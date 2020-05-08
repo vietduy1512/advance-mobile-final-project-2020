@@ -2,7 +2,7 @@
 import React from 'react';
 import { StyleSheet, Text, Image, View, TouchableOpacity, Alert } from 'react-native';
 
-const SectionCoursesItem = (props) => {
+const ListCoursesItem = (props) => {
   const openCourse = () => {
     Alert.alert('Course clicked!');
   }
@@ -22,18 +22,19 @@ const SectionCoursesItem = (props) => {
   );
 }
 
-export default SectionCoursesItem;
+export default ListCoursesItem;
 
 const styles = StyleSheet.create({
   item: {
+    flexDirection: 'row',
     margin: 5,
-    width: 200,
-    height: 200,
-    backgroundColor: 'lightgray'
+    alignItems: 'center',
+    borderBottomColor: 'gray',
+    borderBottomWidth: 1
   },
   imageContainer: {
-    height: 100,
-    width: 200
+    height: 75,
+    width: 150
   },
   image: {
     flex: 1,

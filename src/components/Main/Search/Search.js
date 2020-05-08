@@ -1,21 +1,26 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import Constants from "expo-constants";
+import ListCourses from '../../Courses/ListCourses/ListCourses';
 
-const Search = () => {
+const Home = () => {
+  const onPressNewReleases = () => {
+    console.log('Donothing')
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Search!</Text>
+    <View style={styles.container} onPress={onPressNewReleases}>
+      <ListCourses title={'Continue Learning'} />
     </View>
   );
 }
 
-export default Search;
+export default Home;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    marginTop: Constants.statusBarHeight,
+    marginHorizontal: 16
   },
 });
