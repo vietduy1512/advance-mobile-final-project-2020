@@ -3,19 +3,15 @@ import { StyleSheet, View } from 'react-native';
 import Constants from "expo-constants";
 import ListCourses from '../../Courses/ListCourses/ListCourses';
 
-const Home = () => {
-  const onPressNewReleases = () => {
-    console.log('Donothing')
-  }
-
+const Search = () => {
   return (
-    <View style={styles.container} onPress={onPressNewReleases}>
+    <View style={styles.container}>
       <ListCourses title={'Continue Learning'} />
     </View>
   );
 }
 
-export default Home;
+export default Search;
 
 const styles = StyleSheet.create({
   container: {

@@ -10,8 +10,8 @@ const Home = () => {
   }
 
   return (
-    <ScrollView style={styles.container} onPress={onPressNewReleases}>
-      <ImageButton title={'NEW RELEASES'} />
+    <ScrollView style={styles.container}>
+      <ImageButton title={'NEW RELEASES'} onPress={onPressNewReleases} />
       <SectionCourses title={'Continue Learning'} />
       <SectionCourses title={'Path'} />
       <SectionCourses title={'Channel'} />
