@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import Constants from "expo-constants";
-import DownloadListCourses from '../../Courses/ListCourses/DownloadListCourses';
+import DownloadListCourses from './ListCourses/DownloadListCourses';
 import { downloadListCourses } from '../../../constants/database'
 
 
