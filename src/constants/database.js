@@ -8,7 +8,7 @@ export const listCourses = [
         author: 'Duy Le',
         level: 'Advance',
         released: 'May 6, 2020',
-        duration: '30 hours'
+        duration: '30h'
       },
       {
         id: 2,
@@ -16,7 +16,7 @@ export const listCourses = [
         author: 'Thao Luu',
         level: 'Beginner',
         released: 'May 6, 2020',
-        duration: '30 hours'
+        duration: '30h'
       },
       {
         id: 3,
@@ -24,7 +24,7 @@ export const listCourses = [
         author: 'Thao Luu',
         level: 'Beginner',
         released: 'May 6, 2020',
-        duration: '30 hours'
+        duration: '30h'
       },
     ]
   },
@@ -37,7 +37,7 @@ export const listCourses = [
         author: 'Duy Le',
         level: 'Advance',
         released: 'May 6, 2020',
-        duration: '30 hours'
+        duration: '30h'
       },
       {
         id: 2,
@@ -45,7 +45,7 @@ export const listCourses = [
         author: 'Thao Luu',
         level: 'Beginner',
         released: 'May 6, 2020',
-        duration: '30 hours'
+        duration: '30h'
       },
       {
         id: 3,
@@ -53,7 +53,7 @@ export const listCourses = [
         author: 'Thao Luu',
         level: 'Beginner',
         released: 'May 6, 2020',
-        duration: '30 hours'
+        duration: '30h'
       },
     ]
   }
@@ -67,7 +67,7 @@ export const sectionCourses = [
     author: 'Duy Le',
     level: 'Advance',
     released: 'May 6, 2020',
-    duration: '30 hours'
+    duration: '30h'
   },
   {
     id: 2,
@@ -75,7 +75,7 @@ export const sectionCourses = [
     author: 'Thao Luu',
     level: 'Beginner',
     released: 'May 6, 2020',
-    duration: '30 hours'
+    duration: '30h'
   },
   {
     id: 3,
@@ -83,6 +83,24 @@ export const sectionCourses = [
     author: 'Thao Luu',
     level: 'Beginner',
     released: 'May 6, 2020',
-    duration: '30 hours'
+    duration: '30h'
+  },
+];
+
+export const sectionPaths = [
+  {
+    id: 1,
+    title: 'React Native',
+    coursesAmount: '12 courses'
+  },
+  {
+    id: 2,
+    title: 'Android',
+    coursesAmount: '12 courses'
+  },
+  {
+    id: 3,
+    title: 'iOS',
+    coursesAmount: '12 courses'
   },
 ];

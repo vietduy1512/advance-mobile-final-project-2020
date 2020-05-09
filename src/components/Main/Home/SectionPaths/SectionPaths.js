@@ -1,11 +1,11 @@
 import React from 'react';
 import { Text, View, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
-import SectionCoursesItem from '../SectionCoursesItem/SectionCoursesItem';
-import {sectionCourses} from '../../../../constants/database';
+import SectionPathsItem from '../SectionPathsItem/SectionPathsItem';
+import {sectionPaths} from '../../../../constants/database';
 
-const SectionCourses = (props) => {
-  const Courses = ({ courses }) => (
-    courses.map(item => <SectionCoursesItem key={item.id} item={item} />)
+const SectionPaths = (props) => {
+  const Paths = ({ paths }) => (
+    paths.map(item => <SectionPathsItem key={item.id} item={item} />)
   );
 
   return (
@@ -17,13 +17,13 @@ const SectionCourses = (props) => {
         </TouchableOpacity>
       </View>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-        <Courses courses={sectionCourses}/>
+        <Paths paths={sectionPaths}/>
       </ScrollView>
     </View>
   );
 }
 
-export default SectionCourses;
+export default SectionPaths;
 
 
 const styles = StyleSheet.create({

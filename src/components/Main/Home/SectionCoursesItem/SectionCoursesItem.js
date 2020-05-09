@@ -12,11 +12,18 @@ const SectionCoursesItem = (props) => {
       <View style={styles.imageContainer}>
         <Image source={require('assets/course-example.jpg')} style={styles.image} />
       </View>
-      <View style={{margin: 5}}>
+      <View style={{margin: 10}}>
         <Text>{props.item.title}</Text>
         <Text style={styles.darkText}>{props.item.author}</Text>
-        <Text style={styles.darkText}>{props.item.level}</Text>
-        <Text style={styles.darkText}>{`${props.item.released} - ${props.item.duration}`}</Text>
+        <Text style={styles.darkText}>{`${props.item.level} - ${props.item.released} - ${props.item.duration}`}</Text>
+        <View style={styles.ratingStarContainer}>
+          <Image source={require('assets/star_filled.png')} style={styles.ratingStar} />
+          <Image source={require('assets/star_filled.png')} style={styles.ratingStar} />
+          <Image source={require('assets/star_filled.png')} style={styles.ratingStar} />
+          <Image source={require('assets/star_filled.png')} style={styles.ratingStar} />
+          <Image source={require('assets/star_filled.png')} style={styles.ratingStar} />
+          <Text style={styles.reviewText}>(123)</Text>
+        </View>
       </View>
     </TouchableOpacity>
   );
@@ -26,14 +33,23 @@ export default SectionCoursesItem;
 
 const styles = StyleSheet.create({
   item: {
-    margin: 5,
-    width: 200,
-    height: 200,
-    backgroundColor: 'lightgray'
+    marginBottom: 20,
+    marginRight: 15,
+    width: 180,
+    height: 170,
+    backgroundColor: '#dcdeef',
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.34,
+    shadowRadius: 6.27,
+    elevation: 10,
   },
   imageContainer: {
-    height: 100,
-    width: 200
+    height: 80,
+    width: 180
   },
   image: {
     flex: 1,
@@ -41,6 +57,22 @@ const styles = StyleSheet.create({
     width: undefined
   },
   darkText: {
-    color: 'darkgray'
+    color: 'darkgray',
+    fontSize: 11
+  },
+  ratingStarContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 2
+  },
+  ratingStar: {
+    height: 10,
+    width: 10,
+    marginRight: 2
+  },
+  reviewText: {
+    color: 'darkgray',
+    fontSize: 10,
+    marginLeft: 3
   }
 });

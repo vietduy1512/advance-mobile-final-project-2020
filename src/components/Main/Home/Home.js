@@ -2,19 +2,14 @@ import React from 'react';
 import { StyleSheet, ScrollView } from 'react-native';
 import Constants from "expo-constants";
 import SectionCourses from './SectionCourses/SectionCourses';
-import ImageButton from '../../Common/ImageButton'
+import SectionPaths from './SectionPaths/SectionPaths';
 
 const Home = () => {
-  const onPressNewReleases = () => {
-    console.log('Donothing')
-  }
-
   return (
     <ScrollView style={styles.container}>
-      <ImageButton title={'NEW RELEASES'} onPress={onPressNewReleases} />
       <SectionCourses title={'Continue Learning'} />
-      <SectionCourses title={'Path'} />
-      <SectionCourses title={'Channel'} />
+      <SectionPaths title={'Paths'} />
+      <SectionCourses title={'Channels'} />
       <SectionCourses title={'Bookmarks'} />
     </ScrollView>
   );
