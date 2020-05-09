@@ -3,13 +3,14 @@ import { StyleSheet, ScrollView } from 'react-native';
 import Constants from "expo-constants";
 import SectionCourses from './SectionCourses/SectionCourses';
 import SectionPaths from './SectionPaths/SectionPaths';
+import Channels from './Channels/Channels';
 
 const Home = () => {
   return (
     <ScrollView style={styles.container}>
       <SectionCourses title={'Continue Learning'} />
       <SectionPaths title={'Paths'} />
-      <SectionCourses title={'Channels'} />
+      <Channels title={'Channels'} />
       <SectionCourses title={'Bookmarks'} />
     </ScrollView>
   );
