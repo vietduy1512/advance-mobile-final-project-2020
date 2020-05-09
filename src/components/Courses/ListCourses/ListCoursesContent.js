@@ -2,7 +2,7 @@ import React from 'react';
 import { View, SectionList } from 'react-native';
 import ListCoursesItem from './ListCoursesItem';
 
-const ListCoursesBody = (props) => {
+const ListCoursesContent = (props) => {
   return (
     <View>
       <SectionList
@@ -15,4 +15,4 @@ const ListCoursesBody = (props) => {
   );
 }
 
-export default ListCoursesBody;
+export default ListCoursesContent;

@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, ScrollView } from 'react-native';
 import Constants from "expo-constants";
 import SectionCourses from './SectionCourses/SectionCourses';
-import SectionPaths from './SectionPaths/SectionPaths';
+import SectionPaths from './SectionPaths/HomeSectionPaths';
 import Channels from './Channels/Channels';
 
 const Home = () => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
-import ListCoursesBody from '../../../Courses/ListCourses/ListCoursesBody';
+import ListCoursesContent from '../../../Courses/ListCourses/ListCoursesContent';
 
 const DownloadListCourses = (props) => {
   const renderDownloadHeader = ({section: {title}}) => (
@@ -13,7 +13,7 @@ const DownloadListCourses = (props) => {
   )
 
   return (
-    <ListCoursesBody
+    <ListCoursesContent
       {...props}
       renderHeader={renderDownloadHeader}
     />

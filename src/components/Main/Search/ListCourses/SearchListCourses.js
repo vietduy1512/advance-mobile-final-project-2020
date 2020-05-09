@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
-import ListCoursesBody from '../../../Courses/ListCourses/ListCoursesBody';
+import ListCoursesContent from '../../../Courses/ListCourses/ListCoursesContent';
 
 const SearchListCourses = (props) => {
   const renderSearchHeader = ({section: {title}}) => (
@@ -13,7 +13,7 @@ const SearchListCourses = (props) => {
   )
 
   return (
-    <ListCoursesBody
+    <ListCoursesContent
       {...props}
       renderHeader={renderSearchHeader}
     />
