@@ -28,7 +28,7 @@ export default SectionCourses;
 
 const styles = StyleSheet.create({
   title: {
-    fontSize: 18,
+    fontSize: 17,
     marginVertical: 10
   },
   header: {

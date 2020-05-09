@@ -1,6 +1,6 @@
-export const listCourses = [
+export const downloadListCourses = [
   {
-    title: 'Mobile',
+    title: 'Downloads',
     data: [
       {
         id: 1,
@@ -8,7 +8,8 @@ export const listCourses = [
         author: 'Duy Le',
         level: 'Advance',
         released: 'May 6, 2020',
-        duration: '30h'
+        duration: '30h',
+        reviews: 123
       },
       {
         id: 2,
@@ -16,7 +17,8 @@ export const listCourses = [
         author: 'Thao Luu',
         level: 'Beginner',
         released: 'May 6, 2020',
-        duration: '30h'
+        duration: '30h',
+        reviews: 123
       },
       {
         id: 3,
@@ -24,41 +26,74 @@ export const listCourses = [
         author: 'Thao Luu',
         level: 'Beginner',
         released: 'May 6, 2020',
-        duration: '30h'
+        duration: '30h',
+        reviews: 123
       },
-    ]
-  },
-  {
-    title: 'Web',
-    data: [
       {
-        id: 1,
+        id: 4,
         title: 'React Native',
         author: 'Duy Le',
         level: 'Advance',
         released: 'May 6, 2020',
-        duration: '30h'
+        duration: '30h',
+        reviews: 123
       },
       {
-        id: 2,
+        id: 5,
         title: 'Android',
         author: 'Thao Luu',
         level: 'Beginner',
         released: 'May 6, 2020',
-        duration: '30h'
+        duration: '30h',
+        reviews: 123
       },
       {
-        id: 3,
+        id: 6,
         title: 'iOS',
         author: 'Thao Luu',
         level: 'Beginner',
         released: 'May 6, 2020',
-        duration: '30h'
+        duration: '30h',
+        reviews: 123
       },
     ]
   }
 ]
 
+export const searchListCourses = [
+  {
+    title: 'Courses',
+    data: [
+      {
+        id: 1,
+        title: 'React Native',
+        author: 'Duy Le',
+        level: 'Advance',
+        released: 'May 6, 2020',
+        duration: '30h',
+        reviews: 123
+      },
+      {
+        id: 2,
+        title: 'Android',
+        author: 'Thao Luu',
+        level: 'Beginner',
+        released: 'May 6, 2020',
+        duration: '30h',
+        reviews: 123
+      },
+      {
+        id: 3,
+        title: 'iOS',
+        author: 'Thao Luu',
+        level: 'Beginner',
+        released: 'May 6, 2020',
+        duration: '30h',
+        reviews: 123
+      },
+    ]
+  }
+]
 
 export const sectionCourses = [
   {
@@ -67,7 +102,8 @@ export const sectionCourses = [
     author: 'Duy Le',
     level: 'Advance',
     released: 'May 6, 2020',
-    duration: '30h'
+    duration: '30h',
+    reviews: 123
   },
   {
     id: 2,
@@ -75,7 +111,8 @@ export const sectionCourses = [
     author: 'Thao Luu',
     level: 'Beginner',
     released: 'May 6, 2020',
-    duration: '30h'
+    duration: '30h',
+    reviews: 123
   },
   {
     id: 3,
@@ -83,7 +120,8 @@ export const sectionCourses = [
     author: 'Thao Luu',
     level: 'Beginner',
     released: 'May 6, 2020',
-    duration: '30h'
+    duration: '30h',
+    reviews: 123
   },
 ];
 

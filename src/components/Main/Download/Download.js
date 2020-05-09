@@ -1,21 +1,24 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import Constants from "expo-constants";
+import DownloadListCourses from '../../Courses/ListCourses/DownloadListCourses';
+import { downloadListCourses } from '../../../constants/database'
 
-const Download = () => {
+
+const Search = () => {
   return (
     <View style={styles.container}>
-      <Text>Download!</Text>
+      <DownloadListCourses courses={downloadListCourses}/>
     </View>
   );
 }
 
-export default Download;
+export default Search;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    marginTop: Constants.statusBarHeight,
+    marginHorizontal: 16
   },
 });

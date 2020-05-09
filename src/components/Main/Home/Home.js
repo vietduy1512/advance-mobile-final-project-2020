@@ -7,10 +7,13 @@ import Channels from './Channels/Channels';
 
 const Home = () => {
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView
+      style={styles.container}
+      showsVerticalScrollIndicator={false}
+    >
       <SectionCourses title={'Continue Learning'} />
       <SectionPaths title={'Paths'} />
-      <Channels title={'Channels'} />
+      <Channels />
       <SectionCourses title={'Bookmarks'} />
     </ScrollView>
   );

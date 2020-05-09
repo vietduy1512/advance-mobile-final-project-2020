@@ -22,7 +22,7 @@ const SectionCoursesItem = (props) => {
           <Image source={require('assets/star_filled.png')} style={styles.ratingStar} />
           <Image source={require('assets/star_filled.png')} style={styles.ratingStar} />
           <Image source={require('assets/star_filled.png')} style={styles.ratingStar} />
-          <Text style={styles.reviewText}>(123)</Text>
+          <Text style={styles.reviewText}>{`(${props.item.reviews})`}</Text>
         </View>
       </View>
     </TouchableOpacity>

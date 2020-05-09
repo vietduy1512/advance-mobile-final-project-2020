@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   title: {
-    fontSize: 18,
+    fontSize: 17,
     marginVertical: 10
   },
   header: {

@@ -1,12 +1,14 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import Constants from "expo-constants";
-import ListCourses from '../../Courses/ListCourses/ListCourses';
+import SearchListCourses from '../../Courses/ListCourses/SearchListCourses';
+import { searchListCourses } from '../../../constants/database'
+
 
 const Search = () => {
   return (
     <View style={styles.container}>
-      <ListCourses title={'Continue Learning'} />
+      <SearchListCourses courses={searchListCourses}/>
     </View>
   );
 }
