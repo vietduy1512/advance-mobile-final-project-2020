@@ -2,13 +2,16 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import Constants from "expo-constants";
 import SearchListCourses from './ListCourses/SearchListCourses';
-import { searchListCourses } from '../../../constants/database'
+import SectionPaths from '../../Courses/SectionPaths/SectionPathsContent';
+import { searchListCourses } from '../../../constants/database';
+import { sectionPaths } from '../../../constants/database';
 
 
 const Search = () => {
   return (
     <View style={styles.container}>
       <SearchListCourses courses={searchListCourses}/>
+      <SectionPaths title={'Paths'} paths={sectionPaths} />
     </View>
   );
 }

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Text, View, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
-import SectionCoursesItem from '../SectionCoursesItem/SectionCoursesItem';
-import {sectionCourses} from '../../../../constants/database';
+import SectionCoursesItem from './SectionCoursesItem';
 
 const SectionCourses = (props) => {
   const Courses = ({ courses }) => (
@@ -17,7 +16,7 @@ const SectionCourses = (props) => {
         </TouchableOpacity>
       </View>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-        <Courses courses={sectionCourses}/>
+        <Courses courses={props.courses}/>
       </ScrollView>
     </View>
   );

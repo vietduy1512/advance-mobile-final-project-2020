@@ -2,8 +2,11 @@ import React from 'react';
 import { StyleSheet, ScrollView } from 'react-native';
 import Constants from "expo-constants";
 import SectionCourses from './SectionCourses/SectionCourses';
-import SectionPaths from './SectionPaths/HomeSectionPaths';
+import SectionPaths from '../../Courses/SectionPaths/SectionPathsContent';
 import Channels from './Channels/Channels';
+import { sectionCourses } from '../../../constants/database';
+import { sectionPaths } from '../../../constants/database';
+
 
 const Home = () => {
   return (
@@ -11,10 +14,10 @@ const Home = () => {
       style={styles.container}
       showsVerticalScrollIndicator={false}
     >
-      <SectionCourses title={'Continue Learning'} />
-      <SectionPaths title={'Paths'} />
+      <SectionCourses title={'Continue Learning'} courses={sectionCourses} />
+      <SectionPaths title={'Paths'} paths={sectionPaths} />
       <Channels />
-      <SectionCourses title={'Bookmarks'} />
+      <SectionCourses title={'Bookmarks'} courses={sectionCourses} />
     </ScrollView>
   );
 }
