@@ -3,12 +3,13 @@ import { StyleSheet, View } from 'react-native';
 import Constants from "expo-constants";
 import DownloadListCourses from './ListCourses/DownloadListCourses';
 import { downloadListCourses } from '../../../constants/database'
+import { Titles } from '../../../constants'
 
 
 const Search = () => {
   return (
     <View style={styles.container}>
-      <DownloadListCourses courses={downloadListCourses}/>
+      <DownloadListCourses title={Titles.DOWNLOADS} courses={downloadListCourses}/>
     </View>
   );
 }

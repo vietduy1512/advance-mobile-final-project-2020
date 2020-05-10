@@ -6,6 +6,7 @@ import SectionPaths from '../../Courses/SectionPaths/SectionPathsContent';
 import Channels from './Channels/Channels';
 import { sectionCourses } from '../../../constants/database';
 import { sectionPaths } from '../../../constants/database';
+import { Titles } from '../../../constants';
 
 
 const Home = () => {
@@ -14,10 +15,10 @@ const Home = () => {
       style={styles.container}
       showsVerticalScrollIndicator={false}
     >
-      <SectionCourses title={'Continue Learning'} courses={sectionCourses} />
-      <SectionPaths title={'Paths'} paths={sectionPaths} />
+      <SectionCourses title={Titles.CONTINUE_LEARNING} courses={sectionCourses} />
+      <SectionPaths title={Titles.PATHS} paths={sectionPaths} />
       <Channels />
-      <SectionCourses title={'Bookmarks'} courses={sectionCourses} />
+      <SectionCourses title={Titles.BOOKMARKS} courses={sectionCourses} />
     </ScrollView>
   );
 }

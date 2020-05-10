@@ -6,7 +6,7 @@ const ListCoursesContent = (props) => {
   return (
     <View>
       <SectionList
-        sections={props.courses}
+        sections={[{title: props.title, data: props.courses}]}
         showsVerticalScrollIndicator={false}
         renderItem={({item}) => <ListCoursesItem item={item} />}
         renderSectionHeader={props.renderHeader}

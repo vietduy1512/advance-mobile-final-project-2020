@@ -1,9 +1,8 @@
 import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
-import ListCoursesContent from '../../../Courses/ListCourses/ListCoursesContent';
-import { Titles } from '../../../../constants'
+import ListPathsContent from '../../../Courses/ListPaths/ListPathsContent';
 
-const SearchListCourses = (props) => {
+const SearchListPaths = (props) => {
   const renderSearchHeader = ({section: {title}}) => (
     <View style={styles.header}>
       <Text style={styles.title}>{title}</Text>
@@ -14,15 +13,14 @@ const SearchListCourses = (props) => {
   )
 
   return (
-    <ListCoursesContent
+    <ListPathsContent
       {...props}
-      title={Titles.SEARCH}
       renderHeader={renderSearchHeader}
     />
   );
 }
 
-export default SearchListCourses;
+export default SearchListPaths;
 
 const styles = StyleSheet.create({
   title: {

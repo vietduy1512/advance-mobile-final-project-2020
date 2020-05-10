@@ -4,3 +4,12 @@ export const Screens = Object.freeze({
   BROWSE: 'Browse',
   SEARCH: 'Search',
 });
+
+export const Titles = Object.freeze({
+  CONTINUE_LEARNING: 'Continue Learning',
+  BOOKMARKS: 'Bookmarks',
+  DOWNLOADS: 'Downloads',
+  COURSES: 'Courses',
+  PATHS: 'Paths',
+  SEARCH: 'Search'
+});
