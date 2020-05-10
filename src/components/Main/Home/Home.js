@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, ScrollView } from 'react-native';
 import Constants from "expo-constants";
-import SectionCourses from './SectionCourses/SectionCourses';
+import SectionCourses from '../../Courses/SectionCourses/SectionCoursesContent';
 import SectionPaths from '../../Courses/SectionPaths/SectionPathsContent';
 import Channels from './Channels/Channels';
 import { sectionCourses } from '../../../constants/database';

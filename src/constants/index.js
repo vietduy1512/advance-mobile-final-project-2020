@@ -11,5 +11,6 @@ export const Titles = Object.freeze({
   DOWNLOADS: 'Downloads',
   COURSES: 'Courses',
   PATHS: 'Paths',
-  SEARCH: 'Search'
+  SEARCH: 'Search',
+  AUTHORS: 'Authors'
 });
