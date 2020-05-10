@@ -10,7 +10,7 @@ const ListCoursesContent = (props) => {
   return (
     <View>
       {props.renderHeader()}
-      <ScrollView showsHorizontalScrollIndicator={false}>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <Courses courses={props.courses}/>
       </ScrollView>
     </View>

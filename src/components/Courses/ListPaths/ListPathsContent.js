@@ -10,7 +10,7 @@ const ListPathsContent = (props) => {
   return (
     <View>
       {props.renderHeader()}
-      <ScrollView showsHorizontalScrollIndicator={false}>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <Paths paths={props.paths}/>
       </ScrollView>
     </View>
