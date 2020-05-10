@@ -3,9 +3,9 @@ import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import ListPathsContent from '../../../Courses/ListPaths/ListPathsContent';
 
 const SearchListPaths = (props) => {
-  const renderSearchHeader = ({section: {title}}) => (
+  const renderSearchHeader = () => (
     <View style={styles.header}>
-      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.title}>{props.title}</Text>
       <TouchableOpacity style={styles.expandContainer}>
         <Text style={styles.expandText}>x results &gt;</Text>
       </TouchableOpacity>

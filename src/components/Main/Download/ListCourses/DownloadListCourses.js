@@ -4,9 +4,9 @@ import ListCoursesContent from '../../../Courses/ListCourses/ListCoursesContent'
 import { Titles } from '../../../../constants'
 
 const DownloadListCourses = (props) => {
-  const renderDownloadHeader = ({section: {title}}) => (
+  const renderDownloadHeader = () => (
     <View style={styles.header}>
-      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.title}>{props.title}</Text>
       <TouchableOpacity style={styles.removeAllBtnContainer}>
         <Text style={styles.removeAllBtn}>Remove all</Text>
       </TouchableOpacity>

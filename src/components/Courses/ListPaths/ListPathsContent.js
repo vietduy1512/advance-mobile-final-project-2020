@@ -1,16 +1,18 @@
 import React from 'react';
-import { View, SectionList } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import ListPathsItem from './ListPathsItem';
 
 const ListPathsContent = (props) => {
+  const Paths = ({ paths }) => (
+    paths.map(item => <ListPathsItem key={item.id} item={item} />)
+  );
+
   return (
     <View>
-      <SectionList
-        sections={[{title: props.title, data: props.paths}]}
-        showsVerticalScrollIndicator={false}
-        renderItem={({item}) => <ListPathsItem item={item} />}
-        renderSectionHeader={props.renderHeader}
-      />
+      {props.renderHeader()}
+      <ScrollView showsHorizontalScrollIndicator={false}>
+        <Paths paths={props.paths}/>
+      </ScrollView>
     </View>
   );
 }

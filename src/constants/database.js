@@ -53,6 +53,24 @@ export const downloadListCourses = [
     duration: '30h',
     reviews: 123
   },
+  {
+    id: 7,
+    title: 'iOS',
+    author: 'Thao Luu',
+    level: 'Beginner',
+    released: 'May 6, 2020',
+    duration: '30h',
+    reviews: 123
+  },
+  {
+    id: 8,
+    title: 'iOS',
+    author: 'Thao Luu',
+    level: 'Beginner',
+    released: 'May 6, 2020',
+    duration: '30h',
+    reviews: 123
+  },
 ]
 
 export const searchListCourses = [

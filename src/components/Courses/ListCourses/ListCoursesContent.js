@@ -1,16 +1,18 @@
 import React from 'react';
-import { View, SectionList } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import ListCoursesItem from './ListCoursesItem';
 
 const ListCoursesContent = (props) => {
+  const Courses = ({ courses }) => (
+    courses.map(item => <ListCoursesItem key={item.id} item={item} />)
+  );
+
   return (
     <View>
-      <SectionList
-        sections={[{title: props.title, data: props.courses}]}
-        showsVerticalScrollIndicator={false}
-        renderItem={({item}) => <ListCoursesItem item={item} />}
-        renderSectionHeader={props.renderHeader}
-      />
+      {props.renderHeader()}
+      <ScrollView showsHorizontalScrollIndicator={false}>
+        <Courses courses={props.courses}/>
+      </ScrollView>
     </View>
   );
 }

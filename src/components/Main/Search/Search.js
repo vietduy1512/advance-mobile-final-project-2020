@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, ScrollView } from 'react-native';
 import Constants from "expo-constants";
 import SearchListCourses from './ListCourses/SearchListCourses';
 import SearchListPaths from './ListPaths/SearchListPaths';
@@ -10,10 +10,13 @@ import { searchListPaths } from '../../../constants/database';
 
 const Search = () => {
   return (
-    <View style={styles.container}>
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      style={styles.container}
+    >
       <SearchListCourses title={Titles.COURSES} courses={searchListCourses} />
       <SearchListPaths title={Titles.PATHS} paths={searchListPaths} />
-    </View>
+    </ScrollView>
   );
 }
 

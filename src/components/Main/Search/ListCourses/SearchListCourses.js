@@ -4,9 +4,9 @@ import ListCoursesContent from '../../../Courses/ListCourses/ListCoursesContent'
 import { Titles } from '../../../../constants'
 
 const SearchListCourses = (props) => {
-  const renderSearchHeader = ({section: {title}}) => (
+  const renderSearchHeader = () => (
     <View style={styles.header}>
-      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.title}>{props.title}</Text>
       <TouchableOpacity style={styles.expandContainer}>
         <Text style={styles.expandText}>x results &gt;</Text>
       </TouchableOpacity>
