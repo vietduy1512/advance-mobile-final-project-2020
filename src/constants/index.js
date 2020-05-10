@@ -13,5 +13,8 @@ export const Titles = Object.freeze({
   PATHS: 'Paths',
   SEARCH: 'Search',
   AUTHORS: 'Authors',
-  NEW_RELEASES: 'New Releases'
+  TOP_AUTHORS: 'Top Authors',
+  NEW_RELEASES: 'New Releases',
+  RECOMMENDED: 'Recommended',
+  POPULAR_SKILLS: 'Popular Skills'
 });

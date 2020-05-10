@@ -16,7 +16,8 @@ export default ImageButton;
 
 const styles = StyleSheet.create({
   button: {
-    height: 100
+    height: 100,
+    marginVertical: 10
   },
   touch: {
     flex: 1,
