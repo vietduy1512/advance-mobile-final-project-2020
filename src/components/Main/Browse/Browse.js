@@ -1,21 +1,26 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import Constants from "expo-constants";
+import ImageButton from '../../Common/ImageButton';
+import SectionPaths from '../../Courses/SectionPaths/SectionPathsContent';
+import { sectionPaths } from '../../../constants/database';
+import { Titles } from '../../../constants'
 
-const Browse = () => {
+const Search = () => {
   return (
     <View style={styles.container}>
-      <Text>Browse!</Text>
+      <ImageButton title={Titles.NEW_RELEASES} onPress={() => {}}/>
+      <SectionPaths title={Titles.PATHS} paths={sectionPaths} />
     </View>
   );
 }
 
-export default Browse;
+export default Search;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    marginTop: Constants.statusBarHeight,
+    marginHorizontal: 16
   },
 });
