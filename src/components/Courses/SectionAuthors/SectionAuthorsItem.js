@@ -10,9 +10,9 @@ const SectionAuthorsItem = (props) => {
   return (
     <TouchableOpacity style={styles.item} onPress={openCourse}>
       <View style={styles.imageContainer}>
-        <Image source={require('assets/course-example.jpg')} style={styles.image} />
+        <Image source={props.item.image} style={styles.image} />
       </View>
-      <Text>{props.item.title}</Text>
+      <Text>{props.item.name}</Text>
     </TouchableOpacity>
   );
 }

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 export const downloadListCourses = [
   {
     id: 1,
@@ -6,7 +7,8 @@ export const downloadListCourses = [
     level: 'Advance',
     released: 'May 6, 2020',
     duration: '30h',
-    reviews: 123
+    reviews: 123,
+    image: require('assets/images/react-js-getting-started-v2.png'),
   },
   {
     id: 2,
@@ -15,7 +17,8 @@ export const downloadListCourses = [
     level: 'Beginner',
     released: 'May 6, 2020',
     duration: '30h',
-    reviews: 123
+    reviews: 123,
+    image: require('assets/images/software-development.jpg'),
   },
   {
     id: 3,
@@ -24,7 +27,8 @@ export const downloadListCourses = [
     level: 'Beginner',
     released: 'May 6, 2020',
     duration: '30h',
-    reviews: 123
+    reviews: 123,
+    image: require('assets/images/ios-collection-views-getting-started-v1.png'),
   },
   {
     id: 4,
@@ -33,7 +37,8 @@ export const downloadListCourses = [
     level: 'Advance',
     released: 'May 6, 2020',
     duration: '30h',
-    reviews: 123
+    reviews: 123,
+    image: require('assets/images/react-js-getting-started-v2.png'),
   },
   {
     id: 5,
@@ -42,7 +47,8 @@ export const downloadListCourses = [
     level: 'Beginner',
     released: 'May 6, 2020',
     duration: '30h',
-    reviews: 123
+    reviews: 123,
+    image: require('assets/images/software-development.jpg'),
   },
   {
     id: 6,
@@ -51,7 +57,8 @@ export const downloadListCourses = [
     level: 'Beginner',
     released: 'May 6, 2020',
     duration: '30h',
-    reviews: 123
+    reviews: 123,
+    image: require('assets/images/ios-collection-views-getting-started-v1.png'),
   },
   {
     id: 7,
@@ -60,7 +67,8 @@ export const downloadListCourses = [
     level: 'Beginner',
     released: 'May 6, 2020',
     duration: '30h',
-    reviews: 123
+    reviews: 123,
+    image: require('assets/images/ios-collection-views-getting-started-v1.png'),
   },
   {
     id: 8,
@@ -69,7 +77,8 @@ export const downloadListCourses = [
     level: 'Beginner',
     released: 'May 6, 2020',
     duration: '30h',
-    reviews: 123
+    reviews: 123,
+    image: require('assets/images/ios-collection-views-getting-started-v1.png'),
   },
 ]
 
@@ -81,7 +90,8 @@ export const searchListCourses = [
     level: 'Advance',
     released: 'May 6, 2020',
     duration: '30h',
-    reviews: 123
+    reviews: 123,
+    image: require('assets/images/react-js-getting-started-v2.png'),
   },
   {
     id: 2,
@@ -90,7 +100,8 @@ export const searchListCourses = [
     level: 'Beginner',
     released: 'May 6, 2020',
     duration: '30h',
-    reviews: 123
+    reviews: 123,
+    image: require('assets/images/software-development.jpg'),
   },
   {
     id: 3,
@@ -99,7 +110,8 @@ export const searchListCourses = [
     level: 'Beginner',
     released: 'May 6, 2020',
     duration: '30h',
-    reviews: 123
+    reviews: 123,
+    image: require('assets/images/ios-collection-views-getting-started-v1.png'),
   },
 ]
 
@@ -111,7 +123,8 @@ export const sectionCourses = [
     level: 'Advance',
     released: 'May 6, 2020',
     duration: '30h',
-    reviews: 123
+    reviews: 123,
+    image: require('assets/images/react-js-getting-started-v2.png'),
   },
   {
     id: 2,
@@ -120,7 +133,8 @@ export const sectionCourses = [
     level: 'Beginner',
     released: 'May 6, 2020',
     duration: '30h',
-    reviews: 123
+    reviews: 123,
+    image: require('assets/images/software-development.jpg'),
   },
   {
     id: 3,
@@ -129,7 +143,8 @@ export const sectionCourses = [
     level: 'Beginner',
     released: 'May 6, 2020',
     duration: '30h',
-    reviews: 123
+    reviews: 123,
+    image: require('assets/images/ios-collection-views-getting-started-v1.png'),
   },
 ];
 
@@ -137,17 +152,20 @@ export const sectionPaths = [
   {
     id: 1,
     title: 'React Native',
-    coursesAmount: '12 courses'
+    coursesAmount: '12 courses',
+    image: require('assets/images/react.png'),
   },
   {
     id: 2,
     title: 'Android',
-    coursesAmount: '12 courses'
+    coursesAmount: '12 courses',
+    image: require('assets/images/android.png'),
   },
   {
     id: 3,
     title: 'iOS',
-    coursesAmount: '12 courses'
+    coursesAmount: '12 courses',
+    image: require('assets/images/ios.png'),
   },
 ];
 
@@ -155,16 +173,40 @@ export const searchListPaths = [
   {
     id: 1,
     title: 'React Native',
-    coursesAmount: '12 courses'
+    coursesAmount: '12 courses',
+    image: require('assets/images/react.png'),
   },
   {
     id: 2,
     title: 'Android',
-    coursesAmount: '12 courses'
+    coursesAmount: '12 courses',
+    image: require('assets/images/android.png'),
   },
   {
     id: 3,
     title: 'iOS',
-    coursesAmount: '12 courses'
+    coursesAmount: '12 courses',
+    image: require('assets/images/ios.png'),
+  },
+]
+
+export const authors = [
+  {
+    id: 1,
+    name: 'Cody House',
+    coursesAmount: '12 courses',
+    image: require('assets/images/cory-house.jpg'),
+  },
+  {
+    id: 2,
+    name: 'Don Robins',
+    coursesAmount: '12 courses',
+    image: require('assets/images/don-robins.jpeg'),
+  },
+  {
+    id: 3,
+    name: 'Scott Allen',
+    coursesAmount: '12 courses',
+    image: require('assets/images/scott-allen.jpg'),
   },
 ]

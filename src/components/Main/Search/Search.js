@@ -7,6 +7,7 @@ import SearchListAuthors from './ListAuthors/SearchListAuthors';
 import { Titles } from '../../../constants'
 import { searchListCourses } from '../../../constants/database';
 import { searchListPaths } from '../../../constants/database';
+import { authors } from '../../../constants/database';
 
 
 const Search = () => {
@@ -17,7 +18,7 @@ const Search = () => {
     >
       <SearchListCourses title={Titles.COURSES} courses={searchListCourses} />
       <SearchListPaths title={Titles.PATHS} paths={searchListPaths} />
-      <SearchListAuthors title={Titles.AUTHORS} authors={searchListPaths} />
+      <SearchListAuthors title={Titles.AUTHORS} authors={authors} />
     </ScrollView>
   );
 }

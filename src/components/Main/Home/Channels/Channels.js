@@ -12,7 +12,7 @@ const Channels = () => {
       </View>
       <View style={styles.container}>
         <View style={styles.channelsIconContainer}>
-          <Image source={require('assets/channels.png')} style={styles.channelsIcon} />
+          <Image source={require('assets/images/channels.png')} style={styles.channelsIcon} />
         </View>
         <Text style={styles.channelsText}>{text}</Text>
       </View>

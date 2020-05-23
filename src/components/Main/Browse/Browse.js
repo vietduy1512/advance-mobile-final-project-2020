@@ -6,6 +6,7 @@ import SectionPaths from '../../Courses/SectionPaths/SectionPathsContent';
 import SectionAuthors from '../../Courses/SectionAuthors/SectionAuthorsContent';
 import PopularSkills from './PopularSkills/PopularSkills';
 import { sectionPaths } from '../../../constants/database';
+import { authors } from '../../../constants/database';
 import { Titles } from '../../../constants';
 
 const Search = () => {
@@ -15,7 +16,7 @@ const Search = () => {
       <ImageButton title={Titles.RECOMMENDED} onPress={() => {}}/>
       <PopularSkills title={Titles.POPULAR_SKILLS} />
       <SectionPaths title={Titles.PATHS} paths={sectionPaths} />
-      <SectionAuthors title={Titles.TOP_AUTHORS} authors={sectionPaths} />
+      <SectionAuthors title={Titles.TOP_AUTHORS} authors={authors} />
     </ScrollView>
   );
 }

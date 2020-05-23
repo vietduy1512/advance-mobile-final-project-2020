@@ -3,6 +3,8 @@ import React from 'react';
 import { StyleSheet, Text, Image, View, TouchableOpacity, Alert } from 'react-native';
 
 const SectionCoursesItem = (props) => {
+  const starImage = require('assets/images/star_filled.png');
+  
   const openCourse = () => {
     Alert.alert('Course clicked!');
   }
@@ -10,18 +12,18 @@ const SectionCoursesItem = (props) => {
   return (
     <TouchableOpacity style={styles.item} onPress={openCourse}>
       <View style={styles.imageContainer}>
-        <Image source={require('assets/course-example.jpg')} style={styles.image} />
+        <Image source={props.item.image} style={styles.image} />
       </View>
       <View style={{margin: 10}}>
         <Text>{props.item.title}</Text>
         <Text style={styles.darkText}>{props.item.author}</Text>
         <Text style={styles.darkText}>{`${props.item.level} - ${props.item.released} - ${props.item.duration}`}</Text>
         <View style={styles.ratingStarContainer}>
-          <Image source={require('assets/star_filled.png')} style={styles.ratingStar} />
-          <Image source={require('assets/star_filled.png')} style={styles.ratingStar} />
-          <Image source={require('assets/star_filled.png')} style={styles.ratingStar} />
-          <Image source={require('assets/star_filled.png')} style={styles.ratingStar} />
-          <Image source={require('assets/star_filled.png')} style={styles.ratingStar} />
+          <Image source={starImage} style={styles.ratingStar} />
+          <Image source={starImage} style={styles.ratingStar} />
+          <Image source={starImage} style={styles.ratingStar} />
+          <Image source={starImage} style={styles.ratingStar} />
+          <Image source={starImage} style={styles.ratingStar} />
           <Text style={styles.reviewText}>{`(${props.item.reviews})`}</Text>
         </View>
       </View>

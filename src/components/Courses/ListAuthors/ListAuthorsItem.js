@@ -10,10 +10,10 @@ const ListAuthorsItem = (props) => {
   return (
     <TouchableOpacity style={styles.item} onPress={openCourse}>
       <View style={styles.imageContainer}>
-        <Image source={require('assets/course-example.jpg')} style={styles.image} />
+        <Image source={props.item.image} style={styles.image} />
       </View>
       <View style={{margin: 10}}>
-        <Text>{props.item.title}</Text>
+        <Text>{props.item.name}</Text>
         <Text style={styles.darkText}>{props.item.coursesAmount}</Text>
       </View>
     </TouchableOpacity>
