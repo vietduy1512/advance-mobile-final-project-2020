@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import SectionPathsItem from './SectionPathsItem';
+import { Content } from '../../../constants';
 
 const SectionPathsContent = (props) => {
   const Paths = ({ paths }) => (
@@ -12,7 +13,7 @@ const SectionPathsContent = (props) => {
       <View style={styles.header}>
         <Text style={styles.title}>{props.title}</Text>
         <TouchableOpacity style={styles.expandContainer}>
-          <Text style={styles.expandText}>See all &gt;</Text>
+          <Text style={styles.expandText}>{Content.SEE_ALL}</Text>
         </TouchableOpacity>
       </View>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>

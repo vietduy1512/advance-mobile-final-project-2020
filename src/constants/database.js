@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 export const downloadListCourses = [
   {
     id: 1,

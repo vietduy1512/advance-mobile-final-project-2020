@@ -11,9 +11,17 @@ import { Titles } from '../../../constants';
 
 const Search = () => {
   return (
-    <ScrollView style={styles.container}>
-      <ImageButton title={Titles.NEW_RELEASES} onPress={() => {}}/>
-      <ImageButton title={Titles.RECOMMENDED} onPress={() => {}}/>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+      <ImageButton
+        title={Titles.NEW_RELEASES}
+        image={require('assets/images/react-js-getting-started-v2.png')}
+        onPress={() => {}}
+      />
+      <ImageButton
+        title={Titles.RECOMMENDED}
+        image={require('assets/images/ios-collection-views-getting-started-v1.png')}
+        onPress={() => {}}
+      />
       <PopularSkills title={Titles.POPULAR_SKILLS} />
       <SectionPaths title={Titles.PATHS} paths={sectionPaths} />
       <SectionAuthors title={Titles.TOP_AUTHORS} authors={authors} />

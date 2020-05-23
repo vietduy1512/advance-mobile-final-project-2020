@@ -18,3 +18,7 @@ export const Titles = Object.freeze({
   RECOMMENDED: 'Recommended',
   POPULAR_SKILLS: 'Popular Skills'
 });
+
+export const Content = Object.freeze({
+  SEE_ALL: 'See all >',
+});

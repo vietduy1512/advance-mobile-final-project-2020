@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, ScrollView, StyleSheet } from 'react-native';
 import ImageButton from '../../../Common/ImageButton';
-import { Titles } from '../../../../constants';
+import SkillButton from './SkillButton';
 
 const PopularSkills = (props) => {
   //TODO
@@ -11,7 +11,17 @@ const PopularSkills = (props) => {
     buttons.map(item => (
       <View key={item} style={styles.imageButton}>
         <ImageButton
-          title={Titles.NEW_RELEASES}
+          title={'Content'}
+          height={80}
+          width={160}
+          image={require('assets/images/software-development.jpg')}
+          onPress={() => {}}
+        />
+        <ImageButton
+          title={'Content'}
+          height={80}
+          width={160}
+          image={require('assets/images/software-development.jpg')}
           onPress={() => {}}
         />
       </View>
@@ -22,6 +32,13 @@ const PopularSkills = (props) => {
     <View>
       <View style={styles.header}>
         <Text style={styles.title}>{props.title}</Text>
+      </View>
+      <View style={styles.skillsContainer}>
+        <SkillButton title={'React'} isChecked={true} />
+        <SkillButton title={'Swift'} isChecked={false} />
+        <SkillButton title={'.NET'} isChecked={false} />
+        <SkillButton title={'Java'} isChecked={false} />
+        <SkillButton title={'Android'} isChecked={false} />
       </View>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
         <ImageButtons buttons={data} />
@@ -42,7 +59,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row'
   },
+  skillsContainer: {
+    flexDirection: 'row',
+    marginVertical: 10,
+  },
   imageButton: {
-    margin: 10
+    marginRight: 10
   }
 });

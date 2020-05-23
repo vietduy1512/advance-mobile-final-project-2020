@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import React from 'react';
 import { StyleSheet, Text, Image, View, TouchableOpacity, Alert } from 'react-native';
 

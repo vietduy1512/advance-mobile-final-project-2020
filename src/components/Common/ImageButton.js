@@ -1,28 +1,34 @@
-/* eslint-disable no-undef */
 import React from 'react';
-import { StyleSheet, Text, ImageBackground, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, ImageBackground, TouchableOpacity, View } from 'react-native';
 
 const ImageButton = (props) => {
   return (
-    <ImageBackground style={styles.button} source={require('assets/images/course-example.jpg')}>
-      <TouchableOpacity style={styles.touch} onPress={props.onPress}>
+    <TouchableOpacity style={{
+      height: props.height || 100,
+      width: props.width || undefined,
+      marginTop: 10,
+      backgroundColor: 'black'
+    }} onPress={props.onPress}>
+      <View style={styles.textContainer}>
         <Text style={styles.text}>{props.title}</Text>
-      </TouchableOpacity>
-    </ImageBackground>
+      </View>
+      <ImageBackground style={styles.background} source={props.image} />
+    </TouchableOpacity>
   );
 }
 
 export default ImageButton;
 
 const styles = StyleSheet.create({
-  button: {
-    height: 100,
-    marginVertical: 10
-  },
-  touch: {
+  background: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    opacity: 0.4
+  },
+  textContainer: {
+    flex: 1,
+    position: 'absolute',
+    top: 0, left: 0, right: 0, bottom: 0,
+    justifyContent: 'center', alignItems: 'center'
   },
   text: {
     fontSize: 24,
