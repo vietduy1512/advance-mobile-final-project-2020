@@ -1,1 +1,3 @@
-# advance-mobile-final-project-2020
+# Info
+MSSV: 1512068
+Tên: Lê Viết Duy
