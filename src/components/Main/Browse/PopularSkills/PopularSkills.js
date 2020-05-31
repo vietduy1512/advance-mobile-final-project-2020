@@ -14,14 +14,14 @@ const PopularSkills = (props) => {
           title={'Content'}
           height={80}
           width={160}
-          image={require('assets/images/software-development.jpg')}
+          image={require('assets/images/mockup/software-development.jpg')}
           onPress={() => {}}
         />
         <ImageButton
           title={'Content'}
           height={80}
           width={160}
-          image={require('assets/images/software-development.jpg')}
+          image={require('assets/images/mockup/software-development.jpg')}
           onPress={() => {}}
         />
       </View>

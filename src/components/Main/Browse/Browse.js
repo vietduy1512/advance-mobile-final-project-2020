@@ -15,12 +15,12 @@ const Search = () => {
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <ImageButton
         title={Titles.NEW_RELEASES}
-        image={require('assets/images/react-js-getting-started-v2.png')}
+        image={require('assets/images/mockup/react-js-getting-started-v2.png')}
         onPress={() => {}}
       />
       <ImageButton
         title={Titles.RECOMMENDED}
-        image={require('assets/images/ios-collection-views-getting-started-v1.png')}
+        image={require('assets/images/mockup/ios-collection-views-getting-started-v1.png')}
         onPress={() => {}}
       />
       <PopularSkills title={Titles.POPULAR_SKILLS} />

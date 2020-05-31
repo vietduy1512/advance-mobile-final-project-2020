@@ -7,7 +7,7 @@ const bookmarkListCourses = [
     released: 'May 6, 2020',
     duration: '30h',
     reviews: 123,
-    image: require('assets/images/react-js-getting-started-v2.png'),
+    image: require('assets/images/mockup/react-js-getting-started-v2.png'),
   },
   {
     id: 2,
@@ -17,7 +17,7 @@ const bookmarkListCourses = [
     released: 'May 6, 2020',
     duration: '30h',
     reviews: 123,
-    image: require('assets/images/software-development.jpg'),
+    image: require('assets/images/mockup/software-development.jpg'),
   },
   {
     id: 3,
@@ -27,7 +27,7 @@ const bookmarkListCourses = [
     released: 'May 6, 2020',
     duration: '30h',
     reviews: 123,
-    image: require('assets/images/ios-collection-views-getting-started-v1.png'),
+    image: require('assets/images/mockup/ios-collection-views-getting-started-v1.png'),
   },
   {
     id: 4,
@@ -37,7 +37,7 @@ const bookmarkListCourses = [
     released: 'May 6, 2020',
     duration: '30h',
     reviews: 123,
-    image: require('assets/images/react-js-getting-started-v2.png'),
+    image: require('assets/images/mockup/react-js-getting-started-v2.png'),
   },
   {
     id: 5,
@@ -47,7 +47,7 @@ const bookmarkListCourses = [
     released: 'May 6, 2020',
     duration: '30h',
     reviews: 123,
-    image: require('assets/images/software-development.jpg'),
+    image: require('assets/images/mockup/software-development.jpg'),
   },
   {
     id: 6,
@@ -57,7 +57,7 @@ const bookmarkListCourses = [
     released: 'May 6, 2020',
     duration: '30h',
     reviews: 123,
-    image: require('assets/images/ios-collection-views-getting-started-v1.png'),
+    image: require('assets/images/mockup/ios-collection-views-getting-started-v1.png'),
   },
   {
     id: 7,
@@ -67,17 +67,7 @@ const bookmarkListCourses = [
     released: 'May 6, 2020',
     duration: '30h',
     reviews: 123,
-    image: require('assets/images/ios-collection-views-getting-started-v1.png'),
-  },
-  {
-    id: 8,
-    title: 'iOS',
-    author: 'Thao Luu',
-    level: 'Beginner',
-    released: 'May 6, 2020',
-    duration: '30h',
-    reviews: 123,
-    image: require('assets/images/ios-collection-views-getting-started-v1.png'),
+    image: require('assets/images/mockup/ios-collection-views-getting-started-v1.png'),
   },
 ]
 
@@ -90,7 +80,7 @@ const courses = [
     released: 'May 6, 2020',
     duration: '30h',
     reviews: 123,
-    image: require('assets/images/react-js-getting-started-v2.png'),
+    image: require('assets/images/mockup/react-js-getting-started-v2.png'),
   },
   {
     id: 2,
@@ -100,7 +90,7 @@ const courses = [
     released: 'May 6, 2020',
     duration: '30h',
     reviews: 123,
-    image: require('assets/images/software-development.jpg'),
+    image: require('assets/images/mockup/software-development.jpg'),
   },
   {
     id: 3,
@@ -110,56 +100,107 @@ const courses = [
     released: 'May 6, 2020',
     duration: '30h',
     reviews: 123,
-    image: require('assets/images/ios-collection-views-getting-started-v1.png'),
+    image: require('assets/images/mockup/ios-collection-views-getting-started-v1.png'),
+  },
+  {
+    id: 4,
+    title: 'iOS',
+    author: 'Thao Luu',
+    level: 'Beginner',
+    released: 'May 6, 2020',
+    duration: '30h',
+    reviews: 123,
+    image: require('assets/images/mockup/ios-collection-views-getting-started-v1.png'),
+  },
+  {
+    id: 5,
+    title: 'iOS',
+    author: 'Thao Luu',
+    level: 'Beginner',
+    released: 'May 6, 2020',
+    duration: '30h',
+    reviews: 123,
+    image: require('assets/images/mockup/ios-collection-views-getting-started-v1.png'),
+  },
+  {
+    id: 6,
+    title: 'iOS',
+    author: 'Thao Luu',
+    level: 'Beginner',
+    released: 'May 6, 2020',
+    duration: '30h',
+    reviews: 123,
+    image: require('assets/images/mockup/ios-collection-views-getting-started-v1.png'),
+  },
+  {
+    id: 7,
+    title: 'iOS',
+    author: 'Thao Luu',
+    level: 'Beginner',
+    released: 'May 6, 2020',
+    duration: '30h',
+    reviews: 123,
+    image: require('assets/images/mockup/ios-collection-views-getting-started-v1.png'),
   },
 ]
 
 const paths = [
   {
-    id: 1,
+    id: 1, // Have Scott & Deborah
     title: 'React Native',
-    coursesAmount: '12 courses',
-    image: require('assets/images/react.png'),
+    coursesAmount: '4 courses',
+    image: require('assets/images/mockup/react.png'),
+    courseIds: [1, 2, 3, 4],
   },
   {
     id: 2,
     title: 'Android',
-    coursesAmount: '12 courses',
-    image: require('assets/images/android.png'),
+    coursesAmount: '1 courses',
+    image: require('assets/images/mockup/android.png'),
+    courseIds: [5],
   },
   {
     id: 3,
     title: 'iOS',
-    coursesAmount: '12 courses',
-    image: require('assets/images/ios.png'),
+    coursesAmount: '2 courses',
+    image: require('assets/images/mockup/ios.png'),
+    courseIds: [6, 7],
   },
 ]
 
 const authors = [
   {
-    id: 1,
-    name: 'Cody House',
-    coursesAmount: '12 courses',
-    image: require('assets/images/cory-house.jpg'),
-  },
-  {
-    id: 2,
-    name: 'Don Robins',
-    coursesAmount: '12 courses',
-    image: require('assets/images/don-robins.jpeg'),
-  },
-  {
-    id: 3,
+    id: 1,  // React Native
     name: 'Scott Allen',
-    coursesAmount: '12 courses',
-    image: require('assets/images/scott-allen.jpg'),
+    coursesAmount: '3 courses',
+    image: require('assets/images/mockup/scott-allen.jpg'),
+    courseIds: [1, 2, 3],
+  },
+  {
+    id: 2,  // React Native
+    name: 'Deborah Kurata',
+    coursesAmount: '1 courses',
+    image: require('assets/images/mockup/deborah-kurata.jpg'),
+    courseIds: [4],
+  },
+  {
+    id: 3,  // Android
+    name: 'Cody House',
+    coursesAmount: '1 courses',
+    image: require('assets/images/mockup/cory-house.jpg'),
+    courseIds: [5],
+  },
+  {
+    id: 4,  // iOS
+    name: 'Don Robins',
+    coursesAmount: '2 courses',
+    image: require('assets/images/mockup/don-robins.jpeg'),
+    courseIds: [6, 7],
   },
 ]
 
 export default mockupData = {
   bookmarkListCourses: bookmarkListCourses,
-  courses: courses,
-  paths: paths,
   courses: courses,
   paths: paths,
   authors: authors
