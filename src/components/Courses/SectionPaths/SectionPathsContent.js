@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import SectionPathsItem from './SectionPathsItem';
-import { Content } from '../../../constants';
+import { Content } from 'constants';
 
 const SectionPathsContent = (props) => {
   const Paths = ({ paths }) => (

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
 import SectionCoursesItem from './SectionCoursesItem';
-import { Content } from '../../../constants';
+import { Content } from 'constants';
 
 const SectionCoursesContent = (props) => {
   const Courses = ({ courses }) => (

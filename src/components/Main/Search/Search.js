@@ -4,10 +4,10 @@ import Constants from "expo-constants";
 import SearchListCourses from './ListCourses/SearchListCourses';
 import SearchListPaths from './ListPaths/SearchListPaths';
 import SearchListAuthors from './ListAuthors/SearchListAuthors';
-import { Titles } from '../../../constants'
-import { searchListCourses } from '../../../constants/database';
-import { searchListPaths } from '../../../constants/database';
-import { authors } from '../../../constants/database';
+import { Titles } from 'constants'
+import { searchListCourses } from 'constants/database';
+import { searchListPaths } from 'constants/database';
+import { authors } from 'constants/database';
 
 
 const Search = () => {

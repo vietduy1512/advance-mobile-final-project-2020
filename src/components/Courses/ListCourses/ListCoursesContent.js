@@ -8,7 +8,7 @@ const ListCoursesContent = (props) => {
   );
 
   return (
-    <View>
+    <View style={{flex: 1}}>
       {props.renderHeader()}
       <ScrollView showsVerticalScrollIndicator={false}>
         <Courses courses={props.courses}/>

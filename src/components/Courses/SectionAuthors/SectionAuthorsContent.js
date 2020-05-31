@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import SectionAuthorsItem from './SectionAuthorsItem';
-import { Content } from '../../../constants';
+import { Content } from 'constants';
 
 const SectionAuthorsContent = (props) => {
   const Authors = ({ authors }) => (

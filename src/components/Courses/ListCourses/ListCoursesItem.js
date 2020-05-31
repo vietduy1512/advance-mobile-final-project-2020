@@ -1,7 +1,10 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { StyleSheet, Text, Image, View, TouchableOpacity, Alert } from 'react-native';
+import {ThemeContext} from 'context';
 
 const ListCoursesItem = (props) => {
+  const {theme} = useContext(ThemeContext);
+
   const starImage = require('assets/images/star_filled.png');
 
   const openCourse = () => {
@@ -14,9 +17,17 @@ const ListCoursesItem = (props) => {
         <Image source={props.item.image} style={styles.image} />
       </View>
       <View style={{margin: 10}}>
-        <Text>{props.item.title}</Text>
-        <Text style={styles.darkText}>{props.item.author}</Text>
-        <Text style={styles.darkText}>{`${props.item.level} - ${props.item.released} - ${props.item.duration}`}</Text>
+        <Text style={{
+          color: theme.textColor
+        }}>{props.item.title}</Text>
+        <Text style={{
+          ...styles.darkText,
+          color: theme.textColor
+        }}>{props.item.author}</Text>
+        <Text style={{
+          ...styles.darkText,
+          color: theme.textColor
+        }}>{`${props.item.level} - ${props.item.released} - ${props.item.duration}`}</Text>
         <View style={styles.ratingStarContainer}>
           <Image source={starImage} style={styles.ratingStar} />
           <Image source={starImage} style={styles.ratingStar} />

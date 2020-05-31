@@ -4,9 +4,9 @@ import Constants from "expo-constants";
 import SectionCourses from '../../Courses/SectionCourses/SectionCoursesContent';
 import SectionPaths from '../../Courses/SectionPaths/SectionPathsContent';
 import Channels from './Channels/Channels';
-import { sectionCourses } from '../../../constants/database';
-import { sectionPaths } from '../../../constants/database';
-import { Titles } from '../../../constants';
+import { sectionCourses } from 'constants/database';
+import { sectionPaths } from 'constants/database';
+import { Titles } from 'constants';
 
 
 const Home = () => {

@@ -5,9 +5,9 @@ import ImageButton from '../../Common/ImageButton';
 import SectionPaths from '../../Courses/SectionPaths/SectionPathsContent';
 import SectionAuthors from '../../Courses/SectionAuthors/SectionAuthorsContent';
 import PopularSkills from './PopularSkills/PopularSkills';
-import { sectionPaths } from '../../../constants/database';
-import { authors } from '../../../constants/database';
-import { Titles } from '../../../constants';
+import { sectionPaths } from 'constants/database';
+import { authors } from 'constants/database';
+import { Titles } from 'constants';
 
 const Search = () => {
   return (

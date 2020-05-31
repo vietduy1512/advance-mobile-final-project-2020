@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import ListCoursesContent from '../../../Courses/ListCourses/ListCoursesContent';
-import { Titles } from '../../../../constants'
+import { Titles } from 'constants';
+import {ThemeContext} from 'context';
 
 const DownloadListCourses = (props) => {
+  const {theme} = useContext(ThemeContext);
+
   const renderDownloadHeader = () => (
     <View style={styles.header}>
-      <Text style={styles.title}>{props.title}</Text>
+      <Text style={{...styles.title, color: theme.textColor}}>{props.title}</Text>
       <TouchableOpacity style={styles.removeAllBtnContainer}>
         <Text style={styles.removeAllBtn}>Remove all</Text>
       </TouchableOpacity>
