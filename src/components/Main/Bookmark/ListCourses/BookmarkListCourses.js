@@ -4,10 +4,10 @@ import ListCoursesContent from '../../../Courses/ListCourses/ListCoursesContent'
 import { Titles } from 'constants';
 import {ThemeContext} from 'context';
 
-const DownloadListCourses = (props) => {
+const BookmarkListCourses = (props) => {
   const {theme} = useContext(ThemeContext);
 
-  const renderDownloadHeader = () => (
+  const renderBookmarkHeader = () => (
     <View style={styles.header}>
       <Text style={{...styles.title, color: theme.textColor}}>{props.title}</Text>
       <TouchableOpacity style={styles.removeAllBtnContainer}>
@@ -19,13 +19,13 @@ const DownloadListCourses = (props) => {
   return (
     <ListCoursesContent
       {...props}
-      title={Titles.DOWNLOADS}
-      renderHeader={renderDownloadHeader}
+      title={Titles.BOOKMARKS}
+      renderHeader={renderBookmarkHeader}
     />
   );
 }
 
-export default DownloadListCourses;
+export default BookmarkListCourses;
 
 const styles = StyleSheet.create({
   title: {

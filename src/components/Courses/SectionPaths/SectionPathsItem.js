@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   item: {
     marginBottom: 20,
     marginRight: 15,
-    width: 180,
+    width: 100,
     height: 140,
     backgroundColor: '#dcdeef',
     shadowColor: "#000",
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     height: 80,
-    width: 180
+    width: 100
   },
   image: {
     flex: 1,

@@ -1,15 +1,16 @@
 import React, { useContext } from 'react';
 import { StyleSheet, View, Button } from 'react-native';
 import Constants from "expo-constants";
-import DownloadListCourses from './ListCourses/DownloadListCourses';
-import { downloadListCourses } from 'constants/database';
+import BookmarkListCourses from './ListCourses/BookmarkListCourses';
 import { Titles } from 'constants';
 import {ThemeContext} from 'context';
 import {themes} from 'constants/context';
+import {MockupDataContext} from 'context';
 
 // TODO: Remove button change theme
-const Download = () => {
+const Bookmark = () => {
   const {theme, setTheme} = useContext(ThemeContext);
+  const {bookmarkListCourses} = useContext(MockupDataContext);
 
   return (
     <View 
@@ -17,7 +18,7 @@ const Download = () => {
         ...styles.container,
         backgroundColor: theme.backgroundColor
       }}>
-      <DownloadListCourses title={Titles.DOWNLOADS} courses={downloadListCourses}/>
+      <BookmarkListCourses title={Titles.BOOKMARKS} courses={bookmarkListCourses}/>
       <Button
         title="Change theme"
         onPress={() => {
@@ -29,7 +30,7 @@ const Download = () => {
   );
 }
 
-export default Download;
+export default Bookmark;
 
 const styles = StyleSheet.create({
   container: {

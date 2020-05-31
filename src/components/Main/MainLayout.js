@@ -6,7 +6,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {Screens} from 'constants';
 import Home from './Home/Home';
 import Browse from './Browse/Browse';
-import Download from './Download/Download';
+import Bookmark from './Bookmark/Bookmark';
 import Search from './Search/Search';
 
 const Tab = createBottomTabNavigator();
@@ -19,8 +19,8 @@ const MainLayout = () => {
         case Screens.HOME:
           iconName = 'ios-home';
           break;
-        case Screens.DOWNLOAD:
-          iconName = 'ios-download';
+        case Screens.BOOKMARK:
+          iconName = 'ios-bookmark';
           break;
         case Screens.BROWSE:
           iconName = 'ios-albums';
@@ -44,7 +44,7 @@ const MainLayout = () => {
       }}
     >
       <Tab.Screen name={Screens.HOME} component={Home} />
-      <Tab.Screen name={Screens.DOWNLOAD} component={Download} />
+      <Tab.Screen name={Screens.BOOKMARK} component={Bookmark} />
       <Tab.Screen name={Screens.BROWSE} component={Browse} />
       <Tab.Screen name={Screens.SEARCH} component={Search} />
     </Tab.Navigator>

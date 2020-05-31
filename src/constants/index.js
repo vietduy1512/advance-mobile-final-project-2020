@@ -1,6 +1,6 @@
 export const Screens = Object.freeze({
   HOME: 'Home',
-  DOWNLOAD: 'Download',
+  BOOKMARK: 'Bookmark',
   BROWSE: 'Browse',
   SEARCH: 'Search',
 });
@@ -8,7 +8,6 @@ export const Screens = Object.freeze({
 export const Titles = Object.freeze({
   CONTINUE_LEARNING: 'Continue Learning',
   BOOKMARKS: 'Bookmarks',
-  DOWNLOADS: 'Downloads',
   COURSES: 'Courses',
   PATHS: 'Paths',
   SEARCH: 'Search',

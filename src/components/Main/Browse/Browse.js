@@ -1,15 +1,16 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { StyleSheet, ScrollView } from 'react-native';
 import Constants from "expo-constants";
 import ImageButton from '../../Common/ImageButton';
 import SectionPaths from '../../Courses/SectionPaths/SectionPathsContent';
 import SectionAuthors from '../../Courses/SectionAuthors/SectionAuthorsContent';
 import PopularSkills from './PopularSkills/PopularSkills';
-import { sectionPaths } from 'constants/database';
-import { authors } from 'constants/database';
 import { Titles } from 'constants';
+import {MockupDataContext} from 'context';
 
 const Search = () => {
+  const {paths, authors} = useContext(MockupDataContext);
+
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <ImageButton
@@ -23,7 +24,7 @@ const Search = () => {
         onPress={() => {}}
       />
       <PopularSkills title={Titles.POPULAR_SKILLS} />
-      <SectionPaths title={Titles.PATHS} paths={sectionPaths} />
+      <SectionPaths title={Titles.PATHS} paths={paths} />
       <SectionAuthors title={Titles.TOP_AUTHORS} authors={authors} />
     </ScrollView>
   );

@@ -1,24 +1,25 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { StyleSheet, ScrollView } from 'react-native';
 import Constants from "expo-constants";
 import SectionCourses from '../../Courses/SectionCourses/SectionCoursesContent';
 import SectionPaths from '../../Courses/SectionPaths/SectionPathsContent';
 import Channels from './Channels/Channels';
-import { sectionCourses } from 'constants/database';
-import { sectionPaths } from 'constants/database';
 import { Titles } from 'constants';
-
+import {MockupDataContext} from 'context';
 
 const Home = () => {
+  const {courses, paths} = useContext(MockupDataContext);
+  console.log(courses);
+
   return (
     <ScrollView
       style={styles.container}
       showsVerticalScrollIndicator={false}
     >
-      <SectionCourses title={Titles.CONTINUE_LEARNING} courses={sectionCourses} />
-      <SectionPaths title={Titles.PATHS} paths={sectionPaths} />
+      <SectionCourses title={Titles.CONTINUE_LEARNING} courses={courses} />
+      <SectionPaths title={Titles.PATHS} paths={paths} />
       <Channels />
-      <SectionCourses title={Titles.BOOKMARKS} courses={sectionCourses} />
+      <SectionCourses title={Titles.BOOKMARKS} courses={courses} />
     </ScrollView>
   );
 }

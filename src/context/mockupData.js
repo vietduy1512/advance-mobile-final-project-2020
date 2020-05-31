@@ -1,4 +1,4 @@
-export const downloadListCourses = [
+const bookmarkListCourses = [
   {
     id: 1,
     title: 'React Native',
@@ -81,7 +81,7 @@ export const downloadListCourses = [
   },
 ]
 
-export const searchListCourses = [
+const courses = [
   {
     id: 1,
     title: 'React Native',
@@ -114,61 +114,7 @@ export const searchListCourses = [
   },
 ]
 
-export const sectionCourses = [
-  {
-    id: 1,
-    title: 'React Native',
-    author: 'Duy Le',
-    level: 'Advance',
-    released: 'May 6, 2020',
-    duration: '30h',
-    reviews: 123,
-    image: require('assets/images/react-js-getting-started-v2.png'),
-  },
-  {
-    id: 2,
-    title: 'Android',
-    author: 'Thao Luu',
-    level: 'Beginner',
-    released: 'May 6, 2020',
-    duration: '30h',
-    reviews: 123,
-    image: require('assets/images/software-development.jpg'),
-  },
-  {
-    id: 3,
-    title: 'iOS',
-    author: 'Thao Luu',
-    level: 'Beginner',
-    released: 'May 6, 2020',
-    duration: '30h',
-    reviews: 123,
-    image: require('assets/images/ios-collection-views-getting-started-v1.png'),
-  },
-];
-
-export const sectionPaths = [
-  {
-    id: 1,
-    title: 'React Native',
-    coursesAmount: '12 courses',
-    image: require('assets/images/react.png'),
-  },
-  {
-    id: 2,
-    title: 'Android',
-    coursesAmount: '12 courses',
-    image: require('assets/images/android.png'),
-  },
-  {
-    id: 3,
-    title: 'iOS',
-    coursesAmount: '12 courses',
-    image: require('assets/images/ios.png'),
-  },
-];
-
-export const searchListPaths = [
+const paths = [
   {
     id: 1,
     title: 'React Native',
@@ -189,7 +135,7 @@ export const searchListPaths = [
   },
 ]
 
-export const authors = [
+const authors = [
   {
     id: 1,
     name: 'Cody House',
@@ -209,3 +155,12 @@ export const authors = [
     image: require('assets/images/scott-allen.jpg'),
   },
 ]
+
+export default mockupData = {
+  bookmarkListCourses: bookmarkListCourses,
+  courses: courses,
+  paths: paths,
+  courses: courses,
+  paths: paths,
+  authors: authors
+}

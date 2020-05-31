@@ -1,23 +1,22 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { StyleSheet, ScrollView } from 'react-native';
 import Constants from "expo-constants";
 import SearchListCourses from './ListCourses/SearchListCourses';
 import SearchListPaths from './ListPaths/SearchListPaths';
 import SearchListAuthors from './ListAuthors/SearchListAuthors';
 import { Titles } from 'constants'
-import { searchListCourses } from 'constants/database';
-import { searchListPaths } from 'constants/database';
-import { authors } from 'constants/database';
-
+import {MockupDataContext} from 'context';
 
 const Search = () => {
+  const {courses, paths, authors} = useContext(MockupDataContext);
+
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
       style={styles.container}
     >
-      <SearchListCourses title={Titles.COURSES} courses={searchListCourses} />
-      <SearchListPaths title={Titles.PATHS} paths={searchListPaths} />
+      <SearchListCourses title={Titles.COURSES} courses={courses} />
+      <SearchListPaths title={Titles.PATHS} paths={paths} />
       <SearchListAuthors title={Titles.AUTHORS} authors={authors} />
     </ScrollView>
   );
