@@ -2,7 +2,22 @@ import React from 'react';
 import { StyleSheet, Text, Image, View, TouchableOpacity, Alert } from 'react-native';
 
 const SectionCoursesItem = (props) => {
-  const starImage = require('assets/images/star_filled.png');
+  const filledStarImage = require('assets/images/star_filled.png');
+  const emptyStarImage = require('assets/images/star_corner.png');
+
+  const renderStars = () => {
+    const filledStarCount = props.item.rating;
+    const emptyStarCount = 5 - props.item.rating;
+    let stars = [];
+
+    for (let index = 0; index < filledStarCount; index++) {
+      stars.push(<Image source={filledStarImage} style={styles.ratingStar} />);
+    }
+    for (let index = 0; index < emptyStarCount; index++) {
+      stars.push(<Image source={emptyStarImage} style={styles.ratingStar} />);
+    }
+    return stars;
+  }
   
   const openCourse = () => {
     Alert.alert('Course clicked!');
@@ -18,11 +33,7 @@ const SectionCoursesItem = (props) => {
         <Text style={styles.darkText}>{props.item.author}</Text>
         <Text style={styles.darkText}>{`${props.item.level} - ${props.item.released} - ${props.item.duration}`}</Text>
         <View style={styles.ratingStarContainer}>
-          <Image source={starImage} style={styles.ratingStar} />
-          <Image source={starImage} style={styles.ratingStar} />
-          <Image source={starImage} style={styles.ratingStar} />
-          <Image source={starImage} style={styles.ratingStar} />
-          <Image source={starImage} style={styles.ratingStar} />
+          {renderStars()}
           <Text style={styles.reviewText}>{`(${props.item.reviews})`}</Text>
         </View>
       </View>
@@ -36,8 +47,8 @@ const styles = StyleSheet.create({
   item: {
     marginBottom: 20,
     marginRight: 15,
-    width: 180,
-    height: 170,
+    width: 200,
+    height: 200,
     backgroundColor: '#dcdeef',
     shadowColor: "#000",
     shadowOffset: {
@@ -49,8 +60,8 @@ const styles = StyleSheet.create({
     elevation: 10,
   },
   imageContainer: {
-    height: 80,
-    width: 180
+    height: 100,
+    width: 200
   },
   image: {
     flex: 1,

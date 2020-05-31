@@ -5,7 +5,22 @@ import {ThemeContext} from 'context';
 const ListCoursesItem = (props) => {
   const {theme} = useContext(ThemeContext);
 
-  const starImage = require('assets/images/star_filled.png');
+  const filledStarImage = require('assets/images/star_filled.png');
+  const emptyStarImage = require('assets/images/star_corner.png');
+
+  const renderStars = () => {
+    const filledStarCount = props.item.rating;
+    const emptyStarCount = 5 - props.item.rating;
+    let stars = [];
+
+    for (let index = 0; index < filledStarCount; index++) {
+      stars.push(<Image source={filledStarImage} style={styles.ratingStar} />);
+    }
+    for (let index = 0; index < emptyStarCount; index++) {
+      stars.push(<Image source={emptyStarImage} style={styles.ratingStar} />);
+    }
+    return stars;
+  }
 
   const openCourse = () => {
     Alert.alert('Course clicked!');
@@ -29,11 +44,7 @@ const ListCoursesItem = (props) => {
           color: theme.textColor
         }}>{`${props.item.level} - ${props.item.released} - ${props.item.duration}`}</Text>
         <View style={styles.ratingStarContainer}>
-          <Image source={starImage} style={styles.ratingStar} />
-          <Image source={starImage} style={styles.ratingStar} />
-          <Image source={starImage} style={styles.ratingStar} />
-          <Image source={starImage} style={styles.ratingStar} />
-          <Image source={starImage} style={styles.ratingStar} />
+          {renderStars()}
           <Text style={styles.reviewText}>{`(${props.item.reviews})`}</Text>
         </View>
       </View>
