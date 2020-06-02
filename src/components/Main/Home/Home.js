@@ -9,7 +9,6 @@ import {MockupDataContext} from 'context';
 
 const Home = () => {
   const {courses, paths} = useContext(MockupDataContext);
-  console.log(courses);
 
   return (
     <ScrollView

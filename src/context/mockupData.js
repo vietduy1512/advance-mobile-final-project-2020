@@ -43,6 +43,63 @@ const courses = [
     rating: 4,
     reviews: 1498,
     image: require('assets/images/mockup/react-js-getting-started-v2.png'),
+    description: 'Front end web development involves many different technologies, and the landscape is constantly changing. In this course you will learn the basics of all of the different aspects of front end web development, and how to hone and keep your skills up to date.',
+    content: [
+      {
+        title: 'Course Overview',
+        duration: '1:26',
+        data: [
+          {
+            title: 'Intro',
+          },
+          {
+            title: 'History',
+          },
+          {
+            title: 'Why React?',
+          },
+          {
+            title: 'Reason 1',
+          },
+          {
+            title: 'Reason 2',
+          },
+          {
+            title: 'Reason 3',
+          },
+          {
+            title: 'Reason 4',
+          },
+        ]
+      },
+      {
+        title: 'Why React',
+        duration: '25:26',
+        data: [
+          {
+            title: 'Intro',
+          },
+          {
+            title: 'History',
+          },
+          {
+            title: 'Why React?',
+          },
+          {
+            title: 'Reason 1',
+          },
+          {
+            title: 'Reason 2',
+          },
+          {
+            title: 'Reason 3',
+          },
+          {
+            title: 'Reason 4',
+          },
+        ]
+      }
+    ]
   },
   {
     id: 2,
@@ -55,6 +112,63 @@ const courses = [
     rating: 4,
     reviews: 793,
     image: require('assets/images/mockup/react-big-picture.jpg'),
+    description: 'Front end web development involves many different technologies, and the landscape is constantly changing. In this course you will learn the basics of all of the different aspects of front end web development, and how to hone and keep your skills up to date.',
+    content: [
+      {
+        title: 'Course Overview',
+        duration: '1:26',
+        data: [
+          {
+            title: 'Intro',
+          },
+          {
+            title: 'History',
+          },
+          {
+            title: 'Why React?',
+          },
+          {
+            title: 'Reason 1',
+          },
+          {
+            title: 'Reason 2',
+          },
+          {
+            title: 'Reason 3',
+          },
+          {
+            title: 'Reason 4',
+          },
+        ]
+      },
+      {
+        title: 'Why React',
+        duration: '25:26',
+        data: [
+          {
+            title: 'Intro',
+          },
+          {
+            title: 'History',
+          },
+          {
+            title: 'Why React?',
+          },
+          {
+            title: 'Reason 1',
+          },
+          {
+            title: 'Reason 2',
+          },
+          {
+            title: 'Reason 3',
+          },
+          {
+            title: 'Reason 4',
+          },
+        ]
+      }
+    ]
   },
   {
     id: 3,
@@ -67,6 +181,63 @@ const courses = [
     rating: 4,
     reviews: 756,
     image: require('assets/images/mockup/react-flux-building-applications-v3.png'),
+    description: 'Front end web development involves many different technologies, and the landscape is constantly changing. In this course you will learn the basics of all of the different aspects of front end web development, and how to hone and keep your skills up to date.',
+    content: [
+      {
+        title: 'Course Overview',
+        duration: '1:26',
+        data: [
+          {
+            title: 'Intro',
+          },
+          {
+            title: 'History',
+          },
+          {
+            title: 'Why React?',
+          },
+          {
+            title: 'Reason 1',
+          },
+          {
+            title: 'Reason 2',
+          },
+          {
+            title: 'Reason 3',
+          },
+          {
+            title: 'Reason 4',
+          },
+        ]
+      },
+      {
+        title: 'Why React',
+        duration: '25:26',
+        data: [
+          {
+            title: 'Intro',
+          },
+          {
+            title: 'History',
+          },
+          {
+            title: 'Why React?',
+          },
+          {
+            title: 'Reason 1',
+          },
+          {
+            title: 'Reason 2',
+          },
+          {
+            title: 'Reason 3',
+          },
+          {
+            title: 'Reason 4',
+          },
+        ]
+      }
+    ]
   },
   {
     id: 4,
@@ -79,6 +250,63 @@ const courses = [
     rating: 4,
     reviews: 583,
     image: require('assets/images/mockup/react-redux-react-router-es6-v1.jpg'),
+    description: 'Front end web development involves many different technologies, and the landscape is constantly changing. In this course you will learn the basics of all of the different aspects of front end web development, and how to hone and keep your skills up to date.',
+    content: [
+      {
+        title: 'Course Overview',
+        duration: '1:26',
+        data: [
+          {
+            title: 'Intro',
+          },
+          {
+            title: 'History',
+          },
+          {
+            title: 'Why React?',
+          },
+          {
+            title: 'Reason 1',
+          },
+          {
+            title: 'Reason 2',
+          },
+          {
+            title: 'Reason 3',
+          },
+          {
+            title: 'Reason 4',
+          },
+        ]
+      },
+      {
+        title: 'Why React',
+        duration: '25:26',
+        data: [
+          {
+            title: 'Intro',
+          },
+          {
+            title: 'History',
+          },
+          {
+            title: 'Why React?',
+          },
+          {
+            title: 'Reason 1',
+          },
+          {
+            title: 'Reason 2',
+          },
+          {
+            title: 'Reason 3',
+          },
+          {
+            title: 'Reason 4',
+          },
+        ]
+      }
+    ]
   },
   {
     id: 5,
@@ -91,6 +319,63 @@ const courses = [
     rating: 4,
     reviews: 1648,
     image: require('assets/images/mockup/android-apps-kotlin-build-first-app-v1.png'),
+    description: 'Front end web development involves many different technologies, and the landscape is constantly changing. In this course you will learn the basics of all of the different aspects of front end web development, and how to hone and keep your skills up to date.',
+    content: [
+      {
+        title: 'Course Overview',
+        duration: '1:26',
+        data: [
+          {
+            title: 'Intro',
+          },
+          {
+            title: 'History',
+          },
+          {
+            title: 'Why React?',
+          },
+          {
+            title: 'Reason 1',
+          },
+          {
+            title: 'Reason 2',
+          },
+          {
+            title: 'Reason 3',
+          },
+          {
+            title: 'Reason 4',
+          },
+        ]
+      },
+      {
+        title: 'Why React',
+        duration: '25:26',
+        data: [
+          {
+            title: 'Intro',
+          },
+          {
+            title: 'History',
+          },
+          {
+            title: 'Why React?',
+          },
+          {
+            title: 'Reason 1',
+          },
+          {
+            title: 'Reason 2',
+          },
+          {
+            title: 'Reason 3',
+          },
+          {
+            title: 'Reason 4',
+          },
+        ]
+      }
+    ]
   },
   {
     id: 6,
@@ -103,6 +388,63 @@ const courses = [
     rating: 4,
     reviews: 1143,
     image: require('assets/images/mockup/swift-fundamentals.png'),
+    description: 'Front end web development involves many different technologies, and the landscape is constantly changing. In this course you will learn the basics of all of the different aspects of front end web development, and how to hone and keep your skills up to date.',
+    content: [
+      {
+        title: 'Course Overview',
+        duration: '1:26',
+        data: [
+          {
+            title: 'Intro',
+          },
+          {
+            title: 'History',
+          },
+          {
+            title: 'Why React?',
+          },
+          {
+            title: 'Reason 1',
+          },
+          {
+            title: 'Reason 2',
+          },
+          {
+            title: 'Reason 3',
+          },
+          {
+            title: 'Reason 4',
+          },
+        ]
+      },
+      {
+        title: 'Why React',
+        duration: '25:26',
+        data: [
+          {
+            title: 'Intro',
+          },
+          {
+            title: 'History',
+          },
+          {
+            title: 'Why React?',
+          },
+          {
+            title: 'Reason 1',
+          },
+          {
+            title: 'Reason 2',
+          },
+          {
+            title: 'Reason 3',
+          },
+          {
+            title: 'Reason 4',
+          },
+        ]
+      }
+    ]
   },
   {
     id: 7,
@@ -115,6 +457,63 @@ const courses = [
     rating: 4,
     reviews: 854,
     image: require('assets/images/mockup/ios-collection-views-getting-started-v1.png'),
+    description: 'Front end web development involves many different technologies, and the landscape is constantly changing. In this course you will learn the basics of all of the different aspects of front end web development, and how to hone and keep your skills up to date.',
+    content: [
+      {
+        title: 'Course Overview',
+        duration: '1:26',
+        data: [
+          {
+            title: 'Intro',
+          },
+          {
+            title: 'History',
+          },
+          {
+            title: 'Why React?',
+          },
+          {
+            title: 'Reason 1',
+          },
+          {
+            title: 'Reason 2',
+          },
+          {
+            title: 'Reason 3',
+          },
+          {
+            title: 'Reason 4',
+          },
+        ]
+      },
+      {
+        title: 'Why React',
+        duration: '25:26',
+        data: [
+          {
+            title: 'Intro',
+          },
+          {
+            title: 'History',
+          },
+          {
+            title: 'Why React?',
+          },
+          {
+            title: 'Reason 1',
+          },
+          {
+            title: 'Reason 2',
+          },
+          {
+            title: 'Reason 3',
+          },
+          {
+            title: 'Reason 4',
+          },
+        ]
+      }
+    ]
   },
 ]
 

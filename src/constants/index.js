@@ -3,6 +3,7 @@ export const Screens = Object.freeze({
   BOOKMARK: 'Bookmark',
   BROWSE: 'Browse',
   SEARCH: 'Search',
+  COURSE_DETAIL: 'CourseDetail',
 });
 
 export const Titles = Object.freeze({

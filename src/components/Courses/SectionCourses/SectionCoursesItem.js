@@ -1,7 +1,10 @@
-import React from 'react';
-import { StyleSheet, Text, Image, View, TouchableOpacity, Alert } from 'react-native';
+import React, {useContext} from 'react';
+import { StyleSheet, Text, Image, View, TouchableOpacity } from 'react-native';
+import { NavigationContext } from '@react-navigation/core';
 
 const SectionCoursesItem = (props) => {
+  const navigation = useContext(NavigationContext);
+
   const filledStarImage = require('assets/images/star_filled.png');
   const emptyStarImage = require('assets/images/star_corner.png');
 
@@ -20,7 +23,9 @@ const SectionCoursesItem = (props) => {
   }
   
   const openCourse = () => {
-    Alert.alert('Course clicked!');
+    navigation.navigate('CourseDetail', {
+      courseId: props.item.id
+    })
   }
 
   return (
