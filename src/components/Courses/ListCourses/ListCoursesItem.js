@@ -11,15 +11,13 @@ const ListCoursesItem = (props) => {
   const emptyStarImage = require('assets/images/star_corner.png');
 
   const renderStars = () => {
-    const filledStarCount = props.item.rating;
-    const emptyStarCount = 5 - props.item.rating;
     let stars = [];
 
-    for (let index = 0; index < filledStarCount; index++) {
-      stars.push(<Image source={filledStarImage} style={styles.ratingStar} />);
+    for (let index = 0; index < props.item.rating; index++) {
+      stars.push(<Image source={filledStarImage} key={index} style={styles.ratingStar} />);
     }
-    for (let index = 0; index < emptyStarCount; index++) {
-      stars.push(<Image source={emptyStarImage} style={styles.ratingStar} />);
+    for (let index = props.item.rating; index < 5; index++) {
+      stars.push(<Image source={emptyStarImage} key={index} style={styles.ratingStar} />);
     }
     return stars;
   }

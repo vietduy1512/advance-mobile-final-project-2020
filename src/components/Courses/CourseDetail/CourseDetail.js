@@ -3,8 +3,8 @@ import { StyleSheet, View, Image, TouchableOpacity, Text, ScrollView } from 'rea
 import Constants from "expo-constants";
 import {MockupDataContext} from 'context';
 import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons'; 
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { NavigationRouteContext } from '@react-navigation/core';
+import { Tab, Tabs, TabHeading } from 'native-base';
 
 const CourseDetail = () => {
   const filledStarImage = require('assets/images/star_filled.png');
@@ -17,15 +17,13 @@ const CourseDetail = () => {
   let author = authors.find(author => author.id === course.authorId);
 
   const renderStars = () => {
-    const filledStarCount = course.rating;
-    const emptyStarCount = 5 - course.rating;
     let stars = [];
 
-    for (let index = 0; index < filledStarCount; index++) {
-      stars.push(<Image source={filledStarImage} style={styles.ratingStar} />);
+    for (let index = 0; index < course.rating; index++) {
+      stars.push(<Image source={filledStarImage} key={index} style={styles.ratingStar} />);
     }
-    for (let index = 0; index < emptyStarCount; index++) {
-      stars.push(<Image source={emptyStarImage} style={styles.ratingStar} />);
+    for (let index = course.rating; index < 5; index++) {
+      stars.push(<Image source={emptyStarImage} key={index} style={styles.ratingStar} />);
     }
     return stars;
   };
@@ -114,24 +112,22 @@ const CourseDetail = () => {
 
   const Relevants = () => {
     return (
-      <>
-        <TouchableOpacity style={styles.relevantsContainer} onPress={() => {}}>
+      <View style={styles.relevantsContainer}>
+        <TouchableOpacity style={styles.relevantsButton} onPress={() => {}}>
           <Entypo name="archive" size={20} />
           <Text style={{fontSize: 12, marginLeft: 5}}>Related paths & courses</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.relevantsContainer} onPress={() => {}}>
+        <TouchableOpacity style={styles.relevantsButton} onPress={() => {}}>
           <MaterialCommunityIcons name="checkbox-multiple-marked-circle-outline" size={20} />
           <Text style={{fontSize: 12, marginLeft: 5}}>Take a learning check</Text>
         </TouchableOpacity>
-      </>
+      </View>
     )
   }
 
-  const BodyTab = createMaterialTopTabNavigator();
-
   const ContentHeader = ({section, index}) => {
     return (
-      <View style={{flex: 1, height: 60, flexDirection: 'row', marginBottom: 10}}>
+      <View style={{flex: 1, height: 60, flexDirection: 'row', marginBottom: 10, marginTop: 20}}>
         <View style={{flex: 1, backgroundColor: 'lightgray', justifyContent: 'center', alignItems: 'center'}}>
           <Text>{index}</Text>
         </View>
@@ -183,28 +179,26 @@ const CourseDetail = () => {
 
   const ContentBody = ({section}) => {
     return (
-      <View style={{width: '100%'}}>
+      <>
         {section.data.map((item, key) => <ContentBodyItem key={key} title={item.title} isWatched={true}/>)}
-      </View>
+      </>
     )
   }
 
   const Contents = () => {
-    console.log("Contents")
     return (
       <View style={styles.contentsContainer}>
         {course.content.map((section, index) => (
-          <>
+          <View style={{width: '100%'}} key={index}>
             <ContentHeader section={section} index={index+1}/>
             <ContentBody section={section}/>
-          </>
+          </View>
         ))}
       </View>
     )
   }
 
   const Transcript = () => {
-    console.log("Transcript")
     return (
       <View style={styles.transcriptContainer}>
         <Text>Transcript</Text>
@@ -212,13 +206,24 @@ const CourseDetail = () => {
     )
   }
   
-  // TODO: fix rerender
   const CourseBody = () => {
     return (
-      <BodyTab.Navigator swipeEnabled={true} lazy={false}>
-        <BodyTab.Screen name="Contents" component={Contents} />
-        <BodyTab.Screen name="Transcript" component={Transcript} />
-      </BodyTab.Navigator>
+      <Tabs tabBarUnderlineStyle={{backgroundColor: 'blue'}} >
+        <Tab heading={
+          <TabHeading style={{backgroundColor: 'white'}}>
+            <Text>Contents</Text>
+          </TabHeading>
+        }>
+          <Contents />
+        </Tab>
+        <Tab heading={
+          <TabHeading style={{backgroundColor: 'white'}}>
+            <Text>Transcript</Text>
+          </TabHeading>
+        }>
+          <Transcript />
+        </Tab>
+      </Tabs>
     )
   }
 
@@ -338,7 +343,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     paddingTop: 10,
   },
-  relevantsContainer: {
+  relevantsButton: {
     marginHorizontal: 15,
     marginTop: 10,
     borderRadius: 5,
@@ -347,6 +352,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'lightgrey',
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  relevantsContainer: {
+    marginBottom: 30
   },
   contentsContainer: {
     flex: 1,

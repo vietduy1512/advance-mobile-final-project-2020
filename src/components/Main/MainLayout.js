@@ -37,9 +37,12 @@ const MainLayout = () => {
       <RootStack.Screen
         name="TabLayout"
         component={TabLayout}
+      />
+      <RootStack.Screen
+        name={Screens.COURSE_DETAIL}
+        component={CourseDetail}
         options={{ headerShown: false }}
       />
-      <RootStack.Screen name={Screens.COURSE_DETAIL} component={CourseDetail} />
     </RootStack.Navigator>
   );
 }

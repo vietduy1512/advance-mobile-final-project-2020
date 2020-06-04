@@ -5,17 +5,20 @@ import {themes} from './src/constants/context';
 import {ThemeContext} from 'context';
 import {MockupDataContext} from 'context';
 import mockupData from 'context/mockupData';
+import { Container } from 'native-base';
 
 export default function App() {
   const [theme, setTheme] = useState(themes.light)
 
   return (
-    <ThemeContext.Provider value={{theme, setTheme}}>
-      <MockupDataContext.Provider value={mockupData}>
-        <NavigationContainer>
-          <MainLayout />
-        </NavigationContainer>
-      </MockupDataContext.Provider>
-    </ThemeContext.Provider>
+    <Container>
+      <ThemeContext.Provider value={{theme, setTheme}}>
+        <MockupDataContext.Provider value={mockupData}>
+          <NavigationContainer>
+            <MainLayout />
+          </NavigationContainer>
+        </MockupDataContext.Provider>
+      </ThemeContext.Provider>
+    </Container>
   );
 }
