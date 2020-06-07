@@ -17,7 +17,11 @@ const SectionCoursesContent = (props) => {
         </TouchableOpacity>
       </View>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-        <Courses courses={props.courses}/>
+        {
+          props.courses.length !== 0 ? 
+          <Courses courses={props.courses}/> :
+          <Text style={{color: 'gray'}}>There are no items yet!</Text>
+        }
       </ScrollView>
     </View>
   );

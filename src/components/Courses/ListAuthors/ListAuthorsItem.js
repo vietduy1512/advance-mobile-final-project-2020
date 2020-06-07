@@ -3,7 +3,7 @@ import { StyleSheet, Text, Image, View, TouchableOpacity, Alert } from 'react-na
 
 const ListAuthorsItem = (props) => {
   const openCourse = () => {
-    Alert.alert('Course clicked!');
+    Alert.alert('Not implement yet!');
   }
 
   return (

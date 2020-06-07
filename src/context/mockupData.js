@@ -1,36 +1,3 @@
-const bookmarkListCourses = [
-  {
-    id: 1,
-    title: 'React Native',
-    author: 'Duy Le',
-    level: 'Advance',
-    released: 'May 6, 2020',
-    duration: '30h',
-    reviews: 123,
-    image: require('assets/images/mockup/react-js-getting-started-v2.png'),
-  },
-  {
-    id: 2,
-    title: 'Android',
-    author: 'Thao Luu',
-    level: 'Beginner',
-    released: 'May 6, 2020',
-    duration: '30h',
-    reviews: 123,
-    image: require('assets/images/mockup/software-development.png'),
-  },
-  {
-    id: 3,
-    title: 'iOS',
-    author: 'Thao Luu',
-    level: 'Beginner',
-    released: 'May 6, 2020',
-    duration: '30h',
-    reviews: 123,
-    image: require('assets/images/mockup/ios-collection-views-getting-started-v1.png'),
-  },
-]
-
 const courses = [
   {
     id: 1,
@@ -573,7 +540,6 @@ const authors = [
 ]
 
 export default mockupData = {
-  bookmarkListCourses: bookmarkListCourses,
   courses: courses,
   paths: paths,
   authors: authors

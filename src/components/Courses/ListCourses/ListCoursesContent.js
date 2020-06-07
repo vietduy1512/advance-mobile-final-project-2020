@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Text } from 'react-native';
 import ListCoursesItem from './ListCoursesItem';
 
 const ListCoursesContent = (props) => {
@@ -11,7 +11,11 @@ const ListCoursesContent = (props) => {
     <View style={{flex: 1}}>
       {props.renderHeader()}
       <ScrollView showsVerticalScrollIndicator={false}>
-        <Courses courses={props.courses}/>
+      {
+          props.courses.length !== 0 ? 
+          <Courses courses={props.courses}/> :
+          <Text style={{color: 'gray'}}>There are no items yet!</Text>
+        }
       </ScrollView>
     </View>
   );

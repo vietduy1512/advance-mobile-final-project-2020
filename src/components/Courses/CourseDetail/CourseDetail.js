@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { StyleSheet, View, Image, TouchableOpacity, Text, ScrollView } from 'react-native';
 import Constants from "expo-constants";
 import {MockupDataContext} from 'context';
@@ -6,6 +6,8 @@ import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
 import { NavigationRouteContext } from '@react-navigation/core';
 import { NavigationContext } from '@react-navigation/core';
 import { Tab, Tabs, TabHeading } from 'native-base';
+import {bookmark, unbookmark} from 'actions/bookmarkAction';
+import {connect} from 'react-redux';
 
 const CourseDetail = () => {
   const filledStarImage = require('assets/images/star_filled.png');
@@ -36,7 +38,7 @@ const CourseDetail = () => {
         <TouchableOpacity style={{width: 40, height: 40, top: 5, left: 5, position: 'absolute', zIndex: 1}} onPress={() => {
           navigation.goBack();
         }}>
-          <MaterialCommunityIcons name="close" size={30} color="black" />
+          <MaterialCommunityIcons name="close" size={26} color="white" />
         </TouchableOpacity>
         <Image source={course.image} style={styles.video} />
         <Text style={styles.courseTitle}>{course.title}</Text>
@@ -67,10 +69,37 @@ const CourseDetail = () => {
     )
   };
 
-  const AccessibilityButtons = () => {
-    return (
-      <View style={styles.accessibilityContainer}>
-        <TouchableOpacity style={styles.accessibilityButton} onPress={() => {}}>
+
+
+  const AccessibilityButtons = (props) => {
+    
+    const BookmarkButton = () => {
+      const bookmarkCourse = () => {
+        props.bookmark(courseId);
+      }
+      const unbookmarkCourse = () => {
+        props.unbookmark(courseId);
+      }
+      const [isBookmarked, setIsBookmarked] = useState(false);
+
+      useEffect(() => {
+        let isBookmarked = props.bookmarkIds.includes(courseId);
+        setIsBookmarked(isBookmarked);
+      }, [props.bookmarkIds])
+
+      return isBookmarked ? (
+        <TouchableOpacity style={styles.accessibilityButton} onPress={unbookmarkCourse}>
+          <View style={styles.accessibilityImageContainer}>
+            <View style={styles.accessibilityImageSize}>
+              <Image source={require('assets/images/bookmark.png')} style={styles.accessibilityImage} />
+            </View>
+          </View>
+          <View style={{margin: 10}}>
+            <Text style={{fontSize: 12}}>Unbookmark</Text>
+          </View>
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity style={styles.accessibilityButton} onPress={bookmarkCourse}>
           <View style={styles.accessibilityImageContainer}>
             <View style={styles.accessibilityImageSize}>
               <Image source={require('assets/images/bookmark.png')} style={styles.accessibilityImage} />
@@ -80,6 +109,10 @@ const CourseDetail = () => {
             <Text style={{fontSize: 12}}>Bookmark</Text>
           </View>
         </TouchableOpacity>
+      );
+    }
+    const ChannelAdd = () => {
+      return (
         <TouchableOpacity style={styles.accessibilityButton} onPress={() => {}}>
           <View style={styles.accessibilityImageContainer}>
             <View style={styles.accessibilityImageSize}>
@@ -90,6 +123,10 @@ const CourseDetail = () => {
             <Text style={{fontSize: 12}}>Add to channel</Text>
           </View>
         </TouchableOpacity>
+      )
+    }
+    const DownloadButton = () => {
+      return (
         <TouchableOpacity style={styles.accessibilityButton} onPress={() => {}}>
           <View style={styles.accessibilityImageContainer}>
             <View style={styles.accessibilityImageSize}>
@@ -100,9 +137,21 @@ const CourseDetail = () => {
             <Text style={{fontSize: 12}}>Download</Text>
           </View>
         </TouchableOpacity>
+      )
+    }
+    return (
+      <View style={styles.accessibilityContainer}>
+        <BookmarkButton />
+        <ChannelAdd />
+        <DownloadButton />
       </View>
     )
   };
+
+  const AccessibilityButtonsWraper = connect(
+    mapStateToProps,
+    {bookmark, unbookmark},
+  )(AccessibilityButtons);
 
   // TODO: Add expand button
   const Summary = () => {
@@ -239,7 +288,7 @@ const CourseDetail = () => {
       <VideoViewer />
       <AuthorButton />
       <CourseInfo />
-      <AccessibilityButtons />
+      <AccessibilityButtonsWraper />
       <Summary />
       <Relevants />
       <CourseBody />
@@ -247,7 +296,9 @@ const CourseDetail = () => {
   );
 }
 
-
+const mapStateToProps = state => ({
+  bookmarkIds: state.bookmark.bookmarkIds,
+});
 
 export default CourseDetail;
 
