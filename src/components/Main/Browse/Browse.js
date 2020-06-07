@@ -35,7 +35,7 @@ export default Search;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: Constants.statusBarHeight,
-    marginHorizontal: 16
+    marginTop: Constants.statusBarHeight + 10,
+    marginHorizontal: 10,
   },
 });

@@ -1,47 +1,54 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Text, View, ScrollView, StyleSheet } from 'react-native';
 import ImageButton from '../../../Common/ImageButton';
 import SkillButton from './SkillButton';
+import {MockupDataContext} from 'context';
 
 const PopularSkills = (props) => {
-  //TODO
-  const data = [1, 2, 3, 4];
+  const {skills, imageButtons} = useContext(MockupDataContext);
 
-  const ImageButtons = ({ buttons }) => (
-    buttons.map(item => (
-      <View key={item} style={styles.imageButton}>
-        <ImageButton
-          title={'Content'}
-          height={80}
-          width={160}
-          image={require('assets/images/mockup/software-development.png')}
-          onPress={() => {}}
-        />
-        <ImageButton
-          title={'Content'}
-          height={80}
-          width={160}
-          image={require('assets/images/mockup/software-development.png')}
-          onPress={() => {}}
-        />
-      </View>
-    ))
-  );
+  const ImageButtons = ({ buttons }) => {
+    let imageButtonTuples = buttons.reduce(function (result, item, index) {
+      if (index % 2) {
+        result[result.length - 1].push(item);
+      } else {
+        result.push([item]);
+      }
+      return result;
+    }, []);
+
+    return (
+      imageButtonTuples.map((item, index) => (
+        <View key={index} style={styles.imageButton}>
+          <ImageButton
+            title={item[0].title}
+            height={80}
+            width={160}
+            image={item[0].image}
+            onPress={() => {}}
+          />
+          <ImageButton
+            title={item[1].title}
+            height={80}
+            width={160}
+            image={item[1].image}
+            onPress={() => {}}
+          />
+        </View>
+      ))
+    )
+  };
 
   return (
     <View>
       <View style={styles.header}>
         <Text style={styles.title}>{props.title}</Text>
       </View>
-      <View style={styles.skillsContainer}>
-        <SkillButton title={'React'} isChecked={true} />
-        <SkillButton title={'Swift'} isChecked={false} />
-        <SkillButton title={'.NET'} isChecked={false} />
-        <SkillButton title={'Java'} isChecked={false} />
-        <SkillButton title={'Android'} isChecked={false} />
-      </View>
+      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.skillsContainer}>
+        {skills.map((skill, index) => <SkillButton key={index} title={skill.name} isChecked={skill.isChecked} />)}
+      </ScrollView>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-        <ImageButtons buttons={data} />
+        <ImageButtons buttons={imageButtons} />
       </ScrollView>
     </View>
   );
@@ -57,7 +64,8 @@ const styles = StyleSheet.create({
   header: {
     alignItems: 'center',
     justifyContent: 'space-between',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    marginTop: 10
   },
   skillsContainer: {
     flexDirection: 'row',

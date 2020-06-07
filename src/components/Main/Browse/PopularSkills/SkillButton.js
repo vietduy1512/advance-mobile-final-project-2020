@@ -19,7 +19,7 @@ export default SkillButton;
 const styles = StyleSheet.create({
   expandContainer: {
     height: 20,
-    width: 60,
+    paddingHorizontal: 10,
     backgroundColor: '#dcdeef',
     borderRadius: 10,
     justifyContent: 'center',

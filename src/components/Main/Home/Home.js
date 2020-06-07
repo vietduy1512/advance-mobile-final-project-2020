@@ -43,6 +43,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: Constants.statusBarHeight,
-    marginHorizontal: 16
+    marginHorizontal: 10
   },
 });
