@@ -605,10 +605,16 @@ const imageButtons = [
   },
 ]
 
+const recentSearches = [
+  'react',
+  'scott allen'
+]
+
 export default mockupData = {
   courses: courses,
   paths: paths,
   authors: authors,
   skills: skills,
-  imageButtons: imageButtons
+  imageButtons: imageButtons,
+  recentSearches: recentSearches
 }
