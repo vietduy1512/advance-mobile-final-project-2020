@@ -4,6 +4,7 @@ import Constants from "expo-constants";
 import {MockupDataContext} from 'context';
 import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons'; 
 import { NavigationRouteContext } from '@react-navigation/core';
+import { NavigationContext } from '@react-navigation/core';
 import { Tab, Tabs, TabHeading } from 'native-base';
 
 const CourseDetail = () => {
@@ -12,6 +13,7 @@ const CourseDetail = () => {
 
   const {courses, authors} = useContext(MockupDataContext);
   const route = useContext(NavigationRouteContext);
+  const navigation = useContext(NavigationContext);
   const { courseId } = route.params;
   let course = courses.find(course => course.id === courseId);
   let author = authors.find(author => author.id === course.authorId);
@@ -31,6 +33,11 @@ const CourseDetail = () => {
   const VideoViewer = () => {
     return (
       <View style={styles.videoContainer}>
+        <TouchableOpacity style={{width: 40, height: 40, top: 5, left: 5, position: 'absolute', zIndex: 1}} onPress={() => {
+          navigation.goBack();
+        }}>
+          <MaterialCommunityIcons name="close" size={30} color="black" />
+        </TouchableOpacity>
         <Image source={course.image} style={styles.video} />
         <Text style={styles.courseTitle}>{course.title}</Text>
       </View>
