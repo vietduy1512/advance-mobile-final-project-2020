@@ -5,6 +5,8 @@ export const Screens = Object.freeze({
   SEARCH: 'Search',
   COURSE_DETAIL: 'CourseDetail',
   SETTINGS: 'Settings',
+  LOGIN: 'Login',
+  LAYOUT: 'TabLayout',
 });
 
 export const Titles = Object.freeze({

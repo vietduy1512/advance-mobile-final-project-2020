@@ -1,10 +1,11 @@
 import React, {useContext} from 'react';
-import { ScrollView, TouchableOpacity, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, TouchableOpacity, StyleSheet, Text, View, Button } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import {ThemeContext} from 'context';
 import {NavigationContext} from '@react-navigation/core';
 import { createStackNavigator } from '@react-navigation/stack';
 import ThemeSettings from './ThemeSettings';
+import {Screens} from 'constants';
 
 const SettingItem = ({item, index}) => {
   const {theme} = useContext(ThemeContext);
@@ -46,12 +47,13 @@ const appVersion = () => {
 
 const SettingsStack = createStackNavigator();
 
-const SettingsMain = () => {
+const SettingsMain = ({navigation}) => {
   const {theme} = useContext(ThemeContext);
   return (
     <View style={{...styles.container, backgroundColor: theme.backgroundColor}}>
       <ScrollView>
         {data.map((item, index) => SettingItem({item, index}))}
+        <Button title="Sign out" onPress={() => navigation.navigate(Screens.LOGIN)} />
       </ScrollView>
     </View>
   );
@@ -59,14 +61,14 @@ const SettingsMain = () => {
 
 const Settings = () => (
   <SettingsStack.Navigator>
-      <SettingsStack.Screen name="SettingsMain" component={SettingsMain} options={{ headerShown: false }}
-      />
-      <SettingsStack.Screen  mode="modal"
-        name={"ThemeSettings"}
-        component={ThemeSettings}
-        options={{ headerShown: false }}
-      />
-    </SettingsStack.Navigator>
+    <SettingsStack.Screen name="SettingsMain" component={SettingsMain} options={{ headerShown: false }}
+    />
+    <SettingsStack.Screen  mode="modal"
+      name={"ThemeSettings"}
+      component={ThemeSettings}
+      options={{ headerShown: false }}
+    />
+  </SettingsStack.Navigator>
 )
 
 export default Settings;

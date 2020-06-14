@@ -56,7 +56,7 @@ const HomeScreen = ({navigation}) => {
           ),
           headerRightContainerStyle: {marginRight: 10},
           headerRight: () => (
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate(Screens.LOGIN)}>
               <FontAwesome name="power-off" size={24} color="black" />
             </TouchableOpacity>
           )

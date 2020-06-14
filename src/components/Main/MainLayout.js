@@ -9,6 +9,7 @@ import Browse from './Browse/Browse';
 import Bookmark from './Bookmark/Bookmark';
 import Search from './Search/Search';
 import CourseDetail from '../Courses/CourseDetail/CourseDetail';
+import Login from './Authenticate/Login'
 import { createStackNavigator } from '@react-navigation/stack';
 
 const Tab = createBottomTabNavigator();
@@ -35,7 +36,12 @@ const MainLayout = () => {
   return (
     <RootStack.Navigator mode="modal">
       <RootStack.Screen
-        name="TabLayout"
+        name={Screens.LOGIN}
+        component={Login}
+        options={{ headerShown: false }}
+      />
+      <RootStack.Screen
+        name={Screens.LAYOUT}
         component={TabLayout}
         options={{ headerShown: false }}
       />
