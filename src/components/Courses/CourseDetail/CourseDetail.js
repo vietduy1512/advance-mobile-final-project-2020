@@ -5,11 +5,14 @@ import {MockupDataContext} from 'context';
 import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons'; 
 import { NavigationRouteContext } from '@react-navigation/core';
 import { NavigationContext } from '@react-navigation/core';
-import { Tab, Tabs, TabHeading } from 'native-base';
+import { Tab, Tabs, TabHeading, Content, Accordion } from 'native-base';
 import {bookmark, unbookmark} from 'actions/bookmarkAction';
 import {connect} from 'react-redux';
+import {ThemeContext} from 'context';
 
 const CourseDetail = () => {
+  const {theme} = useContext(ThemeContext);
+
   const filledStarImage = require('assets/images/star_filled.png');
   const emptyStarImage = require('assets/images/star_corner.png');
 
@@ -41,7 +44,7 @@ const CourseDetail = () => {
           <MaterialCommunityIcons name="close" size={26} color="white" />
         </TouchableOpacity>
         <Image source={course.image} style={styles.video} />
-        <Text style={styles.courseTitle}>{course.title}</Text>
+        <Text style={{...styles.courseTitle, color: theme.textColor}}>{course.title}</Text>
       </View>
     )
   };
@@ -95,7 +98,7 @@ const CourseDetail = () => {
             </View>
           </View>
           <View style={{margin: 10}}>
-            <Text style={{fontSize: 12}}>Unbookmark</Text>
+            <Text style={{fontSize: 12, color: theme.textColor}}>Unbookmark</Text>
           </View>
         </TouchableOpacity>
       ) : (
@@ -106,7 +109,7 @@ const CourseDetail = () => {
             </View>
           </View>
           <View style={{margin: 10}}>
-            <Text style={{fontSize: 12}}>Bookmark</Text>
+            <Text style={{fontSize: 12, color: theme.textColor}}>Bookmark</Text>
           </View>
         </TouchableOpacity>
       );
@@ -120,7 +123,7 @@ const CourseDetail = () => {
             </View>
           </View>
           <View style={{margin: 10, width: 100, alignItems: 'center'}}>
-            <Text style={{fontSize: 12}}>Add to channel</Text>
+            <Text style={{fontSize: 12, color: theme.textColor}}>Add to channel</Text>
           </View>
         </TouchableOpacity>
       )
@@ -134,7 +137,7 @@ const CourseDetail = () => {
             </View>
           </View>
           <View style={{margin: 10}}>
-            <Text style={{fontSize: 12}}>Download</Text>
+            <Text style={{fontSize: 12, color: theme.textColor}}>Download</Text>
           </View>
         </TouchableOpacity>
       )
@@ -188,7 +191,7 @@ const CourseDetail = () => {
           <Text>{index}</Text>
         </View>
         <View style={{flex: 3, marginLeft: 15, justifyContent: 'center'}}>
-          <Text style={{fontSize: 16}}>{section.title}</Text>
+          <Text style={{fontSize: 16, color: theme.textColor}}>{section.title}</Text>
           <Text style={{marginTop: 10, fontSize: 10, color: 'gray'}}>{section.duration}</Text>
         </View>
         <View style={{flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center'}}>
@@ -228,7 +231,7 @@ const CourseDetail = () => {
             marginRight: 20,
           }}/>
         )}
-        <Text style={{marginBottom: 15}}>{title}</Text>
+        <Text style={{marginBottom: 15, color: theme.textColor}}>{title}</Text>
       </View>
     );
   }
@@ -243,7 +246,7 @@ const CourseDetail = () => {
 
   const Contents = () => {
     return (
-      <View style={styles.contentsContainer}>
+      <View style={{...styles.contentsContainer, backgroundColor: theme.backgroundColor}}>
         {course.content.map((section, index) => (
           <View style={{width: '100%'}} key={index}>
             <ContentHeader section={section} index={index+1}/>
@@ -254,11 +257,17 @@ const CourseDetail = () => {
     )
   }
 
+  const dataArray = [
+    { title: "First Element", content: "Lorem ipsum dolor sit amet" },
+    { title: "Second Element", content: "Lorem ipsum dolor sit amet" },
+    { title: "Third Element", content: "Lorem ipsum dolor sit amet" }
+  ];
+
   const Transcript = () => {
     return (
-      <View style={styles.transcriptContainer}>
-        <Text>Transcript</Text>
-      </View>
+      <Content padder style={{...styles.transcriptContainer, backgroundColor: theme.backgroundColor}}>
+        <Accordion dataArray={dataArray}/>
+      </Content>
     )
   }
   
@@ -266,15 +275,15 @@ const CourseDetail = () => {
     return (
       <Tabs tabBarUnderlineStyle={{backgroundColor: 'blue'}} >
         <Tab heading={
-          <TabHeading style={{backgroundColor: 'white'}}>
-            <Text>Contents</Text>
+          <TabHeading style={{backgroundColor: theme.backgroundColor}}>
+            <Text style={{color: theme.textColor}}>Contents</Text>
           </TabHeading>
         }>
           <Contents />
         </Tab>
         <Tab heading={
-          <TabHeading style={{backgroundColor: 'white'}}>
-            <Text>Transcript</Text>
+          <TabHeading style={{backgroundColor: theme.backgroundColor}}>
+            <Text style={{color: theme.textColor}}>Transcript</Text>
           </TabHeading>
         }>
           <Transcript />
@@ -284,7 +293,10 @@ const CourseDetail = () => {
   }
 
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+    <ScrollView style={{
+      ...styles.container,
+      backgroundColor: theme.backgroundColor
+    }} showsVerticalScrollIndicator={false}>
       <VideoViewer />
       <AuthorButton />
       <CourseInfo />
@@ -417,6 +429,8 @@ const styles = StyleSheet.create({
   contentsContainer: {
     flex: 1,
     alignItems: 'flex-start',
-    margin: 15
+    padding: 15
+  },
+  transcriptContainer: {
   }
 });

@@ -7,12 +7,17 @@ import SectionAuthors from '../../Courses/SectionAuthors/SectionAuthorsContent';
 import PopularSkills from './PopularSkills/PopularSkills';
 import { Titles } from 'constants';
 import {MockupDataContext} from 'context';
+import {ThemeContext} from 'context';
 
 const Search = () => {
+  const {theme} = useContext(ThemeContext);
   const {paths, authors} = useContext(MockupDataContext);
 
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+    <ScrollView style={{
+      ...styles.container,
+      backgroundColor: theme.backgroundColor
+    }} showsVerticalScrollIndicator={false}>
       <ImageButton
         title={Titles.NEW_RELEASES}
         image={require('assets/images/mockup/react-js-getting-started-v2.png')}
@@ -36,6 +41,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: Constants.statusBarHeight + 10,
-    marginHorizontal: 10,
+    paddingHorizontal: 10,
   },
 });

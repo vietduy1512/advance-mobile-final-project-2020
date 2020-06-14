@@ -1,13 +1,16 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Text, View, Image, StyleSheet } from 'react-native';
+import {ThemeContext} from 'context';
 
 const Channels = () => {
+  const {theme} = useContext(ThemeContext);
+
   const text = 'Use channels to save, organize, and share content to accomplish your learning objectives';
 
   return (
     <View>
       <View style={styles.header}>
-        <Text style={styles.title}>Channels</Text>
+        <Text style={{...styles.title, color: theme.textColor}}>Channels</Text>
       </View>
       <View style={styles.container}>
         <View style={styles.channelsIconContainer}>

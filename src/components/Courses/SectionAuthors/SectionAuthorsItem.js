@@ -1,7 +1,10 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { StyleSheet, Text, Image, View, TouchableOpacity, Alert } from 'react-native';
+import {ThemeContext} from 'context';
 
 const SectionAuthorsItem = (props) => {
+  const {theme} = useContext(ThemeContext);
+
   const openCourse = () => {
     Alert.alert('Not implement yet!');
   }
@@ -11,7 +14,7 @@ const SectionAuthorsItem = (props) => {
       <View style={styles.imageContainer}>
         <Image source={props.item.image} style={styles.image} />
       </View>
-      <Text>{props.item.name}</Text>
+      <Text style={{color: theme.textColor}}>{props.item.name}</Text>
     </TouchableOpacity>
   );
 }

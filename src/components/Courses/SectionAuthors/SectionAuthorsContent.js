@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import SectionAuthorsItem from './SectionAuthorsItem';
 import { Content } from 'constants';
+import {ThemeContext} from 'context';
 
 const SectionAuthorsContent = (props) => {
+  const {theme} = useContext(ThemeContext);
+
   const Authors = ({ authors }) => (
     authors.map(item => <SectionAuthorsItem key={item.id} item={item} />)
   );
@@ -11,7 +14,7 @@ const SectionAuthorsContent = (props) => {
   return (
     <View>
       <View style={styles.header}>
-        <Text style={styles.title}>{props.title}</Text>
+        <Text style={{...styles.title, color: theme.textColor}}>{props.title}</Text>
         <TouchableOpacity style={styles.expandContainer}>
           <Text style={styles.expandText}>{Content.SEE_ALL}</Text>
         </TouchableOpacity>

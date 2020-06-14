@@ -3,8 +3,10 @@ import { Text, View, ScrollView, StyleSheet } from 'react-native';
 import ImageButton from '../../../Common/ImageButton';
 import SkillButton from './SkillButton';
 import {MockupDataContext} from 'context';
+import {ThemeContext} from 'context';
 
 const PopularSkills = (props) => {
+  const {theme} = useContext(ThemeContext);
   const {skills, imageButtons} = useContext(MockupDataContext);
 
   const ImageButtons = ({ buttons }) => {
@@ -42,7 +44,7 @@ const PopularSkills = (props) => {
   return (
     <View>
       <View style={styles.header}>
-        <Text style={styles.title}>{props.title}</Text>
+        <Text style={{...styles.title, color: theme.textColor}}>{props.title}</Text>
       </View>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.skillsContainer}>
         {skills.map((skill, index) => <SkillButton key={index} title={skill.name} isChecked={skill.isChecked} />)}

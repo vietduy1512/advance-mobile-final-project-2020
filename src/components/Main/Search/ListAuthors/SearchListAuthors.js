@@ -1,23 +1,26 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import ListAuthorsContent from '../../../Courses/ListAuthors/ListAuthorsContent';
 import { MaterialIcons } from '@expo/vector-icons';
+import {ThemeContext} from 'context';
 
 const SearchListAuthors = (props) => {
+  const {theme} = useContext(ThemeContext);
+  
   const renderSearchSectionHeader = () => (
     <View style={styles.header}>
-      <Text style={styles.title}>{props.authors.length} Results</Text>
+      <Text style={{...styles.title, color: theme.textColor}}>{props.authors.length} Results</Text>
       <TouchableOpacity style={styles.expandContainer}>
-        <MaterialIcons name="filter-list" size={20} color="black" />
+        <MaterialIcons name="filter-list" size={20} color={theme.textColor} />
       </TouchableOpacity>
     </View>
   )
 
   const renderSearchHeader = () => (
     <View style={styles.header}>
-      <Text style={styles.title}>{props.title}</Text>
+      <Text style={{...styles.title, color: theme.textColor}}>{props.title}</Text>
       <TouchableOpacity style={styles.expandContainer}>
-        <Text style={styles.expandText}>{props.authors.length} results &gt;</Text>
+        <Text style={{...styles.expandText, color: theme.textColor}}>{props.authors.length} results &gt;</Text>
       </TouchableOpacity>
     </View>
   )

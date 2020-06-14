@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 import SectionPathsItem from './SectionPathsItem';
 import { Content } from 'constants';
+import {ThemeContext} from 'context';
 
 const SectionPathsContent = (props) => {
+  const {theme} = useContext(ThemeContext);
+
   const Paths = ({ paths }) => (
     paths.map(item => <SectionPathsItem key={item.id} item={item} />)
   );
@@ -11,7 +14,7 @@ const SectionPathsContent = (props) => {
   return (
     <View>
       <View style={styles.header}>
-        <Text style={styles.title}>{props.title}</Text>
+        <Text style={{...styles.title, color: theme.textColor}}>{props.title}</Text>
         <TouchableOpacity style={styles.expandContainer}>
           <Text style={styles.expandText}>{Content.SEE_ALL}</Text>
         </TouchableOpacity>

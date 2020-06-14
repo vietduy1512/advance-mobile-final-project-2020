@@ -1,16 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { StyleSheet, View, Button } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Constants from "expo-constants";
 import BookmarkListCourses from './ListCourses/BookmarkListCourses';
 import { Titles } from 'constants';
 import {ThemeContext} from 'context';
-import {themes} from 'constants/context';
 import {MockupDataContext} from 'context';
 import {connect} from 'react-redux';
 
-// TODO: Remove button change theme
 const Bookmark = (props) => {
-  const {theme, setTheme} = useContext(ThemeContext);
+  const {theme} = useContext(ThemeContext);
   const {courses} = useContext(MockupDataContext);
   const [bookmarks, setBookmarks] = useState([])
 
@@ -26,13 +24,6 @@ const Bookmark = (props) => {
         backgroundColor: theme.backgroundColor
       }}>
       <BookmarkListCourses title={Titles.BOOKMARKS} courses={bookmarks}/>
-      <Button
-        title="Change theme"
-        onPress={() => {
-          setTheme(themes.dark);
-        }}
-      >
-      </Button>
     </View>
   );
 }

@@ -8,8 +8,10 @@ import { Titles } from 'constants'
 import {MockupDataContext} from 'context';
 import { Tab, Tabs, TabHeading, View } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
+import {ThemeContext} from 'context';
 
 const Search = () => {
+  const {theme} = useContext(ThemeContext);
   const {courses, paths, authors, recentSearches} = useContext(MockupDataContext);
   const [searchCourses, setSearchCourses] = useState([]);
   const [searchPaths, setSearchPaths] = useState([]);
@@ -40,7 +42,7 @@ const Search = () => {
     }
 
     return (
-      <View style={{ height: 40, backgroundColor: 'white', flexDirection: 'row', marginHorizontal: 10, }}>
+      <View style={{ height: 40, backgroundColor: 'white', flexDirection: 'row', paddingHorizontal: 10, }}>
         <View style={{ flex: 4, margin: 5, borderRadius: 5, backgroundColor: 'lightgray', alignItems: 'center', flexDirection: 'row' }}>
           <Ionicons style={{ flex: 1, marginLeft: 5 }} name="md-search" size={20} color="black" />
           <TextInput
@@ -70,17 +72,20 @@ const Search = () => {
 
   const SearchContent = () => (
     <Tabs tabBarUnderlineStyle={{backgroundColor: 'blue'}} >
-      <Tab heading={
-        <TabHeading style={{backgroundColor: 'white'}}>
-          <Text>All</Text>
-        </TabHeading>
+      <Tab
+        style={{...styles.sectioncontainer, backgroundColor: theme.backgroundColor}}
+        heading={
+          <TabHeading style={{backgroundColor: theme.backgroundColor}}>
+            <Text style={{color: theme.textColor}}>All</Text>
+          </TabHeading>
       }>
         <AllSection />
       </Tab>
-      <Tab 
+      <Tab
+        style={{...styles.sectioncontainer, backgroundColor: theme.backgroundColor}}
         heading={
-          <TabHeading style={{backgroundColor: 'white'}}>
-            <Text>Courses</Text>
+          <TabHeading style={{backgroundColor: theme.backgroundColor}}>
+            <Text style={{color: theme.textColor}}>Courses</Text>
           </TabHeading>
       }>
         <ScrollView
@@ -91,10 +96,10 @@ const Search = () => {
         </ScrollView>
       </Tab>
       <Tab
-        style={styles.sectioncontainer}
+        style={{...styles.sectioncontainer, backgroundColor: theme.backgroundColor}}
         heading={
-          <TabHeading style={{backgroundColor: 'white'}}>
-            <Text>Paths</Text>
+          <TabHeading style={{backgroundColor: theme.backgroundColor}}>
+            <Text style={{color: theme.textColor}}>Paths</Text>
           </TabHeading>
       }>
         <ScrollView
@@ -105,10 +110,10 @@ const Search = () => {
         </ScrollView>
       </Tab>
       <Tab
-        style={styles.sectioncontainer}
+        style={{...styles.sectioncontainer, backgroundColor: theme.backgroundColor}}
         heading={
-          <TabHeading style={{backgroundColor: 'white'}}>
-            <Text>Authors</Text>
+          <TabHeading style={{backgroundColor: theme.backgroundColor}}>
+            <Text style={{color: theme.textColor}}>Authors</Text>
           </TabHeading>
       }>
         <ScrollView
@@ -137,8 +142,8 @@ const Search = () => {
           style={{ marginLeft: 15, height: 30, borderRadius: 5, alignItems: 'center', flexDirection: 'row' }}
           onPress={onSubmit}
         >
-          <Ionicons style={{ flex: 1 }} name="md-search" size={20} color="black" />
-          <Text style={{ flex: 11 }}>
+          <Ionicons style={{ flex: 1 }} name="md-search" size={20} color={theme.textColor} />
+          <Text style={{ flex: 11, color: theme.textColor }}>
             {content}
           </Text>
         </TouchableOpacity>
@@ -148,7 +153,7 @@ const Search = () => {
     return (
       <View>
         <View style={styles.header}>
-          <Text style={{...styles.title}}>Recent searches</Text>
+          <Text style={{...styles.title, color: theme.textColor}}>Recent searches</Text>
           <TouchableOpacity style={styles.clearBtnContainer}>
             <Text style={styles.clearBtn}>Remove all</Text>
           </TouchableOpacity>
@@ -161,9 +166,12 @@ const Search = () => {
   let isSearched = searchCourses.length !== 0 || searchPaths.length !== 0 || searchAuthors.length !== 0;
 
   return (
-    <View style={styles.container}>
+    <View style={{
+      ...styles.container,
+      backgroundColor: theme.backgroundColor
+    }}>
       <Header />
-        {isSearched ? <SearchContent /> : <RecentSearches />}
+      {isSearched ? <SearchContent /> : <RecentSearches />}
     </View>
   );
 }
