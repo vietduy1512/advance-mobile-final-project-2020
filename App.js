@@ -4,6 +4,7 @@ import MainLayout from './src/components/Main/MainLayout';
 import {themes} from './src/constants/context';
 import {ThemeContext} from 'context';
 import {MockupDataContext} from 'context';
+import AuthenticationProvider from './src/provider/authenticationProvider';
 import mockupData from 'context/mockupData';
 import { Container } from 'native-base';
 import {Provider} from 'react-redux';
@@ -17,9 +18,11 @@ export default function App() {
       <Provider store={store}>
         <ThemeContext.Provider value={{theme, setTheme}}>
           <MockupDataContext.Provider value={mockupData}>
-            <NavigationContainer>
-              <MainLayout />
-            </NavigationContainer>
+            <AuthenticationProvider>
+              <NavigationContainer>
+                <MainLayout />
+              </NavigationContainer>
+            </AuthenticationProvider>
           </MockupDataContext.Provider>
         </ThemeContext.Provider>
       </Provider>

@@ -1,12 +1,14 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {Text, TextInput, Button, View, Image, StyleSheet} from 'react-native';
 import {Screens} from 'constants';
+import {AuthenticationContext} from 'context';
 
 const Login = ({navigation}) => {
   const [form, setForm] = useState({
     email: 'vietduy1512@gmail.com',
     password: '123456',
   });
+  const authContext = useContext(AuthenticationContext);
 
   const handleChange = (name, value) => {
     setForm({
@@ -14,6 +16,13 @@ const Login = ({navigation}) => {
       [name]: value,
     });
   };
+
+  useEffect(() => {
+    if (authContext.state.isAuthenticated) {
+      console.log('Login succeed!');
+      navigation.navigate(Screens.LAYOUT);
+    }
+  }, [authContext.state.isAuthenticated])
 
   return (
     <View style={styles.container}>
@@ -40,8 +49,13 @@ const Login = ({navigation}) => {
         />
       </View>
       <View style={styles.submit}>
-        <Button title="Login" onPress={() => navigation.navigate(Screens.LAYOUT)} />
+        <Button title="Login" onPress={() => {
+          authContext.login(form.email, form.password);
+        }}/>
       </View>
+      <Text style={{marginTop: 20, color: 'red', fontSize: 16, alignSelf: 'center'}}>
+        {authContext.state.errorMessage}
+      </Text>
     </View>
   );
 };
