@@ -1,17 +1,13 @@
 import {LOGIN_SUCCESS, LOGIN_FAILED} from './types';
 import axios from 'axios';
 
+import {apiLogin} from 'core/services/authenticationService';
+
 //export const login = () => async dispatch => {
 export const login = (dispatch) => async (email, password) => {
   try {
-    const response = await axios.post('https://api.itedu.me/user/login', {
-      // TODO: Replace data
-      email: "nglethimylinh@gmail.com",
-      password: "123456789"
-    });
-
+    const response = await apiLogin(email, password);
     if (response.status === 200) {
-      console.log(response.data);
       dispatch({
         type: LOGIN_SUCCESS,
         data: response.data,
