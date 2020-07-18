@@ -1,7 +1,6 @@
 import React, {useState, useEffect, useContext} from 'react';
 import { StyleSheet, View, Image, TouchableOpacity, Text, ScrollView } from 'react-native';
 import Constants from "expo-constants";
-import {MockupDataContext} from 'context';
 import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons'; 
 import { NavigationRouteContext } from '@react-navigation/core';
 import { NavigationContext } from '@react-navigation/core';
@@ -9,6 +8,9 @@ import { Tab, Tabs, TabHeading, Content, Accordion } from 'native-base';
 import {bookmark, unbookmark} from 'actions/bookmarkAction';
 import {connect} from 'react-redux';
 import {ThemeContext} from 'context';
+import {getCourseDetail} from 'core/services/coursesService';
+import {getAuthorDetail} from 'core/services/authorsService';
+import moment from 'moment';
 
 const CourseDetail = () => {
   const {theme} = useContext(ThemeContext);
@@ -16,20 +18,27 @@ const CourseDetail = () => {
   const filledStarImage = require('assets/images/star_filled.png');
   const emptyStarImage = require('assets/images/star_corner.png');
 
-  const {courses, authors} = useContext(MockupDataContext);
+  const [course, setCourse] = useState({});
+  const [author, setAuthor] = useState({});
   const route = useContext(NavigationRouteContext);
   const navigation = useContext(NavigationContext);
   const { courseId } = route.params;
-  let course = courses.find(course => course.id === courseId);
-  let author = authors.find(author => author.id === course.authorId);
+
+  useEffect(() => {
+    getCourseDetail(courseId).then(result => {
+      setCourse(result.data.payload);
+      getAuthorDetail(result.data.payload.instructorId).then(result => {
+        setAuthor(result.data.payload);
+      })
+    });
+  }, [])
 
   const renderStars = () => {
     let stars = [];
-
-    for (let index = 0; index < course.rating; index++) {
+    for (let index = 0; index < course.ratedNumber; index++) {
       stars.push(<Image source={filledStarImage} key={index} style={styles.ratingStar} />);
     }
-    for (let index = course.rating; index < 5; index++) {
+    for (let index = course.ratedNumber; index < 5; index++) {
       stars.push(<Image source={emptyStarImage} key={index} style={styles.ratingStar} />);
     }
     return stars;
@@ -43,7 +52,7 @@ const CourseDetail = () => {
         }}>
           <MaterialCommunityIcons name="close" size={26} color="white" />
         </TouchableOpacity>
-        <Image source={course.image} style={styles.video} />
+        <Image source={{uri: course.imageUrl}} style={styles.video} />
         <Text style={{...styles.courseTitle, color: theme.textColor}}>{course.title}</Text>
       </View>
     )
@@ -53,7 +62,7 @@ const CourseDetail = () => {
     return (
       <TouchableOpacity style={styles.expandContainer}>
         <View style={styles.authorContainer} >
-          <Image source={author.image} style={styles.author} />
+          <Image source={{uri: author.avatar}} style={styles.author} />
         </View>
         <Text>{author.name}</Text>
       </TouchableOpacity>
@@ -63,15 +72,13 @@ const CourseDetail = () => {
   const CourseInfo = () => {
     return (
       <View style={styles.infoContainer}>
-        <Text style={styles.darkText}>{`${course.level} - ${course.released} - ${course.duration}`}</Text>
+        <Text style={styles.darkText}>{`${moment(course.updatedAt).format("MM/DD/YYYY")} - ${course.totalHours} hours`}</Text>
         <View style={styles.ratingStarContainer}>
           {renderStars()}
-          <Text style={styles.reviewText}>{`(${course.reviews})`}</Text>
         </View>
       </View>
     )
   };
-
 
 
   const AccessibilityButtons = (props) => {
@@ -191,8 +198,9 @@ const CourseDetail = () => {
           <Text>{index}</Text>
         </View>
         <View style={{flex: 3, marginLeft: 15, justifyContent: 'center'}}>
-          <Text style={{fontSize: 16, color: theme.textColor}}>{section.title}</Text>
-          <Text style={{marginTop: 10, fontSize: 10, color: 'gray'}}>{section.duration}</Text>
+          <Text style={{fontSize: 16, color: theme.textColor}}>{section.name}</Text>
+          {/* TODO */}
+          {/* <Text style={{marginTop: 10, fontSize: 10, color: 'gray'}}>{section.duration}</Text> */}
         </View>
         <View style={{flex: 1, flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center'}}>
           <TouchableOpacity style={{width: 40, height: 40, justifyContent: 'center', alignItems: 'center'}} onPress={() => {}}>
@@ -206,7 +214,7 @@ const CourseDetail = () => {
     )
   }
 
-  const ContentBodyItem = ({title, isWatched}) => {
+  const ContentBodyItem = ({name, isWatched}) => {
     return (
       <View style={{marginTop: 15, borderBottomWidth: 0.5, borderBottomColor: 'gray', flexDirection: 'row'}}>
         {isWatched ? (
@@ -231,7 +239,7 @@ const CourseDetail = () => {
             marginRight: 20,
           }}/>
         )}
-        <Text style={{marginBottom: 15, color: theme.textColor}}>{title}</Text>
+        <Text style={{marginBottom: 15, color: theme.textColor}}>{name}</Text>
       </View>
     );
   }
@@ -239,7 +247,7 @@ const CourseDetail = () => {
   const ContentBody = ({section}) => {
     return (
       <>
-        {section.data.map((item, key) => <ContentBodyItem key={key} title={item.title} isWatched={true}/>)}
+        {section.lesson.map((item, key) => <ContentBodyItem key={key} name={item.name} isWatched={true}/>)}
       </>
     )
   }
@@ -247,7 +255,7 @@ const CourseDetail = () => {
   const Contents = () => {
     return (
       <View style={{...styles.contentsContainer, backgroundColor: theme.backgroundColor}}>
-        {course.content.map((section, index) => (
+        {course.section && course.section.map((section, index) => (
           <View style={{width: '100%'}} key={index}>
             <ContentHeader section={section} index={index+1}/>
             <ContentBody section={section}/>
@@ -372,11 +380,6 @@ const styles = StyleSheet.create({
     height: 15,
     width: 15,
     marginRight: 2
-  },
-  reviewText: {
-    color: 'darkgray',
-    fontSize: 12,
-    marginLeft: 3
   },
   accessibilityContainer: {
     flexDirection: 'row',

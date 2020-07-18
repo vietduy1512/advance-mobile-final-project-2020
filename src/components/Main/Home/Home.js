@@ -11,17 +11,23 @@ import {Screens} from 'constants';
 import { AntDesign, FontAwesome } from '@expo/vector-icons';
 import Settings from '../Settings/Settings';
 import {ThemeContext} from 'context';
+import {getTopSellCourses} from 'core/services/coursesService';
 
 const HomeStack = createStackNavigator();
 
 const Home = (props) => {
   const {theme} = useContext(ThemeContext);
-  const {courses, paths} = useContext(MockupDataContext);
-  const [bookmarks, setBookmarks] = useState([])
+  const {paths} = useContext(MockupDataContext);
+  const [courses, setCourses] = useState([]);
+  const [bookmarks, setBookmarks] = useState([]);
 
   useEffect(() => {
-    let bookmarks = courses.filter(course => props.bookmarkIds.includes(course.id))
-    setBookmarks(bookmarks);
+    getTopSellCourses().then(result => {
+      setCourses(result.data.payload);
+    });
+    
+    //let bookmarks = courses.filter(course => props.bookmarkIds.includes(course.id))
+    //setBookmarks(bookmarks);
   }, [props.bookmarkIds])
 
   return (

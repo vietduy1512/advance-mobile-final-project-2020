@@ -9,6 +9,7 @@ import mockupData from 'context/mockupData';
 import { Container } from 'native-base';
 import {Provider} from 'react-redux';
 import store from './src/store';
+import './src/core/interceptors';
 
 export default function App() {
   const [theme, setTheme] = useState(themes.light)
