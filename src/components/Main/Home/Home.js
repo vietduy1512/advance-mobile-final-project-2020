@@ -4,7 +4,6 @@ import SectionCourses from '../../Courses/SectionCourses/SectionCoursesContent';
 import SectionPaths from '../../Courses/SectionPaths/SectionPathsContent';
 import Channels from './Channels/Channels';
 import { Titles } from 'constants';
-import {MockupDataContext} from 'context';
 import {connect} from 'react-redux';
 import { createStackNavigator } from '@react-navigation/stack';
 import {Screens} from 'constants';
@@ -12,19 +11,23 @@ import { AntDesign, FontAwesome } from '@expo/vector-icons';
 import Settings from '../Settings/Settings';
 import {ThemeContext} from 'context';
 import {getTopSellCourses} from 'core/services/coursesService';
+import {getAllCategories} from 'core/services/categoriesService';
 
 const HomeStack = createStackNavigator();
 
 const Home = (props) => {
   const {theme} = useContext(ThemeContext);
-  const {paths} = useContext(MockupDataContext);
   const [courses, setCourses] = useState([]);
+  const [paths, setPaths] = useState([]);
   const [bookmarks, setBookmarks] = useState([]);
 
   useEffect(() => {
-    getTopSellCourses().then(result => {
-      setCourses(result.data.payload);
+    getTopSellCourses().then(response => {
+      setCourses(response.data.payload);
     });
+    getAllCategories().then(response => {
+      setPaths(response.data.payload)
+    })
     
     //let bookmarks = courses.filter(course => props.bookmarkIds.includes(course.id))
     //setBookmarks(bookmarks);

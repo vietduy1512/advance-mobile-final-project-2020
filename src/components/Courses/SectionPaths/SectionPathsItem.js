@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, Image, View, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Alert } from 'react-native';
 
 const SectionPathsItem = (props) => {
   const openCourse = () => {
@@ -8,12 +8,12 @@ const SectionPathsItem = (props) => {
 
   return (
     <TouchableOpacity style={styles.item} onPress={openCourse}>
-      <View style={styles.imageContainer}>
-        <Image source={props.item.image} style={styles.image} />
-      </View>
+      {/* TODO */}
+      {/* <View style={styles.imageContainer}>
+        <Image source={{ uri:props.item.image }} style={styles.image} />
+      </View> */}
       <View style={{margin: 10}}>
-        <Text>{props.item.title}</Text>
-        <Text style={styles.darkText}>{props.item.coursesAmount}</Text>
+        <Text>{props.item.name}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -26,7 +26,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     marginRight: 15,
     width: 100,
-    height: 140,
+    height: 70,
+    //height: 140,
     backgroundColor: '#dcdeef',
     shadowColor: "#000",
     shadowOffset: {
@@ -37,18 +38,14 @@ const styles = StyleSheet.create({
     shadowRadius: 6.27,
     elevation: 10,
   },
-  imageContainer: {
-    height: 80,
-    width: 100,
-    backgroundColor: 'white'
-  },
-  image: {
-    flex: 1,
-    height: undefined,
-    width: undefined
-  },
-  darkText: {
-    color: 'darkgray',
-    fontSize: 11
-  }
+  // imageContainer: {
+  //   height: 80,
+  //   width: 100,
+  //   backgroundColor: 'white'
+  // },
+  // image: {
+  //   flex: 1,
+  //   height: undefined,
+  //   width: undefined
+  // },
 });

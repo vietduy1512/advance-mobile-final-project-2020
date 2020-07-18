@@ -12,9 +12,9 @@ const SectionAuthorsItem = (props) => {
   return (
     <TouchableOpacity style={styles.item} onPress={openCourse}>
       <View style={styles.imageContainer}>
-        <Image source={props.item.image} style={styles.image} />
+        <Image source={{ uri:props.item['user.avatar'] }} style={styles.image} />
       </View>
-      <Text style={{color: theme.textColor}}>{props.item.name}</Text>
+      <Text style={{color: theme.textColor}}>{props.item['user.name']}</Text>
     </TouchableOpacity>
   );
 }

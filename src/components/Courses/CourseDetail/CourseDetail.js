@@ -25,10 +25,10 @@ const CourseDetail = () => {
   const { courseId } = route.params;
 
   useEffect(() => {
-    getCourseDetail(courseId).then(result => {
-      setCourse(result.data.payload);
-      getAuthorDetail(result.data.payload.instructorId).then(result => {
-        setAuthor(result.data.payload);
+    getCourseDetail(courseId).then(response => {
+      setCourse(response.data.payload);
+      getAuthorDetail(response.data.payload.instructorId).then(response => {
+        setAuthor(response.data.payload);
       })
     });
   }, [])
