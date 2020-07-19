@@ -13,35 +13,37 @@ import {ThemeContext} from 'context';
 import {getTopSellCourses} from 'core/services/coursesService';
 import {getAllCategories} from 'core/services/categoriesService';
 import {getFavoriteCourses} from 'core/services/coursesService';
+import {LoadingContext} from 'context';
 
 const HomeStack = createStackNavigator();
 
-const Home = (props) => {
+const Home = () => {
+  const {setLoading} = useContext(LoadingContext);
   const {theme} = useContext(ThemeContext);
   const [courses, setCourses] = useState([]);
   const [paths, setPaths] = useState([]);
   const [bookmarks, setBookmarks] = useState([]);
 
   useEffect(() => {
-    getTopSellCourses().then(response => {
-      setCourses(response.data.payload);
-    });
-    getAllCategories().then(response => {
-      setPaths(response.data.payload)
-    });
-    // TODO: Use Redux instead
-    getFavoriteCourses().then(response => {
-      const data = response.data.payload;
-      const model = data.map(item => ({
-        id: item.id,
-        ratedNumber: item.courseContentPoint,
-        imageUrl: item.courseImage,
-        title: item.courseTitle,
-        'instructor.user.name': item.instructorName,
-      }));
-      setBookmarks(model);
-    });
-  }, [props.bookmarkIds])
+    setLoading(true);
+    Promise.all([getTopSellCourses(), getAllCategories(), getFavoriteCourses()])
+      .then(([coursesRes, categoriesRes, favoriteRes]) => {
+        setCourses(coursesRes.data.payload);
+        setPaths(categoriesRes.data.payload);
+
+        const data = favoriteRes.data.payload;
+        const model = data.map(item => ({
+          id: item.id,
+          ratedNumber: item.courseContentPoint,
+          imageUrl: item.courseImage,
+          title: item.courseTitle,
+          'instructor.user.name': item.instructorName,
+        }));
+        // TODO: Use Redux instead
+        setBookmarks(model);
+        setLoading(false);
+      });
+  }, [])
 
   return (
     <ScrollView

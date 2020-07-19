@@ -9,19 +9,22 @@ import { Titles } from 'constants';
 import {ThemeContext} from 'context';
 import {getAllCategories} from 'core/services/categoriesService';
 import {getAllAuthors} from 'core/services/authorsService';
+import {LoadingContext} from 'context';
 
 const Search = () => {
+  const {setLoading} = useContext(LoadingContext);
   const {theme} = useContext(ThemeContext);
   const [paths, setPaths] = useState([]);
   const [authors, setAuthors] = useState([]);
 
   useEffect(() => {
-    getAllCategories().then(response => {
-      setPaths(response.data.payload)
-    });
-    getAllAuthors().then(response => {
-      setAuthors(response.data.payload)
-    });
+    setLoading(true);
+    Promise.all([getAllCategories(), getAllAuthors()])
+      .then(([categoriesRes, authorsRes]) => {
+        setPaths(categoriesRes.data.payload);
+        setAuthors(authorsRes.data.payload)
+        setLoading(false);
+      });
   }, [])
 
   return (

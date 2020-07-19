@@ -7,16 +7,17 @@ import { Titles } from 'constants';
 import {ThemeContext} from 'context';
 import {connect} from 'react-redux';
 import {getFavoriteCourses} from 'core/services/coursesService';
-import { NavigationRouteContext } from '@react-navigation/core';
+import {LoadingContext} from 'context';
 
 const Bookmark = () => {
+  const {setLoading} = useContext(LoadingContext);
   const {theme} = useContext(ThemeContext);
   const [bookmarks, setBookmarks] = useState([])
-  const route = useContext(NavigationRouteContext);
 
   // TODO: Use Redux instead
   useFocusEffect(
     React.useCallback(() => {
+      setLoading(true);
       getFavoriteCourses().then(response => {
         const data = response.data.payload;
         const model = data.map(item => ({
@@ -27,7 +28,7 @@ const Bookmark = () => {
           'instructor.user.name': item.instructorName,
         }));
         setBookmarks(model);
-        console.log(route)
+        setLoading(false);
       });
     }, [])
   );

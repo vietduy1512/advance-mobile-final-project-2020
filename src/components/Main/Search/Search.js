@@ -12,8 +12,10 @@ import {ThemeContext} from 'context';
 import {getAllCategories} from 'core/services/categoriesService';
 import {getAllAuthors} from 'core/services/authorsService';
 import {searchCourse} from 'core/services/coursesService';
+import {LoadingContext} from 'context';
 
 const Search = () => {
+  const {setLoading} = useContext(LoadingContext);
   const {theme} = useContext(ThemeContext);
   const {recentSearches} = useContext(MockupDataContext);
   const [searchCourses, setSearchCourses] = useState([]);
@@ -21,22 +23,18 @@ const Search = () => {
   const [searchAuthors, setSearchAuthors] = useState([]);
 
   const searchData = (text) => {
-    searchCourse(text).then(response => {
-      let courses = response.data.payload.rows;
-      console.log(courses);
-      setSearchCourses(courses);
-    });
-
-    getAllCategories().then(response => {
-      let paths = response.data.payload;
-      let newPaths = paths.filter(path => path.name.toLowerCase().includes(text.toLowerCase()));
-      setSearchPaths(newPaths);
-    });
-    getAllAuthors().then(response => {
-      let authors = response.data.payload;
-      let newAuthors = authors.filter(author => author['user.name'].toLowerCase().includes(text.toLowerCase()));
-      setSearchAuthors(newAuthors);
-    });
+    setLoading(true);
+    Promise.all([searchCourse(text), getAllCategories(), getAllAuthors()])
+      .then(([coursesRes, categoriesRes, authorsRes]) => {
+        let courses = coursesRes.data.payload.rows;
+        let newPaths = categoriesRes.data.payload.filter(path => path.name.toLowerCase().includes(text.toLowerCase()));
+        let newAuthors = authorsRes.data.payload.filter(author => author['user.name'].toLowerCase().includes(text.toLowerCase()));
+        
+        setSearchCourses(courses);
+        setSearchPaths(newPaths);
+        setSearchAuthors(newAuthors);
+        setLoading(false);
+      });
   }
 
   const AllSection = () => (
