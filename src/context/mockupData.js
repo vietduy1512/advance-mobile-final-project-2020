@@ -606,7 +606,8 @@ const imageButtons = [
 ]
 
 const recentSearches = [
-  'react',
+  'Nhi',
+  'web',
   'scott allen'
 ]
 

@@ -11,12 +11,11 @@ const ListPathsItem = (props) => {
 
   return (
     <TouchableOpacity style={styles.item} onPress={openCourse}>
-      <View style={styles.imageContainer}>
+      {/* <View style={styles.imageContainer}>
         <Image source={props.item.image} style={styles.image} />
-      </View>
+      </View> */}
       <View style={{margin: 10}}>
-        <Text style={{color: theme.textColor}}>{props.item.title}</Text>
-        <Text style={styles.darkText}>{props.item.coursesAmount}</Text>
+        <Text style={{color: theme.textColor}}>{props.item.name}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -35,17 +34,13 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 30,
     paddingBottom: 5
   },
-  imageContainer: {
-    height: 60,
-    width: 100
-  },
-  image: {
-    flex: 1,
-    height: undefined,
-    width: undefined
-  },
-  darkText: {
-    color: 'darkgray',
-    fontSize: 11
-  }
+  // imageContainer: {
+  //   height: 60,
+  //   width: 100
+  // },
+  // image: {
+  //   flex: 1,
+  //   height: undefined,
+  //   width: undefined
+  // },
 });

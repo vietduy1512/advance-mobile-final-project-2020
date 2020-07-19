@@ -9,13 +9,35 @@ import {MockupDataContext} from 'context';
 import { Tab, Tabs, TabHeading, View } from 'native-base';
 import { Ionicons } from '@expo/vector-icons';
 import {ThemeContext} from 'context';
+import {getAllCategories} from 'core/services/categoriesService';
+import {getAllAuthors} from 'core/services/authorsService';
+import {searchCourse} from 'core/services/coursesService';
 
 const Search = () => {
   const {theme} = useContext(ThemeContext);
-  const {courses, paths, authors, recentSearches} = useContext(MockupDataContext);
+  const {recentSearches} = useContext(MockupDataContext);
   const [searchCourses, setSearchCourses] = useState([]);
   const [searchPaths, setSearchPaths] = useState([]);
   const [searchAuthors, setSearchAuthors] = useState([]);
+
+  const searchData = (text) => {
+    searchCourse(text).then(response => {
+      let courses = response.data.payload.rows;
+      console.log(courses);
+      setSearchCourses(courses);
+    });
+
+    getAllCategories().then(response => {
+      let paths = response.data.payload;
+      let newPaths = paths.filter(path => path.name.toLowerCase().includes(text.toLowerCase()));
+      setSearchPaths(newPaths);
+    });
+    getAllAuthors().then(response => {
+      let authors = response.data.payload;
+      let newAuthors = authors.filter(author => author['user.name'].toLowerCase().includes(text.toLowerCase()));
+      setSearchAuthors(newAuthors);
+    });
+  }
 
   const AllSection = () => (
     <ScrollView
@@ -32,12 +54,7 @@ const Search = () => {
     const [searchText, setSearchText] = useState("");
 
     const onSubmitEditing = () => {
-      let newCourses = courses.filter(course => course.title.toLowerCase().includes(searchText.toLowerCase()));
-      let newPaths = paths.filter(path => path.title.toLowerCase().includes(searchText.toLowerCase()));
-      let newAuthors = authors.filter(author => author.name.toLowerCase().includes(searchText.toLowerCase()));
-      setSearchCourses(newCourses);
-      setSearchPaths(newPaths);
-      setSearchAuthors(newAuthors);
+      searchData(searchText);
       setSearchText("");
     }
 
@@ -130,12 +147,7 @@ const Search = () => {
 
     const Searches = ({content}) => {
       const onSubmit = () => {
-        let newCourses = courses.filter(course => course.title.toLowerCase().includes(content.toLowerCase()));
-        let newPaths = paths.filter(path => path.title.toLowerCase().includes(content.toLowerCase()));
-        let newAuthors = authors.filter(author => author.name.toLowerCase().includes(content.toLowerCase()));
-        setSearchCourses(newCourses);
-        setSearchPaths(newPaths);
-        setSearchAuthors(newAuthors);
+        searchData(content);
       }
       return (
         <TouchableOpacity
