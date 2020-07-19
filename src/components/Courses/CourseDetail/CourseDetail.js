@@ -8,7 +8,7 @@ import { Tab, Tabs, TabHeading, Content, Accordion } from 'native-base';
 import {bookmark, unbookmark} from 'actions/bookmarkAction';
 import {connect} from 'react-redux';
 import {ThemeContext} from 'context';
-import {getCourseDetail} from 'core/services/coursesService';
+import {getCourseDetail, likeCourses, getCourseLikeStatus} from 'core/services/coursesService';
 import {getAuthorDetail} from 'core/services/authorsService';
 import moment from 'moment';
 
@@ -85,16 +85,21 @@ const CourseDetail = () => {
     
     const BookmarkButton = () => {
       const bookmarkCourse = () => {
-        props.bookmark(courseId);
+        likeCourses(courseId).then(res => {
+          setIsBookmarked(res.data.likeStatus);
+        });
       }
       const unbookmarkCourse = () => {
-        props.unbookmark(courseId);
+        likeCourses(courseId).then(res => {
+          setIsBookmarked(res.data.likeStatus);
+        });
       }
       const [isBookmarked, setIsBookmarked] = useState(false);
 
       useEffect(() => {
-        let isBookmarked = props.bookmarkIds.includes(courseId);
-        setIsBookmarked(isBookmarked);
+        getCourseLikeStatus(courseId).then(res => {
+          setIsBookmarked(res.data.likeStatus);
+        });
       }, [props.bookmarkIds])
 
       return isBookmarked ? (

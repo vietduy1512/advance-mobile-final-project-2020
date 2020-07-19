@@ -29,14 +29,12 @@ const SectionCoursesItem = (props) => {
   return (
     <TouchableOpacity style={styles.item} onPress={openCourse}>
       <View style={styles.imageContainer}>
-        <Image source={{
-          uri: props.item.imageUrl
-        }} style={styles.image} />
+        <Image source={{ uri: props.item.imageUrl }} style={styles.image} />
       </View>
       <View style={{margin: 10}}>
         <Text>{props.item.title}</Text>
         <Text style={styles.darkText}>{props.item['instructor.user.name']}</Text>
-        <Text style={styles.darkText}>{`${moment(props.item.updatedAt).format("MM/DD/YYYY")} - ${props.item.totalHours} hours`}</Text>
+        <Text style={styles.darkText}>{moment(props.item.updatedAt).format("MM/DD/YYYY")}</Text>
         <View style={styles.ratingStarContainer}>
           {renderStars()}
         </View>

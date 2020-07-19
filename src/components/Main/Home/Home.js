@@ -12,6 +12,7 @@ import Settings from '../Settings/Settings';
 import {ThemeContext} from 'context';
 import {getTopSellCourses} from 'core/services/coursesService';
 import {getAllCategories} from 'core/services/categoriesService';
+import {getFavoriteCourses} from 'core/services/coursesService';
 
 const HomeStack = createStackNavigator();
 
@@ -27,10 +28,19 @@ const Home = (props) => {
     });
     getAllCategories().then(response => {
       setPaths(response.data.payload)
-    })
-    
-    //let bookmarks = courses.filter(course => props.bookmarkIds.includes(course.id))
-    //setBookmarks(bookmarks);
+    });
+    // TODO: Use Redux instead
+    getFavoriteCourses().then(response => {
+      const data = response.data.payload;
+      const model = data.map(item => ({
+        id: item.id,
+        ratedNumber: item.courseContentPoint,
+        imageUrl: item.courseImage,
+        title: item.courseTitle,
+        'instructor.user.name': item.instructorName,
+      }));
+      setBookmarks(model);
+    });
   }, [props.bookmarkIds])
 
   return (

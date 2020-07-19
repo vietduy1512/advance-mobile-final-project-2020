@@ -1,21 +1,37 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import { StyleSheet, View } from 'react-native';
 import Constants from "expo-constants";
 import BookmarkListCourses from './ListCourses/BookmarkListCourses';
 import { Titles } from 'constants';
 import {ThemeContext} from 'context';
-import {MockupDataContext} from 'context';
 import {connect} from 'react-redux';
+import {getFavoriteCourses} from 'core/services/coursesService';
+import { NavigationRouteContext } from '@react-navigation/core';
 
-const Bookmark = (props) => {
+const Bookmark = () => {
   const {theme} = useContext(ThemeContext);
-  const {courses} = useContext(MockupDataContext);
   const [bookmarks, setBookmarks] = useState([])
+  const route = useContext(NavigationRouteContext);
 
-  useEffect(() => {
-    let bookmarks = courses.filter(course => props.bookmarkIds.includes(course.id))
-    setBookmarks(bookmarks);
-  }, [props.bookmarkIds])
+  // TODO: Use Redux instead
+  useFocusEffect(
+    React.useCallback(() => {
+      getFavoriteCourses().then(response => {
+        const data = response.data.payload;
+        const model = data.map(item => ({
+          id: item.id,
+          ratedNumber: item.courseContentPoint,
+          imageUrl: item.courseImage,
+          title: item.courseTitle,
+          'instructor.user.name': item.instructorName,
+        }));
+        setBookmarks(model);
+        console.log(route)
+      });
+    }, [])
+  );
+  
 
   return (
     <View 
