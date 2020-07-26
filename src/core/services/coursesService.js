@@ -11,6 +11,10 @@ export const getCourseDetail = async (courseId) => {
   return await axios.get(`https://api.itedu.me/course/detail-with-lesson/${courseId}`);
 }
 
+export const getCourseDetailSummary = async (courseId, userId) => {
+  return await axios.get(`https://api.itedu.me/course/get-course-detail/${courseId}/${userId}`);
+}
+
 export const getFavoriteCourses = async () => {
   return await axios.get('https://api.itedu.me/user/get-favorite-courses');
 }

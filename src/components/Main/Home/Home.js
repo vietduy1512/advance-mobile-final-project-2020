@@ -14,6 +14,7 @@ import {getTopSellCourses} from 'core/services/coursesService';
 import {getAllCategories} from 'core/services/categoriesService';
 import {getFavoriteCourses} from 'core/services/coursesService';
 import {LoadingContext} from 'context';
+import {AuthenticationContext} from 'context';
 
 const HomeStack = createStackNavigator();
 
@@ -62,6 +63,12 @@ const Home = () => {
 }
 
 const HomeScreen = ({navigation}) => {
+  const authContext = useContext(AuthenticationContext);
+
+  const logout = () => {
+    authContext.logout();
+    navigation.navigate(Screens.LOGIN)
+  }
   return (
     <HomeStack.Navigator mode="modal">
       <HomeStack.Screen
@@ -77,7 +84,7 @@ const HomeScreen = ({navigation}) => {
           ),
           headerRightContainerStyle: {marginRight: 10},
           headerRight: () => (
-            <TouchableOpacity onPress={() => navigation.navigate(Screens.LOGIN)}>
+            <TouchableOpacity onPress={logout}>
               <FontAwesome name="power-off" size={24} color="black" />
             </TouchableOpacity>
           )

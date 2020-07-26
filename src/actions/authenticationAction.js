@@ -1,4 +1,4 @@
-import {LOGIN_SUCCESS, LOGIN_FAILED} from './types';
+import {LOGIN_SUCCESS, LOGIN_FAILED, LOGOUT} from './types';
 import { AsyncStorage } from 'react-native';
 import {apiLogin} from 'core/services/authenticationService';
 
@@ -24,4 +24,10 @@ export const login = (dispatch) => async (email, password) => {
 
 export const register = (dispatch) => async (email, password) => {
   // Not implemented
+}
+
+export const logout = (dispatch) => async () => {
+  dispatch({
+    type: LOGOUT
+  });
 }

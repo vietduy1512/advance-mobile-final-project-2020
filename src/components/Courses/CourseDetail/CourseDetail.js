@@ -8,12 +8,17 @@ import { Tab, Tabs, TabHeading, Content, Accordion } from 'native-base';
 import {bookmark, unbookmark} from 'actions/bookmarkAction';
 import {connect} from 'react-redux';
 import {ThemeContext} from 'context';
-import {getCourseDetail, likeCourses, getCourseLikeStatus} from 'core/services/coursesService';
+import {AuthenticationContext} from 'context';
+import {getCourseDetail, getCourseDetailSummary, likeCourses, getCourseLikeStatus} from 'core/services/coursesService';
 import {getAuthorDetail} from 'core/services/authorsService';
 import moment from 'moment';
+import {LoadingContext} from 'context';
+import LayoutSpinner from 'components/Common/LayoutSpinner';
 
 const CourseDetail = () => {
   const {theme} = useContext(ThemeContext);
+  const authContext = useContext(AuthenticationContext);
+  const {setLoading} = useContext(LoadingContext);
 
   const filledStarImage = require('assets/images/star_filled.png');
   const emptyStarImage = require('assets/images/star_corner.png');
@@ -25,13 +30,24 @@ const CourseDetail = () => {
   const { courseId } = route.params;
 
   useEffect(() => {
-    getCourseDetail(courseId).then(response => {
-      setCourse(response.data.payload);
-      getAuthorDetail(response.data.payload.instructorId).then(response => {
-        setAuthor(response.data.payload);
-      })
-    });
+    setLoading(true);
+    getCourseDetail(courseId)
+      .then(initData)
+      .catch(error => {
+        if (error.response.status == 400) {
+          getCourseDetailSummary(courseId, authContext.state.userInfo.id)
+            .then(initData)
+        }
+      });
   }, [])
+
+  const initData = response => {
+    setCourse(response.data.payload);
+    getAuthorDetail(response.data.payload.instructorId).then(response => {
+      setAuthor(response.data.payload);
+      setLoading(false);
+    })
+  }
 
   const renderStars = () => {
     let stars = [];
@@ -306,18 +322,21 @@ const CourseDetail = () => {
   }
 
   return (
-    <ScrollView style={{
-      ...styles.container,
-      backgroundColor: theme.backgroundColor
-    }} showsVerticalScrollIndicator={false}>
-      <VideoViewer />
-      <AuthorButton />
-      <CourseInfo />
-      <AccessibilityButtonsWraper />
-      <Summary />
-      <Relevants />
-      <CourseBody />
-    </ScrollView>
+    <>
+      <LayoutSpinner />
+      <ScrollView style={{
+        ...styles.container,
+        backgroundColor: theme.backgroundColor
+      }} showsVerticalScrollIndicator={false}>
+        <VideoViewer />
+        <AuthorButton />
+        <CourseInfo />
+        <AccessibilityButtonsWraper />
+        <Summary />
+        <Relevants />
+        <CourseBody />
+      </ScrollView>
+    </>
   );
 }
 

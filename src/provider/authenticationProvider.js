@@ -2,7 +2,7 @@
 import React, {useReducer} from 'react';
 import {AuthenticationContext} from 'context';
 import reducer from 'reducers/authenticationReducer';
-import {login, register} from 'actions/authenticationAction';
+import {login, register, logout} from 'actions/authenticationAction';
 
 const initialState = {
   isAuthenticated: false,
@@ -13,7 +13,7 @@ const initialState = {
 const AuthenticationProvider = (props) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  return <AuthenticationContext.Provider value={{state, login: login(dispatch), register: register(dispatch)}}>
+  return <AuthenticationContext.Provider value={{state, login: login(dispatch), register: register(dispatch), logout: logout(dispatch)}}>
     {props.children}
   </AuthenticationContext.Provider>
 }
