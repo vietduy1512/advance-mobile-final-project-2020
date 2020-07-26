@@ -4,25 +4,47 @@ import SectionCourses from '../../Courses/SectionCourses/SectionCoursesContent';
 import SectionPaths from '../../Courses/SectionPaths/SectionPathsContent';
 import Channels from './Channels/Channels';
 import { Titles } from 'constants';
-import {MockupDataContext} from 'context';
 import {connect} from 'react-redux';
 import { createStackNavigator } from '@react-navigation/stack';
 import {Screens} from 'constants';
 import { AntDesign, FontAwesome } from '@expo/vector-icons';
 import Settings from '../Settings/Settings';
 import {ThemeContext} from 'context';
+import {getTopSellCourses} from 'core/services/coursesService';
+import {getAllCategories} from 'core/services/categoriesService';
+import {getFavoriteCourses} from 'core/services/coursesService';
+import {LoadingContext} from 'context';
+import {AuthenticationContext} from 'context';
 
 const HomeStack = createStackNavigator();
 
-const Home = (props) => {
+const Home = () => {
+  const {setLoading} = useContext(LoadingContext);
   const {theme} = useContext(ThemeContext);
-  const {courses, paths} = useContext(MockupDataContext);
-  const [bookmarks, setBookmarks] = useState([])
+  const [courses, setCourses] = useState([]);
+  const [paths, setPaths] = useState([]);
+  const [bookmarks, setBookmarks] = useState([]);
 
   useEffect(() => {
-    let bookmarks = courses.filter(course => props.bookmarkIds.includes(course.id))
-    setBookmarks(bookmarks);
-  }, [props.bookmarkIds])
+    setLoading(true);
+    Promise.all([getTopSellCourses(), getAllCategories(), getFavoriteCourses()])
+      .then(([coursesRes, categoriesRes, favoriteRes]) => {
+        setCourses(coursesRes.data.payload);
+        setPaths(categoriesRes.data.payload);
+
+        const data = favoriteRes.data.payload;
+        const model = data.map(item => ({
+          id: item.id,
+          ratedNumber: item.courseContentPoint,
+          imageUrl: item.courseImage,
+          title: item.courseTitle,
+          'instructor.user.name': item.instructorName,
+        }));
+        // TODO: Use Redux instead
+        setBookmarks(model);
+        setLoading(false);
+      });
+  }, [])
 
   return (
     <ScrollView
@@ -41,6 +63,12 @@ const Home = (props) => {
 }
 
 const HomeScreen = ({navigation}) => {
+  const authContext = useContext(AuthenticationContext);
+
+  const logout = () => {
+    authContext.logout();
+    navigation.navigate(Screens.LOGIN)
+  }
   return (
     <HomeStack.Navigator mode="modal">
       <HomeStack.Screen
@@ -56,7 +84,7 @@ const HomeScreen = ({navigation}) => {
           ),
           headerRightContainerStyle: {marginRight: 10},
           headerRight: () => (
-            <TouchableOpacity onPress={() => navigation.navigate(Screens.LOGIN)}>
+            <TouchableOpacity onPress={logout}>
               <FontAwesome name="power-off" size={24} color="black" />
             </TouchableOpacity>
           )

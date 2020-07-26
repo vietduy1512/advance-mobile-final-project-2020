@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import { StyleSheet, ScrollView } from 'react-native';
 import Constants from "expo-constants";
 import ImageButton from '../../Common/ImageButton';
@@ -6,12 +6,26 @@ import SectionPaths from '../../Courses/SectionPaths/SectionPathsContent';
 import SectionAuthors from '../../Courses/SectionAuthors/SectionAuthorsContent';
 import PopularSkills from './PopularSkills/PopularSkills';
 import { Titles } from 'constants';
-import {MockupDataContext} from 'context';
 import {ThemeContext} from 'context';
+import {getAllCategories} from 'core/services/categoriesService';
+import {getAllAuthors} from 'core/services/authorsService';
+import {LoadingContext} from 'context';
 
 const Search = () => {
+  const {setLoading} = useContext(LoadingContext);
   const {theme} = useContext(ThemeContext);
-  const {paths, authors} = useContext(MockupDataContext);
+  const [paths, setPaths] = useState([]);
+  const [authors, setAuthors] = useState([]);
+
+  useEffect(() => {
+    setLoading(true);
+    Promise.all([getAllCategories(), getAllAuthors()])
+      .then(([categoriesRes, authorsRes]) => {
+        setPaths(categoriesRes.data.payload);
+        setAuthors(authorsRes.data.payload)
+        setLoading(false);
+      });
+  }, [])
 
   return (
     <ScrollView style={{

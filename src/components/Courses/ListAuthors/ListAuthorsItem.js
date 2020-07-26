@@ -12,11 +12,10 @@ const ListAuthorsItem = (props) => {
   return (
     <TouchableOpacity style={styles.item} onPress={openCourse}>
       <View style={styles.imageContainer}>
-        <Image source={props.item.image} style={styles.image} />
+        <Image source={{ uri:props.item['user.avatar'] }} style={styles.image} />
       </View>
       <View style={{margin: 10}}>
-        <Text style={{color: theme.textColor}}>{props.item.name}</Text>
-        <Text style={styles.darkText}>{props.item.coursesAmount}</Text>
+        <Text style={{color: theme.textColor}}>{props.item['user.name']}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -45,8 +44,4 @@ const styles = StyleSheet.create({
     height: undefined,
     width: undefined
   },
-  darkText: {
-    color: 'darkgray',
-    fontSize: 11
-  }
 });

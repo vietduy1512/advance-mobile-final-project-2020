@@ -6,6 +6,7 @@ export const Screens = Object.freeze({
   COURSE_DETAIL: 'CourseDetail',
   SETTINGS: 'Settings',
   LOGIN: 'Login',
+  REGISTER: 'Register',
   LAYOUT: 'TabLayout',
 });
 

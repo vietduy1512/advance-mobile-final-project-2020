@@ -2,6 +2,7 @@ import React, {useContext} from 'react';
 import { StyleSheet, Text, Image, View, TouchableOpacity } from 'react-native';
 import {ThemeContext} from 'context';
 import { NavigationContext } from '@react-navigation/core';
+import moment from 'moment';
 
 const ListCoursesItem = (props) => {
   const navigation = useContext(NavigationContext);
@@ -13,10 +14,10 @@ const ListCoursesItem = (props) => {
   const renderStars = () => {
     let stars = [];
 
-    for (let index = 0; index < props.item.rating; index++) {
+    for (let index = 0; index < props.item.ratedNumber; index++) {
       stars.push(<Image source={filledStarImage} key={index} style={styles.ratingStar} />);
     }
-    for (let index = props.item.rating; index < 5; index++) {
+    for (let index = props.item.ratedNumber; index < 5; index++) {
       stars.push(<Image source={emptyStarImage} key={index} style={styles.ratingStar} />);
     }
     return stars;
@@ -31,7 +32,7 @@ const ListCoursesItem = (props) => {
   return (
     <TouchableOpacity style={styles.item} onPress={openCourse}>
       <View style={styles.imageContainer}>
-        <Image source={props.item.image} style={styles.image} />
+        <Image source={{ uri: props.item.imageUrl }} style={styles.image} />
       </View>
       <View style={{margin: 10}}>
         <Text style={{
@@ -40,14 +41,13 @@ const ListCoursesItem = (props) => {
         <Text style={{
           ...styles.darkText,
           color: theme.textColor
-        }}>{props.item.author}</Text>
+        }}>{props.item['instructor.user.name']}</Text>
         <Text style={{
           ...styles.darkText,
           color: theme.textColor
-        }}>{`${props.item.level} - ${props.item.released} - ${props.item.duration}`}</Text>
+        }}>{moment(props.item.updatedAt).format("MM/DD/YYYY")}</Text>
         <View style={styles.ratingStarContainer}>
           {renderStars()}
-          <Text style={styles.reviewText}>{`(${props.item.reviews})`}</Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -89,9 +89,4 @@ const styles = StyleSheet.create({
     width: 10,
     marginRight: 2
   },
-  reviewText: {
-    color: 'darkgray',
-    fontSize: 10,
-    marginLeft: 3
-  }
 });
