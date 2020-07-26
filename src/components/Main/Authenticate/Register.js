@@ -1,18 +1,18 @@
-import React, {useState, useEffect, useContext} from 'react';
-import {Text, TextInput, Button, View, Image, StyleSheet} from 'react-native';
+import React, {useState, useContext} from 'react';
+import {Text, TextInput, Button, View, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import {Screens} from 'constants';
-import {AuthenticationContext} from 'context';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import {LoadingContext} from 'context';
+import {apiRegister} from 'core/services/authenticationService';
 import LayoutSpinner from 'components/Common/LayoutSpinner';
+import {LoadingContext} from 'context';
 
 const Login = ({navigation}) => {
   const [form, setForm] = useState({
+    username: '',
     email: '',
+    phone: '',
     password: '',
   });
   const [errorMessage, setErrorMessage] = useState('');
-  const authContext = useContext(AuthenticationContext);
   const {setLoading} = useContext(LoadingContext);
 
   const handleChange = (name, value) => {
@@ -22,25 +22,27 @@ const Login = ({navigation}) => {
     });
   };
 
-  useEffect(() => {
-    if (authContext.state.isAuthenticated) {
-      console.log('Login succeed!');
-      navigation.navigate(Screens.LAYOUT);
-    }
-  }, [authContext.state.isAuthenticated])
-
-  const login = () => {
-    if (!form.email || !form.password) {
+  const register = () => {
+    if (!form.username || !form.email || !form.phone || !form.password) {
       setErrorMessage('Please fill all input above!');
       return;
     }
-    setErrorMessage('');
 
     setLoading(true);
-    authContext.login(form.email, form.password)
+    apiRegister(form)
+      .then(() => {
+        navigation.navigate(Screens.LOGIN);
+      })
+      .catch((error) => {
+        if (error.response && error.response.data) {
+          setErrorMessage(error.response.data.message);
+        } else {
+          setErrorMessage('Something went wrong!');
+        }
+      })
       .finally(() => {
         setLoading(false);
-      });
+      })
   }
 
   return (
@@ -50,12 +52,30 @@ const Login = ({navigation}) => {
         <Image source={require('assets/images/e-learning-logo.jpg')} style={styles.logoIcon} />
       </View>
       <View style={styles.section}>
+        <Text style={styles.label}>Username</Text>
+        <TextInput
+          placeholder="Input your username"
+          style={styles.textInput}
+          value={form.username}
+          onChangeText={value => handleChange('username', value)}
+        />
+      </View>
+      <View style={styles.section}>
         <Text style={styles.label}>Email</Text>
         <TextInput
           placeholder="Input your email"
           style={styles.textInput}
           value={form.email}
           onChangeText={value => handleChange('email', value)}
+        />
+      </View>
+      <View style={styles.section}>
+        <Text style={styles.label}>Phone</Text>
+        <TextInput
+          placeholder="Input your phone number"
+          style={styles.textInput}
+          value={form.phone}
+          onChangeText={value => handleChange('phone', value)}
         />
       </View>
       <View style={styles.section}>
@@ -69,17 +89,17 @@ const Login = ({navigation}) => {
         />
       </View>
       <View style={styles.submit}>
-        <Button title="Login" onPress={login}/>
+        <Button title="Register" onPress={register}/>
       </View>
       <View style={styles.navigation}>
         <TouchableOpacity onPress={() => {
-          navigation.navigate(Screens.REGISTER);
+          navigation.navigate(Screens.LOGIN);
         }}>
-          <Text style={{color: 'blue'}}>{`Don't have account? Sign up here`}</Text>
+          <Text style={{color: 'blue'}}>{`Back to Login`}</Text>
         </TouchableOpacity>
       </View>
       <Text style={{marginTop: 20, marginHorizontal: 40, color: 'red', fontSize: 16, alignSelf: 'center'}}>
-        {errorMessage || authContext.state.errorMessage }
+        {errorMessage}
       </Text>
     </View>
   );

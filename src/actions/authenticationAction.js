@@ -5,21 +5,20 @@ import {apiLogin} from 'core/services/authenticationService';
 export const login = (dispatch) => async (email, password) => {
   try {
     const response = await apiLogin(email, password);
-    if (response.status === 200) {
-      await AsyncStorage.setItem(
-        'access_token',
-        response.data.token
-      );
-      dispatch({
-        type: LOGIN_SUCCESS,
-        data: response.data,
-      });
+    await AsyncStorage.setItem(
+      'access_token',
+      response.data.token
+    );
+    dispatch({
+      type: LOGIN_SUCCESS,
+      data: response.data,
+    });
+  } catch (error) {
+    if (error.response && error.response.data) {
+      dispatch({type: LOGIN_FAILED, errorMessage: error.response.data.message});
     } else {
       dispatch({type: LOGIN_FAILED, errorMessage: 'Something went wrong!'});
     }
-  } catch (error) {
-    console.log(error);
-    dispatch({type: LOGIN_FAILED, errorMessage: 'Something went wrong!'});
   }
 };
 
