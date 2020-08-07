@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import { View, ScrollView, Text } from 'react-native';
 import ListCoursesItem from './ListCoursesItem';
-import {ThemeContext} from 'context';
+import {ThemeContext} from 'config/context';
 
 const ListCoursesContent = (props) => {
   const {theme} = useContext(ThemeContext);

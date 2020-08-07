@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Spinner } from 'native-base';
 import { View, StyleSheet } from 'react-native';
-import {LoadingContext} from 'context';
+import {LoadingContext} from 'config/context';
 
 const LayoutSpinner = () => {
   const {loading} = useContext(LoadingContext);

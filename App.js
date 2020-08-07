@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import MainLayout from './src/components/Main/MainLayout';
+import MainLayout from './src/screens/MainLayout';
 import {themes} from './src/constants/context';
-import {ThemeContext, LoadingContext, MockupDataContext} from 'context';
-import AuthenticationProvider from './src/provider/authenticationProvider';
-import mockupData from 'context/mockupData';
+import {ThemeContext, LoadingContext, MockupDataContext} from './src/config/context';
+import AuthenticationProvider from './src/config/provider/authenticationProvider';
+import mockupData from './src/config/context/mockupData';
 import { Container } from 'native-base';
 import {Provider} from 'react-redux';
-import store from './src/store';
-import './src/core/interceptors';
+import store from './src/core/store';
+import './src/config/interceptors';
 
 export default function App() {
   const [theme, setTheme] = useState(themes.light);

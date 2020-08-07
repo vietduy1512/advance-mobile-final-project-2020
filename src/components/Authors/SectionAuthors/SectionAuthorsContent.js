@@ -1,14 +1,14 @@
 import React, {useContext} from 'react';
-import { Text, View, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
-import SectionCoursesItem from './SectionCoursesItem';
+import { Text, View, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import SectionAuthorsItem from './SectionAuthorsItem';
 import { Content } from 'constants';
 import {ThemeContext} from 'config/context';
 
-const SectionCoursesContent = (props) => {
+const SectionAuthorsContent = (props) => {
   const {theme} = useContext(ThemeContext);
 
-  const Courses = ({ courses }) => (
-    courses.map(item => <SectionCoursesItem key={item.id} item={item} />)
+  const Authors = ({ authors }) => (
+    authors.map(item => <SectionAuthorsItem key={item.id} item={item} />)
   );
 
   return (
@@ -20,18 +20,13 @@ const SectionCoursesContent = (props) => {
         </TouchableOpacity>
       </View>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-        {
-          props.courses.length !== 0 ? 
-          <Courses courses={props.courses}/> :
-          <Text style={{color: 'gray'}}>There are no items yet!</Text>
-        }
+        <Authors authors={props.authors}/>
       </ScrollView>
     </View>
   );
 }
 
-export default SectionCoursesContent;
-
+export default SectionAuthorsContent;
 
 const styles = StyleSheet.create({
   title: {

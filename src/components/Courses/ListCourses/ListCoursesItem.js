@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import { StyleSheet, Text, Image, View, TouchableOpacity } from 'react-native';
-import {ThemeContext} from 'context';
+import {ThemeContext} from 'config/context';
 import { NavigationContext } from '@react-navigation/core';
 import moment from 'moment';
 
