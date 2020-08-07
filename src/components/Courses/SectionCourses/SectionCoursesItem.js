@@ -1,47 +1,53 @@
-import React, {useContext} from 'react';
-import { StyleSheet, Text, Image, View, TouchableOpacity } from 'react-native';
-import { NavigationContext } from '@react-navigation/core';
-import moment from 'moment';
+import React, { useContext } from "react";
+import { StyleSheet, Text, Image, View, TouchableOpacity } from "react-native";
+import { NavigationContext } from "@react-navigation/core";
+import moment from "moment";
 
 const SectionCoursesItem = (props) => {
   const navigation = useContext(NavigationContext);
 
-  const filledStarImage = require('assets/images/star_filled.png');
-  const emptyStarImage = require('assets/images/star_corner.png');
+  const filledStarImage = require("assets/images/star_filled.png");
+  const emptyStarImage = require("assets/images/star_corner.png");
 
   const renderStars = () => {
     let stars = [];
     for (let index = 0; index < props.item.ratedNumber; index++) {
-      stars.push(<Image source={filledStarImage} key={index} style={styles.ratingStar} />);
+      stars.push(
+        <Image source={filledStarImage} key={index} style={styles.ratingStar} />
+      );
     }
     for (let index = props.item.ratedNumber; index < 5; index++) {
-      stars.push(<Image source={emptyStarImage} key={index} style={styles.ratingStar} />);
+      stars.push(
+        <Image source={emptyStarImage} key={index} style={styles.ratingStar} />
+      );
     }
     return stars;
-  }
-  
+  };
+
   const openCourse = () => {
-    navigation.navigate('CourseDetail', {
-      courseId: props.item.id
-    })
-  }
+    navigation.navigate("CourseDetail", {
+      courseId: props.item.id,
+    });
+  };
 
   return (
     <TouchableOpacity style={styles.item} onPress={openCourse}>
       <View style={styles.imageContainer}>
         <Image source={{ uri: props.item.imageUrl }} style={styles.image} />
       </View>
-      <View style={{margin: 10}}>
+      <View style={{ margin: 10 }}>
         <Text>{props.item.title}</Text>
-        <Text style={styles.darkText}>{props.item['instructor.user.name']}</Text>
-        <Text style={styles.darkText}>{moment(props.item.updatedAt).format("MM/DD/YYYY")}</Text>
-        <View style={styles.ratingStarContainer}>
-          {renderStars()}
-        </View>
+        <Text style={styles.darkText}>
+          {props.item["instructor.user.name"]}
+        </Text>
+        <Text style={styles.darkText}>
+          {moment(props.item.updatedAt).format("MM/DD/YYYY")}
+        </Text>
+        <View style={styles.ratingStarContainer}>{renderStars()}</View>
       </View>
     </TouchableOpacity>
   );
-}
+};
 
 export default SectionCoursesItem;
 
@@ -51,7 +57,7 @@ const styles = StyleSheet.create({
     marginRight: 15,
     width: 200,
     height: 210,
-    backgroundColor: '#dcdeef',
+    backgroundColor: "#dcdeef",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -63,25 +69,25 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     height: 100,
-    width: 200
+    width: 200,
   },
   image: {
     flex: 1,
     height: undefined,
-    width: undefined
+    width: undefined,
   },
   darkText: {
-    color: 'darkgray',
-    fontSize: 11
+    color: "darkgray",
+    fontSize: 11,
   },
   ratingStarContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 2
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 2,
   },
   ratingStar: {
     height: 10,
     width: 10,
-    marginRight: 2
+    marginRight: 2,
   },
 });

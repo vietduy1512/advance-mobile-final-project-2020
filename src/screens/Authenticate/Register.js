@@ -1,19 +1,27 @@
-import React, {useState, useContext} from 'react';
-import {Text, TextInput, Button, View, Image, StyleSheet, TouchableOpacity} from 'react-native';
-import {Screens} from 'constants';
-import {apiRegister} from 'core/services/authenticationService';
-import LayoutSpinner from 'components/Common/LayoutSpinner';
-import {LoadingContext} from 'config/context';
+import React, { useState, useContext } from "react";
+import {
+  Text,
+  TextInput,
+  Button,
+  View,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
+import { Screens } from "constants";
+import { apiRegister } from "core/services/authenticationService";
+import LayoutSpinner from "components/Common/LayoutSpinner";
+import { LoadingContext } from "config/context";
 
-const Login = ({navigation}) => {
+const Login = ({ navigation }) => {
   const [form, setForm] = useState({
-    username: '',
-    email: '',
-    phone: '',
-    password: '',
+    username: "",
+    email: "",
+    phone: "",
+    password: "",
   });
-  const [errorMessage, setErrorMessage] = useState('');
-  const {setLoading} = useContext(LoadingContext);
+  const [errorMessage, setErrorMessage] = useState("");
+  const { setLoading } = useContext(LoadingContext);
 
   const handleChange = (name, value) => {
     setForm({
@@ -24,7 +32,7 @@ const Login = ({navigation}) => {
 
   const register = () => {
     if (!form.username || !form.email || !form.phone || !form.password) {
-      setErrorMessage('Please fill all input above!');
+      setErrorMessage("Please fill all input above!");
       return;
     }
 
@@ -37,19 +45,22 @@ const Login = ({navigation}) => {
         if (error.response && error.response.data) {
           setErrorMessage(error.response.data.message);
         } else {
-          setErrorMessage('Something went wrong!');
+          setErrorMessage("Something went wrong!");
         }
       })
       .finally(() => {
         setLoading(false);
-      })
-  }
+      });
+  };
 
   return (
     <View style={styles.container}>
       <LayoutSpinner />
       <View style={styles.logoIconContainer}>
-        <Image source={require('assets/images/e-learning-logo.jpg')} style={styles.logoIcon} />
+        <Image
+          source={require("assets/images/e-learning-logo.jpg")}
+          style={styles.logoIcon}
+        />
       </View>
       <View style={styles.section}>
         <Text style={styles.label}>Username</Text>
@@ -57,7 +68,7 @@ const Login = ({navigation}) => {
           placeholder="Input your username"
           style={styles.textInput}
           value={form.username}
-          onChangeText={value => handleChange('username', value)}
+          onChangeText={(value) => handleChange("username", value)}
         />
       </View>
       <View style={styles.section}>
@@ -66,7 +77,7 @@ const Login = ({navigation}) => {
           placeholder="Input your email"
           style={styles.textInput}
           value={form.email}
-          onChangeText={value => handleChange('email', value)}
+          onChangeText={(value) => handleChange("email", value)}
         />
       </View>
       <View style={styles.section}>
@@ -75,7 +86,7 @@ const Login = ({navigation}) => {
           placeholder="Input your phone number"
           style={styles.textInput}
           value={form.phone}
-          onChangeText={value => handleChange('phone', value)}
+          onChangeText={(value) => handleChange("phone", value)}
         />
       </View>
       <View style={styles.section}>
@@ -85,20 +96,30 @@ const Login = ({navigation}) => {
           placeholder="Input your password"
           style={styles.textInput}
           value={form.password}
-          onChangeText={value => handleChange('password', value)}
+          onChangeText={(value) => handleChange("password", value)}
         />
       </View>
       <View style={styles.submit}>
-        <Button title="Register" onPress={register}/>
+        <Button title="Register" onPress={register} />
       </View>
       <View style={styles.navigation}>
-        <TouchableOpacity onPress={() => {
-          navigation.navigate(Screens.LOGIN);
-        }}>
-          <Text style={{color: 'blue'}}>{`Back to Login`}</Text>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate(Screens.LOGIN);
+          }}
+        >
+          <Text style={{ color: "blue" }}>{`Back to Login`}</Text>
         </TouchableOpacity>
       </View>
-      <Text style={{marginTop: 20, marginHorizontal: 40, color: 'red', fontSize: 16, alignSelf: 'center'}}>
+      <Text
+        style={{
+          marginTop: 20,
+          marginHorizontal: 40,
+          color: "red",
+          fontSize: 16,
+          alignSelf: "center",
+        }}
+      >
         {errorMessage}
       </Text>
     </View>
@@ -110,8 +131,8 @@ export default Login;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    backgroundColor: 'white'
+    justifyContent: "center",
+    backgroundColor: "white",
   },
   section: {
     marginLeft: 20,
@@ -120,30 +141,30 @@ const styles = StyleSheet.create({
   },
   submit: {
     width: 100,
-    alignSelf: 'center',
+    alignSelf: "center",
   },
   navigation: {
     marginTop: 20,
-    alignSelf: 'center',
+    alignSelf: "center",
   },
   label: {
-    fontWeight: 'bold'
+    fontWeight: "bold",
   },
   textInput: {
     height: 40,
     borderRadius: 10,
     paddingLeft: 10,
-    borderColor: 'gray',
+    borderColor: "gray",
     borderWidth: 1,
   },
   logoIconContainer: {
     height: 100,
     width: 200,
-    alignSelf: 'center'
+    alignSelf: "center",
   },
   logoIcon: {
     flex: 1,
     height: undefined,
-    width: undefined
+    width: undefined,
   },
 });

@@ -1,18 +1,18 @@
 /* eslint-disable react/display-name */
 /* eslint-disable react/prop-types */
-import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import { Screens } from 'constants';
-import Home from './Main/Home';
-import Browse from './Main/Browse';
-import Bookmark from './Main/Bookmark';
-import Search from './Main/Search';
-import CourseDetail from './Courses/CourseDetail';
-import Login from './Authenticate/Login'
-import Register from './Authenticate/Register'
-import { createStackNavigator } from '@react-navigation/stack';
-import LayoutSpinner from 'components/Common/LayoutSpinner';
+import React from "react";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Ionicons from "react-native-vector-icons/Ionicons";
+import { Screens } from "constants";
+import Home from "./Main/Home";
+import Browse from "./Main/Browse";
+import Bookmark from "./Main/Bookmark";
+import Search from "./Main/Search";
+import CourseDetail from "./Courses/CourseDetail";
+import Login from "./Authenticate/Login";
+import Register from "./Authenticate/Register";
+import { createStackNavigator } from "@react-navigation/stack";
+import LayoutSpinner from "components/Common/LayoutSpinner";
 
 const Tab = createBottomTabNavigator();
 const RootStack = createStackNavigator();
@@ -24,8 +24,8 @@ const TabLayout = () => {
       <Tab.Navigator
         screenOptions={screenOptions}
         tabBarOptions={{
-          activeTintColor: 'tomato',
-          inactiveTintColor: 'gray'
+          activeTintColor: "tomato",
+          inactiveTintColor: "gray",
         }}
       >
         <Tab.Screen name={Screens.HOME} component={Home} />
@@ -35,7 +35,7 @@ const TabLayout = () => {
       </Tab.Navigator>
     </>
   );
-}
+};
 
 const MainLayout = () => {
   return (
@@ -62,7 +62,7 @@ const MainLayout = () => {
       />
     </RootStack.Navigator>
   );
-}
+};
 
 export default MainLayout;
 
@@ -71,20 +71,20 @@ const screenOptions = ({ route }) => ({
     let iconName;
     switch (route.name) {
       case Screens.HOME:
-        iconName = 'ios-home';
+        iconName = "ios-home";
         break;
       case Screens.BOOKMARK:
-        iconName = 'ios-bookmark';
+        iconName = "ios-bookmark";
         break;
       case Screens.BROWSE:
-        iconName = 'ios-albums';
+        iconName = "ios-albums";
         break;
       case Screens.SEARCH:
-        iconName = 'ios-search';
+        iconName = "ios-search";
         break;
       default:
         break;
     }
     return <Ionicons name={iconName} size={size} color={color} />;
-  }
+  },
 });

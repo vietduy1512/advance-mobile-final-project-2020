@@ -1,23 +1,33 @@
-import React, {useContext} from 'react';
-import { StyleSheet, Text, Image, View, TouchableOpacity, Alert } from 'react-native';
-import {ThemeContext} from 'config/context';
+import React, { useContext } from "react";
+import {
+  StyleSheet,
+  Text,
+  Image,
+  View,
+  TouchableOpacity,
+  Alert,
+} from "react-native";
+import { ThemeContext } from "config/context";
 
 const SectionAuthorsItem = (props) => {
-  const {theme} = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   const openCourse = () => {
-    Alert.alert('Not implement yet!');
-  }
+    Alert.alert("Not implement yet!");
+  };
 
   return (
     <TouchableOpacity style={styles.item} onPress={openCourse}>
       <View style={styles.imageContainer}>
-        <Image source={{ uri:props.item['user.avatar'] }} style={styles.image} />
+        <Image
+          source={{ uri: props.item["user.avatar"] }}
+          style={styles.image}
+        />
       </View>
-      <Text style={{color: theme.textColor}}>{props.item['user.name']}</Text>
+      <Text style={{ color: theme.textColor }}>{props.item["user.name"]}</Text>
     </TouchableOpacity>
   );
-}
+};
 
 export default SectionAuthorsItem;
 
@@ -27,7 +37,7 @@ const styles = StyleSheet.create({
     marginRight: 15,
     width: 60,
     height: 120,
-    alignItems: 'center'
+    alignItems: "center",
   },
   imageContainer: {
     height: 60,
@@ -37,6 +47,6 @@ const styles = StyleSheet.create({
     flex: 1,
     borderRadius: 30,
     height: undefined,
-    width: undefined
+    width: undefined,
   },
 });

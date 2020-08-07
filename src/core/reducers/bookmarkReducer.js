@@ -1,10 +1,10 @@
-import {BOOKMARK, UNBOOKMARK} from 'core/actions/types';
+import { BOOKMARK, UNBOOKMARK } from "core/actions/types";
 
 const initialState = {
   bookmarkIds: [],
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   const index = state.bookmarkIds.indexOf(action.bookmarkId);
 
   switch (action.type) {

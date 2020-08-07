@@ -1,77 +1,73 @@
 const skills = [
   {
-    name: 'React Native',
+    name: "React Native",
     isChecked: true,
   },
   {
-    name: 'Android',
+    name: "Android",
     isChecked: false,
   },
   {
-    name: 'iOS',
+    name: "iOS",
     isChecked: false,
   },
   {
-    name: 'Swift',
+    name: "Swift",
     isChecked: false,
   },
   {
-    name: '.NET',
+    name: ".NET",
     isChecked: false,
   },
   {
-    name: 'Java',
+    name: "Java",
     isChecked: false,
   },
   {
-    name: 'Blockchain',
+    name: "Blockchain",
     isChecked: false,
   },
   {
-    name: 'Python',
+    name: "Python",
     isChecked: true,
   },
   {
-    name: 'Golang',
+    name: "Golang",
     isChecked: false,
   },
-]
+];
 
 const imageButtons = [
   {
-    title: 'Conferences',
-    image: require('assets/images/mockup/ios-collection-views-getting-started-v1.png'),
+    title: "Conferences",
+    image: require("assets/images/mockup/ios-collection-views-getting-started-v1.png"),
   },
   {
-    title: 'Business',
-    image: require('assets/images/mockup/swift-fundamentals.png'),
+    title: "Business",
+    image: require("assets/images/mockup/swift-fundamentals.png"),
   },
   {
-    title: 'Creative',
-    image: require('assets/images/mockup/android-apps-kotlin-build-first-app-v1.png'),
+    title: "Creative",
+    image: require("assets/images/mockup/android-apps-kotlin-build-first-app-v1.png"),
   },
   {
-    title: 'Software',
-    image: require('assets/images/mockup/react-redux-react-router-es6-v1.jpg'),
+    title: "Software",
+    image: require("assets/images/mockup/react-redux-react-router-es6-v1.jpg"),
   },
   {
-    title: 'Innovative',
-    image: require('assets/images/mockup/react-flux-building-applications-v3.png'),
+    title: "Innovative",
+    image: require("assets/images/mockup/react-flux-building-applications-v3.png"),
   },
   {
-    title: 'Company',
-    image: require('assets/images/mockup/react-big-picture.jpg'),
+    title: "Company",
+    image: require("assets/images/mockup/react-big-picture.jpg"),
   },
-]
+];
 
-const recentSearches = [
-  'Nhi',
-  'web',
-  'scott allen'
-]
+const recentSearches = ["Nhi", "web", "scott allen"];
 
 export default mockupData = {
   skills: skills,
   imageButtons: imageButtons,
-  recentSearches: recentSearches
-}
+  recentSearches: recentSearches,
+};

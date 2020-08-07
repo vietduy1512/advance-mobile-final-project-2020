@@ -1,18 +1,21 @@
-import React from 'react';
-import { Text, StyleSheet, TouchableOpacity, Image, View } from 'react-native';
+import React from "react";
+import { Text, StyleSheet, TouchableOpacity, Image, View } from "react-native";
 
 const SkillButton = (props) => {
   return (
     <TouchableOpacity style={styles.expandContainer}>
       {props.isChecked ? (
-        <View style={styles.imageContainer} >
-          <Image source={require('assets/images/check.png')} style={styles.image} />
+        <View style={styles.imageContainer}>
+          <Image
+            source={require("assets/images/check.png")}
+            style={styles.image}
+          />
         </View>
-      ): null}
+      ) : null}
       <Text style={styles.expandText}>{props.title}</Text>
     </TouchableOpacity>
   );
-}
+};
 
 export default SkillButton;
 
@@ -20,25 +23,25 @@ const styles = StyleSheet.create({
   expandContainer: {
     height: 20,
     paddingHorizontal: 10,
-    backgroundColor: '#dcdeef',
+    backgroundColor: "#dcdeef",
     borderRadius: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
     marginRight: 5,
   },
   expandText: {
-    fontSize: 12
+    fontSize: 12,
   },
   imageContainer: {
     height: 15,
     width: 15,
-    marginRight: 2
+    marginRight: 2,
   },
   image: {
     flex: 1,
     borderRadius: 30,
     height: undefined,
-    width: undefined
+    width: undefined,
   },
 });

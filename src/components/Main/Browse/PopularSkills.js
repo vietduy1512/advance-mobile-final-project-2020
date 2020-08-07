@@ -1,13 +1,13 @@
-import React, {useContext} from 'react';
-import { Text, View, ScrollView, StyleSheet } from 'react-native';
-import ImageButton from 'components/Common/ImageButton';
-import SkillButton from './SkillButton';
-import {MockupDataContext} from 'config/context';
-import {ThemeContext} from 'config/context';
+import React, { useContext } from "react";
+import { Text, View, ScrollView, StyleSheet } from "react-native";
+import ImageButton from "components/Common/ImageButton";
+import SkillButton from "./SkillButton";
+import { MockupDataContext } from "config/context";
+import { ThemeContext } from "config/context";
 
 const PopularSkills = (props) => {
-  const {theme} = useContext(ThemeContext);
-  const {skills, imageButtons} = useContext(MockupDataContext);
+  const { theme } = useContext(ThemeContext);
+  const { skills, imageButtons } = useContext(MockupDataContext);
 
   const ImageButtons = ({ buttons }) => {
     let imageButtonTuples = buttons.reduce(function (result, item, index) {
@@ -19,42 +19,52 @@ const PopularSkills = (props) => {
       return result;
     }, []);
 
-    return (
-      imageButtonTuples.map((item, index) => (
-        <View key={index} style={styles.imageButton}>
-          <ImageButton
-            title={item[0].title}
-            height={80}
-            width={160}
-            image={item[0].image}
-            onPress={() => {}}
-          />
-          <ImageButton
-            title={item[1].title}
-            height={80}
-            width={160}
-            image={item[1].image}
-            onPress={() => {}}
-          />
-        </View>
-      ))
-    )
+    return imageButtonTuples.map((item, index) => (
+      <View key={index} style={styles.imageButton}>
+        <ImageButton
+          title={item[0].title}
+          height={80}
+          width={160}
+          image={item[0].image}
+          onPress={() => {}}
+        />
+        <ImageButton
+          title={item[1].title}
+          height={80}
+          width={160}
+          image={item[1].image}
+          onPress={() => {}}
+        />
+      </View>
+    ));
   };
 
   return (
     <View>
       <View style={styles.header}>
-        <Text style={{...styles.title, color: theme.textColor}}>{props.title}</Text>
+        <Text style={{ ...styles.title, color: theme.textColor }}>
+          {props.title}
+        </Text>
       </View>
-      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.skillsContainer}>
-        {skills.map((skill, index) => <SkillButton key={index} title={skill.name} isChecked={skill.isChecked} />)}
+      <ScrollView
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
+        style={styles.skillsContainer}
+      >
+        {skills.map((skill, index) => (
+          <SkillButton
+            key={index}
+            title={skill.name}
+            isChecked={skill.isChecked}
+          />
+        ))}
       </ScrollView>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
         <ImageButtons buttons={imageButtons} />
       </ScrollView>
     </View>
   );
-}
+};
 
 export default PopularSkills;
 
@@ -64,16 +74,16 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   header: {
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    marginTop: 10
+    alignItems: "center",
+    justifyContent: "space-between",
+    flexDirection: "row",
+    marginTop: 10,
   },
   skillsContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginVertical: 10,
   },
   imageButton: {
-    marginRight: 10
-  }
+    marginRight: 10,
+  },
 });

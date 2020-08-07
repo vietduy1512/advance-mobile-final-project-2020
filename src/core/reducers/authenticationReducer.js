@@ -1,14 +1,13 @@
-import {LOGIN_SUCCESS, LOGIN_FAILED, LOGOUT} from 'core/actions/types';
+import { LOGIN_SUCCESS, LOGIN_FAILED, LOGOUT } from "core/actions/types";
 
 const initialState = {
   isAuthenticated: false,
   userInfo: null,
   token: null,
-  errorMessage: ''
-}
+  errorMessage: "",
+};
 
-
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case LOGIN_SUCCESS:
       return {
@@ -16,17 +15,17 @@ export default function(state = initialState, action) {
         isAuthenticated: true,
         userInfo: action.data.userInfo,
         token: action.data.token,
-        errorMessage: ''
+        errorMessage: "",
       };
     case LOGIN_FAILED:
       return {
         ...state,
         isAuthenticated: false,
-        errorMessage: action.errorMessage
+        errorMessage: action.errorMessage,
       };
     case LOGOUT:
       return {
-        ...initialState
+        ...initialState,
       };
     default:
       return state;

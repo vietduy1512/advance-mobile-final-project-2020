@@ -1,56 +1,59 @@
-import React, {useState, useEffect, useContext} from 'react';
-import { StyleSheet, ScrollView, Text, TouchableOpacity } from 'react-native';
-import SectionCourses from 'components/Courses/SectionCourses/SectionCoursesContent';
-import SectionPaths from 'components/Paths/SectionPaths/SectionPathsContent';
-import Channels from 'components/Main/Home/Channels';
-import { Titles } from 'constants';
-import {connect} from 'react-redux';
-import { createStackNavigator } from '@react-navigation/stack';
-import {Screens} from 'constants';
-import { AntDesign, FontAwesome } from '@expo/vector-icons';
-import Settings from '../Settings/Settings';
-import {ThemeContext} from 'config/context';
-import {getTopSellCourses} from 'core/services/coursesService';
-import {getAllCategories} from 'core/services/categoriesService';
-import {getFavoriteCourses} from 'core/services/coursesService';
-import {LoadingContext} from 'config/context';
-import {AuthenticationContext} from 'config/context';
+import React, { useState, useEffect, useContext } from "react";
+import { StyleSheet, ScrollView, Text, TouchableOpacity } from "react-native";
+import SectionCourses from "components/Courses/SectionCourses/SectionCoursesContent";
+import SectionPaths from "components/Paths/SectionPaths/SectionPathsContent";
+import Channels from "components/Main/Home/Channels";
+import { Titles } from "constants";
+import { connect } from "react-redux";
+import { createStackNavigator } from "@react-navigation/stack";
+import { Screens } from "constants";
+import { AntDesign, FontAwesome } from "@expo/vector-icons";
+import Settings from "../Settings/Settings";
+import { ThemeContext } from "config/context";
+import { getTopSellCourses } from "core/services/coursesService";
+import { getAllCategories } from "core/services/categoriesService";
+import { getFavoriteCourses } from "core/services/coursesService";
+import { LoadingContext } from "config/context";
+import { AuthenticationContext } from "config/context";
 
 const HomeStack = createStackNavigator();
 
 const Home = () => {
-  const {setLoading} = useContext(LoadingContext);
-  const {theme} = useContext(ThemeContext);
+  const { setLoading } = useContext(LoadingContext);
+  const { theme } = useContext(ThemeContext);
   const [courses, setCourses] = useState([]);
   const [paths, setPaths] = useState([]);
   const [bookmarks, setBookmarks] = useState([]);
 
   useEffect(() => {
     setLoading(true);
-    Promise.all([getTopSellCourses(), getAllCategories(), getFavoriteCourses()])
-      .then(([coursesRes, categoriesRes, favoriteRes]) => {
-        setCourses(coursesRes.data.payload);
-        setPaths(categoriesRes.data.payload);
+    Promise.all([
+      getTopSellCourses(),
+      getAllCategories(),
+      getFavoriteCourses(),
+    ]).then(([coursesRes, categoriesRes, favoriteRes]) => {
+      setCourses(coursesRes.data.payload);
+      setPaths(categoriesRes.data.payload);
 
-        const data = favoriteRes.data.payload;
-        const model = data.map(item => ({
-          id: item.id,
-          ratedNumber: item.courseContentPoint,
-          imageUrl: item.courseImage,
-          title: item.courseTitle,
-          'instructor.user.name': item.instructorName,
-        }));
-        // TODO: Use Redux instead
-        setBookmarks(model);
-        setLoading(false);
-      });
-  }, [])
+      const data = favoriteRes.data.payload;
+      const model = data.map((item) => ({
+        id: item.id,
+        ratedNumber: item.courseContentPoint,
+        imageUrl: item.courseImage,
+        title: item.courseTitle,
+        "instructor.user.name": item.instructorName,
+      }));
+      // TODO: Use Redux instead
+      setBookmarks(model);
+      setLoading(false);
+    });
+  }, []);
 
   return (
     <ScrollView
       style={{
         ...styles.container,
-        backgroundColor: theme.backgroundColor
+        backgroundColor: theme.backgroundColor,
       }}
       showsVerticalScrollIndicator={false}
     >
@@ -60,15 +63,15 @@ const Home = () => {
       <SectionCourses title={Titles.BOOKMARKS} courses={bookmarks} />
     </ScrollView>
   );
-}
+};
 
-const HomeScreen = ({navigation}) => {
+const HomeScreen = ({ navigation }) => {
   const authContext = useContext(AuthenticationContext);
 
   const logout = () => {
     authContext.logout();
-    navigation.navigate(Screens.LOGIN)
-  }
+    navigation.navigate(Screens.LOGIN);
+  };
   return (
     <HomeStack.Navigator mode="modal">
       <HomeStack.Screen
@@ -76,39 +79,38 @@ const HomeScreen = ({navigation}) => {
         component={HomeWrapper}
         options={{
           headerTitle: <Text>{Screens.HOME}</Text>,
-          headerLeftContainerStyle: {marginLeft: 10},
+          headerLeftContainerStyle: { marginLeft: 10 },
           headerLeft: () => (
-            <TouchableOpacity onPress={() => navigation.navigate(Screens.SETTINGS)}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate(Screens.SETTINGS)}
+            >
               <AntDesign name="setting" size={24} color="black" />
             </TouchableOpacity>
           ),
-          headerRightContainerStyle: {marginRight: 10},
+          headerRightContainerStyle: { marginRight: 10 },
           headerRight: () => (
             <TouchableOpacity onPress={logout}>
               <FontAwesome name="power-off" size={24} color="black" />
             </TouchableOpacity>
-          )
+          ),
         }}
       />
       <HomeStack.Screen name={Screens.SETTINGS} component={Settings} />
     </HomeStack.Navigator>
-  )
-}
+  );
+};
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   bookmarkIds: state.bookmark.bookmarkIds,
 });
 
-const HomeWrapper = connect(
-  mapStateToProps,
-  null,
-)(Home);
+const HomeWrapper = connect(mapStateToProps, null)(Home);
 
 export default HomeScreen;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
   },
 });
