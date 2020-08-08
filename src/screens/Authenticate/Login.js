@@ -1,15 +1,21 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Text, TextInput, Button, View, Image, StyleSheet } from "react-native";
+import { Text, Button, View, Image, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Screens } from "constants";
 import { AuthenticationContext } from "config/context";
 import { LoadingContext } from "config/context";
 import LayoutSpinner from "components/Common/LayoutSpinner";
+import InputField from "components/Common/InputField";
+import validator from "validator";
 
 const Login = ({ navigation }) => {
   const [form, setForm] = useState({
     email: "vietduy1512+001@gmail.com",
     password: "P@ssw0rd",
+  });
+  const [dirty, setDirty] = useState({
+    email: false,
+    password: false,
   });
   const [errorMessage, setErrorMessage] = useState("");
   const authContext = useContext(AuthenticationContext);
@@ -19,6 +25,10 @@ const Login = ({ navigation }) => {
     setForm({
       ...form,
       [name]: value,
+    });
+    setDirty({
+      ...dirty,
+      [name]: true,
     });
   };
 
@@ -52,6 +62,15 @@ const Login = ({ navigation }) => {
     });
   };
 
+  
+  const isValidEmail = () => {
+    return validator.isEmail(form.email);
+  };
+
+  const isValidPassword = () => {
+    return validator.isLength(form.password, { min: 4 });
+  };
+
   return (
     <View style={styles.container}>
       <LayoutSpinner />
@@ -61,25 +80,23 @@ const Login = ({ navigation }) => {
           style={styles.logoIcon}
         />
       </View>
-      <View style={styles.section}>
-        <Text style={styles.label}>Email</Text>
-        <TextInput
-          placeholder="Input your email"
-          style={styles.textInput}
-          value={form.email}
-          onChangeText={(value) => handleChange("email", value)}
-        />
-      </View>
-      <View style={styles.section}>
-        <Text style={styles.label}>Password</Text>
-        <TextInput
-          secureTextEntry={true}
-          placeholder="Input your password"
-          style={styles.textInput}
-          value={form.password}
-          onChangeText={(value) => handleChange("password", value)}
-        />
-      </View>
+      <InputField
+        title="Email"
+        error="Email is invalid"
+        dirty={dirty.email}
+        validation={isValidEmail}
+        value={form.email}
+        onChangeText={(value) => handleChange("email", value)}
+      />
+      <InputField
+        title="Password"
+        error="Password at least 4 characters"
+        dirty={dirty.password}
+        validation={isValidPassword}
+        value={form.password}
+        onChangeText={(value) => handleChange("password", value)}
+        secureTextEntry={true}
+      />
       <View style={styles.submit}>
         <Button title="Login" onPress={login} />
       </View>

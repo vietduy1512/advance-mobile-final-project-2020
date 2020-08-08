@@ -1,5 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
-import { StyleSheet, ScrollView, Text, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  Alert,
+} from "react-native";
 import SectionCourses from "components/Courses/SectionCourses/SectionCoursesContent";
 import SectionPaths from "components/Paths/SectionPaths/SectionPathsContent";
 import Channels from "components/Main/Home/Channels";
@@ -69,8 +75,24 @@ const HomeScreen = ({ navigation }) => {
   const authContext = useContext(AuthenticationContext);
 
   const logout = () => {
-    authContext.logout();
-    navigation.navigate(Screens.LOGIN);
+    Alert.alert(
+      "Logout",
+      "Are you sure you want to logout ?",
+      [
+        {
+          text: "No",
+          style: "cancel",
+        },
+        {
+          text: "Yes",
+          onPress: () => {
+            authContext.logout();
+            navigation.navigate(Screens.LOGIN);
+          },
+        },
+      ],
+      { cancelable: false }
+    );
   };
   return (
     <HomeStack.Navigator mode="modal">

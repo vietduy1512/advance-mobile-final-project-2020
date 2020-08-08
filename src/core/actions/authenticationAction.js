@@ -29,6 +29,8 @@ export const register = (dispatch) => async (email, password) => {
 };
 
 export const logout = (dispatch) => async () => {
+  await AsyncStorage.removeItem("user_info");
+  await AsyncStorage.removeItem("access_token");
   dispatch({
     type: LOGOUT,
   });

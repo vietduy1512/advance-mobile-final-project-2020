@@ -1,17 +1,19 @@
 import React, { useState, useContext } from "react";
 import {
   Text,
-  TextInput,
   Button,
   View,
   Image,
   StyleSheet,
   TouchableOpacity,
+  SafeAreaView,
 } from "react-native";
 import { Screens } from "constants";
 import { apiRegister } from "core/services/authenticationService";
 import LayoutSpinner from "components/Common/LayoutSpinner";
 import { LoadingContext } from "config/context";
+import validator from "validator";
+import InputField from "components/Common/InputField";
 
 const Login = ({ navigation }) => {
   const [form, setForm] = useState({
@@ -19,6 +21,14 @@ const Login = ({ navigation }) => {
     email: "",
     phone: "",
     password: "",
+    confirmPassword: "",
+  });
+  const [dirty, setDirty] = useState({
+    username: false,
+    email: false,
+    phone: false,
+    password: false,
+    confirmPassword: false,
   });
   const [errorMessage, setErrorMessage] = useState("");
   const { setLoading } = useContext(LoadingContext);
@@ -27,6 +37,10 @@ const Login = ({ navigation }) => {
     setForm({
       ...form,
       [name]: value,
+    });
+    setDirty({
+      ...dirty,
+      [name]: true,
     });
   };
 
@@ -53,6 +67,26 @@ const Login = ({ navigation }) => {
       });
   };
 
+  const isValidUsername = () => {
+    return validator.isAlphanumeric(form.username);
+  };
+
+  const isValidEmail = () => {
+    return validator.isEmail(form.email);
+  };
+
+  const isValidPhone = () => {
+    return validator.isNumeric(form.phone);
+  };
+
+  const isValidPassword = () => {
+    return validator.isLength(form.password, { min: 4 });
+  };
+
+  const isValidConfirmPassword = () => {
+    return !!form.confirmPassword && form.confirmPassword === form.password;
+  };
+
   return (
     <View style={styles.container}>
       <LayoutSpinner />
@@ -62,43 +96,50 @@ const Login = ({ navigation }) => {
           style={styles.logoIcon}
         />
       </View>
-      <View style={styles.section}>
-        <Text style={styles.label}>Username</Text>
-        <TextInput
-          placeholder="Input your username"
-          style={styles.textInput}
+      <SafeAreaView>
+        <InputField
+          title="Username"
+          error="Username is invalid"
+          dirty={dirty.username}
+          validation={isValidUsername}
           value={form.username}
           onChangeText={(value) => handleChange("username", value)}
         />
-      </View>
-      <View style={styles.section}>
-        <Text style={styles.label}>Email</Text>
-        <TextInput
-          placeholder="Input your email"
-          style={styles.textInput}
+        <InputField
+          title="Email"
+          error="Email is invalid"
+          dirty={dirty.email}
+          validation={isValidEmail}
           value={form.email}
           onChangeText={(value) => handleChange("email", value)}
         />
-      </View>
-      <View style={styles.section}>
-        <Text style={styles.label}>Phone</Text>
-        <TextInput
-          placeholder="Input your phone number"
-          style={styles.textInput}
+        <InputField
+          title="Phone"
+          error="Only number is required"
+          dirty={dirty.phone}
+          validation={isValidPhone}
           value={form.phone}
           onChangeText={(value) => handleChange("phone", value)}
         />
-      </View>
-      <View style={styles.section}>
-        <Text style={styles.label}>Password</Text>
-        <TextInput
-          secureTextEntry={true}
-          placeholder="Input your password"
-          style={styles.textInput}
+        <InputField
+          title="Password"
+          error="Password at least 4 characters"
+          dirty={dirty.password}
+          validation={isValidPassword}
           value={form.password}
           onChangeText={(value) => handleChange("password", value)}
+          secureTextEntry={true}
         />
-      </View>
+        <InputField
+          title="Confirm password"
+          error="Confirm password is not matched"
+          dirty={dirty.confirmPassword}
+          validation={isValidConfirmPassword}
+          value={form.confirmPassword}
+          onChangeText={(value) => handleChange("confirmPassword", value)}
+          secureTextEntry={true}
+        />
+      </SafeAreaView>
       <View style={styles.submit}>
         <Button title="Register" onPress={register} />
       </View>
@@ -134,11 +175,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "white",
   },
-  section: {
-    marginLeft: 20,
-    marginRight: 20,
-    marginBottom: 20,
-  },
   submit: {
     width: 100,
     alignSelf: "center",
@@ -146,16 +182,6 @@ const styles = StyleSheet.create({
   navigation: {
     marginTop: 20,
     alignSelf: "center",
-  },
-  label: {
-    fontWeight: "bold",
-  },
-  textInput: {
-    height: 40,
-    borderRadius: 10,
-    paddingLeft: 10,
-    borderColor: "gray",
-    borderWidth: 1,
   },
   logoIconContainer: {
     height: 100,
