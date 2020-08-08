@@ -10,7 +10,6 @@ import {
 } from "core/services/coursesService";
 import { getAuthorDetail } from "core/services/authorsService";
 import { LoadingContext } from "config/context";
-import LayoutSpinner from "components/Common/LayoutSpinner";
 import AccessibilityButtons from "components/Courses/CourseDetail/AccessibilityButtons";
 import Summary from "components/Courses/CourseDetail/Summary";
 import Relevants from "components/Courses/CourseDetail/Relevants";
@@ -54,7 +53,6 @@ const CourseDetail = () => {
 
   return (
     <>
-      <LayoutSpinner />
       <ScrollView
         style={{
           ...styles.container,

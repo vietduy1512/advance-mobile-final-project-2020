@@ -3,7 +3,6 @@ import { Text, Button, View, Image, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Screens } from "constants";
 import { LoadingContext } from "config/context";
-import LayoutSpinner from "components/Common/LayoutSpinner";
 import InputField from "components/Common/InputField";
 import validator from "validator";
 import { forgotPassword } from "core/services/usersService";
@@ -47,7 +46,6 @@ const Login = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <LayoutSpinner />
       <View style={styles.logoIconContainer}>
         <Image
           source={require("assets/images/e-learning-logo.jpg")}

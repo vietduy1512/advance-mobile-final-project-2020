@@ -4,7 +4,6 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { Screens } from "constants";
 import { AuthenticationContext } from "config/context";
 import { LoadingContext } from "config/context";
-import LayoutSpinner from "components/Common/LayoutSpinner";
 import InputField from "components/Common/InputField";
 import validator from "validator";
 
@@ -73,7 +72,6 @@ const Login = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <LayoutSpinner />
       <View style={styles.logoIconContainer}>
         <Image
           source={require("assets/images/e-learning-logo.jpg")}

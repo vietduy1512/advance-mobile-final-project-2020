@@ -1,6 +1,8 @@
 import axios from "axios";
 import { AsyncStorage } from "react-native";
 
+axios.defaults.baseURL = 'https://api.itedu.me';
+
 axios.interceptors.request.use(
   async function (config) {
     const token = await AsyncStorage.getItem("access_token");

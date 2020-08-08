@@ -1,5 +1,3 @@
-/* eslint-disable react/display-name */
-/* eslint-disable react/prop-types */
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -21,7 +19,6 @@ const RootStack = createStackNavigator();
 const TabLayout = () => {
   return (
     <>
-      <LayoutSpinner />
       <Tab.Navigator
         screenOptions={screenOptions}
         tabBarOptions={{
@@ -40,33 +37,36 @@ const TabLayout = () => {
 
 const MainLayout = () => {
   return (
-    <RootStack.Navigator mode="modal">
-      <RootStack.Screen
-        name={Screens.LOGIN}
-        component={Login}
-        options={{ headerShown: false }}
-      />
-      <RootStack.Screen
-        name={Screens.REGISTER}
-        component={Register}
-        options={{ headerShown: false }}
-      />
-      <RootStack.Screen
-        name={Screens.FORGOT_PASSWORD}
-        component={ForgotPassword}
-        options={{ headerShown: false }}
-      />
-      <RootStack.Screen
-        name={Screens.LAYOUT}
-        component={TabLayout}
-        options={{ headerShown: false }}
-      />
-      <RootStack.Screen
-        name={Screens.COURSE_DETAIL}
-        component={CourseDetail}
-        options={{ headerShown: false }}
-      />
-    </RootStack.Navigator>
+    <>
+      <LayoutSpinner />
+      <RootStack.Navigator mode="modal">
+        <RootStack.Screen
+          name={Screens.LOGIN}
+          component={Login}
+          options={{ headerShown: false }}
+        />
+        <RootStack.Screen
+          name={Screens.REGISTER}
+          component={Register}
+          options={{ headerShown: false }}
+        />
+        <RootStack.Screen
+          name={Screens.FORGOT_PASSWORD}
+          component={ForgotPassword}
+          options={{ headerShown: false }}
+        />
+        <RootStack.Screen
+          name={Screens.LAYOUT}
+          component={TabLayout}
+          options={{ headerShown: false }}
+        />
+        <RootStack.Screen
+          name={Screens.COURSE_DETAIL}
+          component={CourseDetail}
+          options={{ headerShown: false }}
+        />
+      </RootStack.Navigator>
+    </>
   );
 };
 

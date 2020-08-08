@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const apiLogin = async (email, password) => {
-  return await axios.post("https://api.itedu.me/user/login", {
+  return await axios.post("/user/login", {
     // email: "nglethimylinh@gmail.com",
     // password: "123456789"
     email: email,
@@ -10,7 +10,7 @@ export const apiLogin = async (email, password) => {
 };
 
 export const apiRegister = async ({ username, email, phone, password }) => {
-  return await axios.post("https://api.itedu.me/user/register", {
+  return await axios.post("/user/register", {
     username: username,
     email: email,
     phone: phone,

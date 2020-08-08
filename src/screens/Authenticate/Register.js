@@ -10,7 +10,6 @@ import {
 } from "react-native";
 import { Screens } from "constants";
 import { apiRegister } from "core/services/authenticationService";
-import LayoutSpinner from "components/Common/LayoutSpinner";
 import { LoadingContext } from "config/context";
 import validator from "validator";
 import InputField from "components/Common/InputField";
@@ -91,7 +90,6 @@ const Login = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <LayoutSpinner />
       <View style={styles.logoIconContainer}>
         <Image
           source={require("assets/images/e-learning-logo.jpg")}
