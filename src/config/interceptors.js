@@ -12,3 +12,16 @@ axios.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+
+axios.interceptors.response.use(
+  async function (response) {
+    return response;
+  },
+  async function (error) {
+    console.log(error);
+    if (error.response.status === 401) {
+      await AsyncStorage.removeItem("access_token");
+    }
+    return Promise.reject(error);
+  }
+);

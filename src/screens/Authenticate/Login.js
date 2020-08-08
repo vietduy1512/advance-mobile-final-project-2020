@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Text, TextInput, Button, View, Image, StyleSheet } from "react-native";
+import { Text, TextInput, Button, View, Image, StyleSheet, AsyncStorage } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Screens } from "constants";
 import { AuthenticationContext } from "config/context";
@@ -12,6 +12,7 @@ const Login = ({ navigation }) => {
     password: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
+  const [token, setToken] = useState(null);
   const authContext = useContext(AuthenticationContext);
   const { setLoading } = useContext(LoadingContext);
 
@@ -22,12 +23,25 @@ const Login = ({ navigation }) => {
     });
   };
 
+  const fetchAccessToken = async () => {
+    setLoading(true);
+    const token = await AsyncStorage.getItem("access_token");
+    if (token) {
+      setToken(token);
+    }
+    setLoading(false);
+  };
+
   useEffect(() => {
-    if (authContext.state.isAuthenticated) {
+    fetchAccessToken();
+  }, [])
+
+  useEffect(() => {
+    if (token || authContext.state.isAuthenticated) {
       console.log("Login succeed!");
       navigation.navigate(Screens.LAYOUT);
     }
-  }, [authContext.state.isAuthenticated]);
+  }, [token, authContext.state.isAuthenticated]);
 
   const login = () => {
     if (!form.email || !form.password) {
