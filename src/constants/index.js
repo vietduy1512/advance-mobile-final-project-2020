@@ -7,6 +7,7 @@ export const Screens = Object.freeze({
   SETTINGS: "Settings",
   LOGIN: "Login",
   REGISTER: "Register",
+  FORGOT_PASSWORD: "ForgotPassword",
   LAYOUT: "TabLayout",
 });
 

@@ -14,6 +14,7 @@ import LayoutSpinner from "components/Common/LayoutSpinner";
 import { LoadingContext } from "config/context";
 import validator from "validator";
 import InputField from "components/Common/InputField";
+import { alertSuccess } from "core/helpers/alertHelper";
 
 const Login = ({ navigation }) => {
   const [form, setForm] = useState({
@@ -54,6 +55,7 @@ const Login = ({ navigation }) => {
     apiRegister(form)
       .then(() => {
         navigation.navigate(Screens.LOGIN);
+        alertSuccess("Register successfully!");
       })
       .catch((error) => {
         if (error.response && error.response.data) {

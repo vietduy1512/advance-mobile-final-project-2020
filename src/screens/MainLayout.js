@@ -11,6 +11,7 @@ import Search from "./Main/Search";
 import CourseDetail from "./Courses/CourseDetail";
 import Login from "./Authenticate/Login";
 import Register from "./Authenticate/Register";
+import ForgotPassword from "./Authenticate/ForgotPassword";
 import { createStackNavigator } from "@react-navigation/stack";
 import LayoutSpinner from "components/Common/LayoutSpinner";
 
@@ -48,6 +49,11 @@ const MainLayout = () => {
       <RootStack.Screen
         name={Screens.REGISTER}
         component={Register}
+        options={{ headerShown: false }}
+      />
+      <RootStack.Screen
+        name={Screens.FORGOT_PASSWORD}
+        component={ForgotPassword}
         options={{ headerShown: false }}
       />
       <RootStack.Screen

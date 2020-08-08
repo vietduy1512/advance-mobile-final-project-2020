@@ -111,6 +111,17 @@ const Login = ({ navigation }) => {
           >{`Don't have account? Sign up here`}</Text>
         </TouchableOpacity>
       </View>
+      <View style={styles.navigation}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate(Screens.FORGOT_PASSWORD);
+          }}
+        >
+          <Text
+            style={{ color: "blue" }}
+          >{`Forget your password?`}</Text>
+        </TouchableOpacity>
+      </View>
       <Text
         style={{
           marginTop: 20,
@@ -134,11 +145,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "white",
   },
-  section: {
-    marginLeft: 20,
-    marginRight: 20,
-    marginBottom: 20,
-  },
   submit: {
     width: 100,
     alignSelf: "center",
@@ -146,16 +152,6 @@ const styles = StyleSheet.create({
   navigation: {
     marginTop: 20,
     alignSelf: "center",
-  },
-  label: {
-    fontWeight: "bold",
-  },
-  textInput: {
-    height: 40,
-    borderRadius: 10,
-    paddingLeft: 10,
-    borderColor: "gray",
-    borderWidth: 1,
   },
   logoIconContainer: {
     height: 100,
