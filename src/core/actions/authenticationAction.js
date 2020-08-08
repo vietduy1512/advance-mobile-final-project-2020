@@ -5,6 +5,7 @@ import { apiLogin } from "core/services/authenticationService";
 export const login = (dispatch) => async (email, password) => {
   try {
     const response = await apiLogin(email, password);
+    await AsyncStorage.setItem("user_info", JSON.stringify(response.data.userInfo));
     await AsyncStorage.setItem("access_token", response.data.token);
     dispatch({
       type: LOGIN_SUCCESS,
@@ -31,4 +32,18 @@ export const logout = (dispatch) => async () => {
   dispatch({
     type: LOGOUT,
   });
+};
+
+export const init = (dispatch) => async () => {
+  const userInfo = JSON.parse(await AsyncStorage.getItem("user_info"));
+  const accessToken = await AsyncStorage.getItem("access_token");
+  if (userInfo && accessToken) {
+    dispatch({
+      type: LOGIN_SUCCESS,
+      data: {
+        userInfo: userInfo,
+        token: accessToken
+      },
+    });
+  }
 };

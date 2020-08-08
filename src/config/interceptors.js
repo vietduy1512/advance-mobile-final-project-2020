@@ -4,7 +4,7 @@ import { AsyncStorage } from "react-native";
 axios.interceptors.request.use(
   async function (config) {
     const token = await AsyncStorage.getItem("access_token");
-    console.log("Access token: " + token);
+    console.log("[Request] " + config.url);
     config.headers["Authorization"] = "Bearer " + token;
     return config;
   },
@@ -18,8 +18,9 @@ axios.interceptors.response.use(
     return response;
   },
   async function (error) {
-    console.log(error);
+    console.log(`[Response][Error] ${error.response.config.url} - ${error.response.status} - ${error.response.data.message}`);
     if (error.response.status === 401) {
+      await AsyncStorage.removeItem("user_info");
       await AsyncStorage.removeItem("access_token");
     }
     return Promise.reject(error);

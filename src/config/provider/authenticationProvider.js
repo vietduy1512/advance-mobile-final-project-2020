@@ -2,6 +2,7 @@ import React, { useReducer } from "react";
 import { AuthenticationContext } from "config/context";
 import reducer from "core/reducers/authenticationReducer";
 import { login, register, logout } from "core/actions/authenticationAction";
+import { init } from "../../core/actions/authenticationAction";
 
 const initialState = {
   isAuthenticated: false,
@@ -19,6 +20,7 @@ const AuthenticationProvider = (props) => {
         login: login(dispatch),
         register: register(dispatch),
         logout: logout(dispatch),
+        init: init(dispatch),
       }}
     >
       {props.children}

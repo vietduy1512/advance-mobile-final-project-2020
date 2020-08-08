@@ -13,13 +13,13 @@ const ListCoursesItem = (props) => {
 
   const renderStars = () => {
     let stars = [];
-
-    for (let index = 0; index < props.item.ratedNumber; index++) {
+    const contentPoint = Math.floor(props.item.contentPoint);
+    for (let index = 0; index < contentPoint; index++) {
       stars.push(
         <Image source={filledStarImage} key={index} style={styles.ratingStar} />
       );
     }
-    for (let index = props.item.ratedNumber; index < 5; index++) {
+    for (let index = contentPoint; index < 5; index++) {
       stars.push(
         <Image source={emptyStarImage} key={index} style={styles.ratingStar} />
       );

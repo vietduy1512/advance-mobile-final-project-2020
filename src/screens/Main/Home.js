@@ -38,7 +38,7 @@ const Home = () => {
       const data = favoriteRes.data.payload;
       const model = data.map((item) => ({
         id: item.id,
-        ratedNumber: item.courseContentPoint,
+        contentPoint: item.courseContentPoint,
         imageUrl: item.courseImage,
         title: item.courseTitle,
         "instructor.user.name": item.instructorName,

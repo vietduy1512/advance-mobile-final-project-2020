@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Text, TextInput, Button, View, Image, StyleSheet, AsyncStorage } from "react-native";
+import { Text, TextInput, Button, View, Image, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Screens } from "constants";
 import { AuthenticationContext } from "config/context";
@@ -8,11 +8,10 @@ import LayoutSpinner from "components/Common/LayoutSpinner";
 
 const Login = ({ navigation }) => {
   const [form, setForm] = useState({
-    email: "",
-    password: "",
+    email: "vietduy1512+001@gmail.com",
+    password: "P@ssw0rd",
   });
   const [errorMessage, setErrorMessage] = useState("");
-  const [token, setToken] = useState(null);
   const authContext = useContext(AuthenticationContext);
   const { setLoading } = useContext(LoadingContext);
 
@@ -23,25 +22,21 @@ const Login = ({ navigation }) => {
     });
   };
 
-  const fetchAccessToken = async () => {
+  useEffect(() => {
     setLoading(true);
-    const token = await AsyncStorage.getItem("access_token");
-    if (token) {
-      setToken(token);
-    }
-    setLoading(false);
-  };
+    authContext.init().finally(() => {
+      setLoading(false);
+      if (authContext.state.isAuthenticated) {
+        navigation.navigate(Screens.LAYOUT);
+      }
+    });
+  }, []);
 
   useEffect(() => {
-    fetchAccessToken();
-  }, [])
-
-  useEffect(() => {
-    if (token || authContext.state.isAuthenticated) {
-      console.log("Login succeed!");
+    if (authContext.state.isAuthenticated) {
       navigation.navigate(Screens.LAYOUT);
     }
-  }, [token, authContext.state.isAuthenticated]);
+  }, [authContext.state.isAuthenticated]);
 
   const login = () => {
     if (!form.email || !form.password) {
@@ -52,6 +47,7 @@ const Login = ({ navigation }) => {
 
     setLoading(true);
     authContext.login(form.email, form.password).finally(() => {
+      console.log("Login succeed!");
       setLoading(false);
     });
   };
