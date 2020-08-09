@@ -16,7 +16,13 @@ import { Screens } from "constants";
 import { AntDesign, FontAwesome } from "@expo/vector-icons";
 import Settings from "../Settings/Settings";
 import { ThemeContext } from "config/context";
-import { getTopSellCourses, getTopNewCourses, getTopRateCourses, getProcessCourses } from "core/services/coursesService";
+import {
+  getRecommendCourses,
+  getProcessCourses,
+  getTopSellCourses,
+  getTopNewCourses,
+  getTopRateCourses,
+} from "core/services/coursesService";
 import { getAllCategories } from "core/services/categoriesService";
 import { getFavoriteCourses } from "core/services/coursesService";
 import { LoadingContext } from "config/context";
@@ -27,7 +33,9 @@ const HomeStack = createStackNavigator();
 const Home = () => {
   const { setLoading } = useContext(LoadingContext);
   const { theme } = useContext(ThemeContext);
+  const authContext = useContext(AuthenticationContext);
   const [processCourses, setProcessCourses] = useState([]);
+  const [recommendCourses, setRecommendCourses] = useState([]);
   const [topSellCourses, setTopSellCourses] = useState([]);
   const [topNewCourses, setTopNewCourses] = useState([]);
   const [topRateCourses, setTopRateCourses] = useState([]);
@@ -37,32 +45,46 @@ const Home = () => {
   useEffect(() => {
     setLoading(true);
     Promise.all([
+      getRecommendCourses(authContext.state.userInfo.id),
       getProcessCourses(),
       getTopSellCourses(),
       getTopNewCourses(),
       getTopRateCourses(),
       getAllCategories(),
       getFavoriteCourses(),
-    ]).then(([processRes, topSellRes, topNewRes, topRateRes, categoriesRes, favoriteRes]) => {
-      setProcessCourses(processRes.data.payload);
-      setTopSellCourses(topSellRes.data.payload);
-      setTopNewCourses(topNewRes.data.payload);
-      setTopRateCourses(topRateRes.data.payload);
-      setPaths(categoriesRes.data.payload);
+    ])
+      .then(
+        ([
+          recommendRes,
+          processRes,
+          topSellRes,
+          topNewRes,
+          topRateRes,
+          categoriesRes,
+          favoriteRes,
+        ]) => {
+          setRecommendCourses(recommendRes.data.payload);
+          setProcessCourses(processRes.data.payload);
+          setTopSellCourses(topSellRes.data.payload);
+          setTopNewCourses(topNewRes.data.payload);
+          setTopRateCourses(topRateRes.data.payload);
+          setPaths(categoriesRes.data.payload);
 
-      const data = favoriteRes.data.payload;
-      const model = data.map((item) => ({
-        id: item.id,
-        contentPoint: item.courseContentPoint,
-        imageUrl: item.courseImage,
-        title: item.courseTitle,
-        "instructor.user.name": item.instructorName,
-      }));
-      // TODO: Use Redux instead
-      setBookmarks(model);
-    }).finally(() => {
-      setLoading(false);
-    });
+          const data = favoriteRes.data.payload;
+          const model = data.map((item) => ({
+            id: item.id,
+            contentPoint: item.courseContentPoint,
+            imageUrl: item.courseImage,
+            title: item.courseTitle,
+            "instructor.user.name": item.instructorName,
+          }));
+          // TODO: Use Redux instead
+          setBookmarks(model);
+        }
+      )
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
 
   return (
@@ -73,10 +95,23 @@ const Home = () => {
       }}
       showsVerticalScrollIndicator={false}
     >
-      <SectionCourses title={Titles.CONTINUE_LEARNING} courses={processCourses} />
-      <SectionCourses title={Titles.TOP_SELL_COURSES} courses={topSellCourses} />
+      <SectionCourses
+        title={Titles.CONTINUE_LEARNING}
+        courses={processCourses}
+      />
+      <SectionCourses
+        title={Titles.RECOMMEND_COURSES}
+        courses={recommendCourses}
+      />
+      <SectionCourses
+        title={Titles.TOP_SELL_COURSES}
+        courses={topSellCourses}
+      />
       <SectionCourses title={Titles.TOP_NEW_COURSES} courses={topNewCourses} />
-      <SectionCourses title={Titles.TOP_RATE_COURSES} courses={topRateCourses} />
+      <SectionCourses
+        title={Titles.TOP_RATE_COURSES}
+        courses={topRateCourses}
+      />
       <SectionPaths title={Titles.PATHS} paths={paths} />
       <Channels />
       <SectionCourses title={Titles.BOOKMARKS} courses={bookmarks} />

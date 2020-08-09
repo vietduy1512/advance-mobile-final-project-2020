@@ -21,6 +21,10 @@ export const getTopRateCourses = async (page = 1, limit = 5) => {
   });
 };
 
+export const getRecommendCourses = async (userId, limit = 5, offset = 1) => {
+  return await axios.get(`/user/recommend-course/${userId}/${limit}/${offset}`);
+};
+
 export const getProcessCourses = async () => {
   return await axios.get("/user/get-process-courses");
 };
