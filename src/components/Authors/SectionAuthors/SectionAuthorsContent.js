@@ -9,6 +9,7 @@ import {
 import SectionAuthorsItem from "./SectionAuthorsItem";
 import { Content } from "constants";
 import { ThemeContext } from "config/context";
+import EmptyText from "components/Common/EmptyText";
 
 const SectionAuthorsContent = (props) => {
   const { theme } = useContext(ThemeContext);
@@ -27,7 +28,11 @@ const SectionAuthorsContent = (props) => {
         </TouchableOpacity>
       </View>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-        <Authors authors={props.authors} />
+        <EmptyText
+          items={props.authors}
+          body={<Authors authors={props.authors} />}
+          message="There are no authors yet!"
+        />
       </ScrollView>
     </View>
   );

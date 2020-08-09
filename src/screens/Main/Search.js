@@ -44,9 +44,10 @@ const Search = () => {
         setSearchCourses(courses);
         setSearchPaths(newPaths);
         setSearchAuthors(newAuthors);
-        setLoading(false);
       }
-    );
+    ).finally(() => {
+      setLoading(false);
+    });
   };
 
   const AllSection = () => (

@@ -47,6 +47,7 @@ const CourseDetail = () => {
     setCourse(response.data.payload);
     getAuthorDetail(response.data.payload.instructorId).then((response) => {
       setAuthor(response.data.payload);
+    }).finally(() => {
       setLoading(false);
     });
   };

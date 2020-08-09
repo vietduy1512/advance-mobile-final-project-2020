@@ -9,6 +9,7 @@ import {
 import { Content } from "constants";
 import { ThemeContext } from "config/context";
 import SectionCoursesItem from "./SectionCoursesItem";
+import EmptyText from "components/Common/EmptyText";
 
 const SectionCoursesContent = (props) => {
   const { theme } = useContext(ThemeContext);
@@ -27,11 +28,11 @@ const SectionCoursesContent = (props) => {
         </TouchableOpacity>
       </View>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-        {props.courses.length !== 0 ? (
-          <Courses courses={props.courses} />
-        ) : (
-          <Text style={{ color: "gray" }}>There are no items yet!</Text>
-        )}
+        <EmptyText
+          items={props.courses}
+          body={<Courses courses={props.courses}/>}
+          message="There are no courses yet!"
+        />
       </ScrollView>
     </View>
   );

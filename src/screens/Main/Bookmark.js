@@ -28,6 +28,7 @@ const Bookmark = () => {
           "instructor.user.name": item.instructorName,
         }));
         setBookmarks(model);
+      }).finally(() => {
         setLoading(false);
       });
     }, [])

@@ -9,6 +9,7 @@ import {
 import { Content } from "constants";
 import { ThemeContext } from "config/context";
 import SectionPathsItem from "./SectionPathsItem";
+import EmptyText from "components/Common/EmptyText";
 
 const SectionPathsContent = (props) => {
   const { theme } = useContext(ThemeContext);
@@ -27,7 +28,11 @@ const SectionPathsContent = (props) => {
         </TouchableOpacity>
       </View>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-        <Paths paths={props.paths} />
+        <EmptyText
+          items={props.paths}
+          body={<Paths paths={props.paths} />}
+          message="There are no paths yet!"
+        />
       </ScrollView>
     </View>
   );

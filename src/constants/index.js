@@ -13,6 +13,9 @@ export const Screens = Object.freeze({
 
 export const Titles = Object.freeze({
   CONTINUE_LEARNING: "Continue Learning",
+  TOP_SELL_COURSES: "Top sell courses",
+  TOP_NEW_COURSES: "Top new courses",
+  TOP_RATE_COURSES: "Top rate courses",
   BOOKMARKS: "Bookmarks",
   COURSES: "Courses",
   PATHS: "Paths",

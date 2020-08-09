@@ -16,7 +16,7 @@ import { Screens } from "constants";
 import { AntDesign, FontAwesome } from "@expo/vector-icons";
 import Settings from "../Settings/Settings";
 import { ThemeContext } from "config/context";
-import { getTopSellCourses } from "core/services/coursesService";
+import { getTopSellCourses, getTopNewCourses, getTopRateCourses, getProcessCourses } from "core/services/coursesService";
 import { getAllCategories } from "core/services/categoriesService";
 import { getFavoriteCourses } from "core/services/coursesService";
 import { LoadingContext } from "config/context";
@@ -27,18 +27,27 @@ const HomeStack = createStackNavigator();
 const Home = () => {
   const { setLoading } = useContext(LoadingContext);
   const { theme } = useContext(ThemeContext);
-  const [courses, setCourses] = useState([]);
+  const [processCourses, setProcessCourses] = useState([]);
+  const [topSellCourses, setTopSellCourses] = useState([]);
+  const [topNewCourses, setTopNewCourses] = useState([]);
+  const [topRateCourses, setTopRateCourses] = useState([]);
   const [paths, setPaths] = useState([]);
   const [bookmarks, setBookmarks] = useState([]);
 
   useEffect(() => {
     setLoading(true);
     Promise.all([
+      getProcessCourses(),
       getTopSellCourses(),
+      getTopNewCourses(),
+      getTopRateCourses(),
       getAllCategories(),
       getFavoriteCourses(),
-    ]).then(([coursesRes, categoriesRes, favoriteRes]) => {
-      setCourses(coursesRes.data.payload);
+    ]).then(([processRes, topSellRes, topNewRes, topRateRes, categoriesRes, favoriteRes]) => {
+      setProcessCourses(processRes.data.payload);
+      setTopSellCourses(topSellRes.data.payload);
+      setTopNewCourses(topNewRes.data.payload);
+      setTopRateCourses(topRateRes.data.payload);
       setPaths(categoriesRes.data.payload);
 
       const data = favoriteRes.data.payload;
@@ -51,6 +60,7 @@ const Home = () => {
       }));
       // TODO: Use Redux instead
       setBookmarks(model);
+    }).finally(() => {
       setLoading(false);
     });
   }, []);
@@ -63,7 +73,10 @@ const Home = () => {
       }}
       showsVerticalScrollIndicator={false}
     >
-      <SectionCourses title={Titles.CONTINUE_LEARNING} courses={courses} />
+      <SectionCourses title={Titles.CONTINUE_LEARNING} courses={processCourses} />
+      <SectionCourses title={Titles.TOP_SELL_COURSES} courses={topSellCourses} />
+      <SectionCourses title={Titles.TOP_NEW_COURSES} courses={topNewCourses} />
+      <SectionCourses title={Titles.TOP_RATE_COURSES} courses={topRateCourses} />
       <SectionPaths title={Titles.PATHS} paths={paths} />
       <Channels />
       <SectionCourses title={Titles.BOOKMARKS} courses={bookmarks} />

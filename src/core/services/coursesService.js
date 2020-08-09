@@ -1,9 +1,37 @@
 import axios from "axios";
 
-export const getTopSellCourses = async (page = 1, limit = 10) => {
+export const getTopSellCourses = async (page = 1, limit = 5) => {
   return await axios.post("/course/top-sell", {
     limit: limit,
     page: page,
+  });
+};
+
+export const getTopNewCourses = async (page = 1, limit = 5) => {
+  return await axios.post("/course/top-new", {
+    limit: limit,
+    page: page,
+  });
+};
+
+export const getTopRateCourses = async (page = 1, limit = 5) => {
+  return await axios.post("/course/top-rate", {
+    limit: limit,
+    page: page,
+  });
+};
+
+export const getProcessCourses = async () => {
+  return await axios.get("/user/get-process-courses");
+};
+
+export const getFavoriteCourses = async () => {
+  return await axios.get("/user/get-favorite-courses");
+};
+
+export const likeCourses = async (courseId) => {
+  return await axios.post("/user/like-course", {
+    courseId: courseId,
   });
 };
 
@@ -19,23 +47,13 @@ export const getCourseDetailSummary = async (courseId, userId) => {
   );
 };
 
-export const getFavoriteCourses = async () => {
-  return await axios.get("/user/get-favorite-courses");
-};
-
-export const likeCourses = async (courseId) => {
-  return await axios.post("/user/like-course", {
-    courseId: courseId,
-  });
-};
-
 export const getCourseLikeStatus = async (courseId) => {
   return await axios.get(
     `/user/get-course-like-status/${courseId}`
   );
 };
 
-export const searchCourse = async (keyword, limit = 10, offset = 0) => {
+export const searchCourse = async (keyword, limit = 5, offset = 0) => {
   return await axios.post("/course/search", {
     keyword: keyword,
     limit: limit,

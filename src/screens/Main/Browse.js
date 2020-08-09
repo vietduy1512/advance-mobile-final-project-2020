@@ -23,9 +23,10 @@ const Search = () => {
       ([categoriesRes, authorsRes]) => {
         setPaths(categoriesRes.data.payload);
         setAuthors(authorsRes.data.payload);
-        setLoading(false);
       }
-    );
+    ).finally(() => {
+      setLoading(false);
+    });
   }, []);
 
   return (
