@@ -3,6 +3,7 @@ import { StyleSheet, Text, Image, View, TouchableOpacity } from "react-native";
 import { NavigationContext } from "@react-navigation/core";
 import moment from "moment";
 import { ThemeContext } from "config/context";
+import { Screens } from "constants";
 
 const ListCoursesItem = (props) => {
   const navigation = useContext(NavigationContext);
@@ -28,7 +29,7 @@ const ListCoursesItem = (props) => {
   };
 
   const openCourse = () => {
-    navigation.navigate("CourseDetail", {
+    navigation.navigate(Screens.COURSE_DETAIL, {
       courseId: props.item.id,
     });
   };

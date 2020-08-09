@@ -40,27 +40,36 @@ export const likeCourses = async (courseId) => {
 };
 
 export const getCourseDetail = async (courseId) => {
-  return await axios.get(
-    `/course/detail-with-lesson/${courseId}`
-  );
+  return await axios.get(`/course/detail-with-lesson/${courseId}`);
 };
 
 export const getCourseDetailSummary = async (courseId, userId) => {
-  return await axios.get(
-    `/course/get-course-detail/${courseId}/${userId}`
-  );
+  return await axios.get(`/course/get-course-detail/${courseId}/${userId}`);
 };
 
 export const getCourseLikeStatus = async (courseId) => {
-  return await axios.get(
-    `/user/get-course-like-status/${courseId}`
-  );
+  return await axios.get(`/user/get-course-like-status/${courseId}`);
 };
 
-export const searchCourse = async (keyword, limit = 5, offset = 0) => {
+export const searchCourse = async (keyword, page = 1, limit = 5) => {
   return await axios.post("/course/search", {
     keyword: keyword,
     limit: limit,
-    offset: offset,
+    offset: page - 1,
+  });
+};
+
+export const getCategoryCourses = async (categoryId, page = 1, limit = 5) => {
+  return await axios.post("/course/search", {
+    keyword: "",
+    limit: limit,
+    offset: page - 1,
+    opt: {
+      sort: {
+        attribute: "title",
+        rule: "ASC",
+      },
+      category: [categoryId],
+    },
   });
 };

@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { StyleSheet, Text, Image, View, TouchableOpacity } from "react-native";
 import { NavigationContext } from "@react-navigation/core";
 import moment from "moment";
+import { Screens } from "constants";
 
 const SectionCoursesItem = (props) => {
   const navigation = useContext(NavigationContext);
@@ -26,7 +27,7 @@ const SectionCoursesItem = (props) => {
   };
 
   const openCourse = () => {
-    navigation.navigate("CourseDetail", {
+    navigation.navigate(Screens.COURSE_DETAIL, {
       courseId: props.item.id,
     });
   };

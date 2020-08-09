@@ -1,16 +1,22 @@
 import React, { useContext } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Alert } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { ThemeContext } from "config/context";
+import { Screens } from "constants";
+import { NavigationContext } from "@react-navigation/core";
 
 const ListPathsItem = (props) => {
   const { theme } = useContext(ThemeContext);
+  const navigation = useContext(NavigationContext);
 
-  const openCourse = () => {
-    Alert.alert("Not implement yet!");
+  const openPath = () => {
+    navigation.navigate(Screens.PATH_COURSES, {
+      categoryId: props.item.id,
+      categoryName: props.item.name,
+    });
   };
 
   return (
-    <TouchableOpacity style={styles.item} onPress={openCourse}>
+    <TouchableOpacity style={styles.item} onPress={openPath}>
       {/* <View style={styles.imageContainer}>
         <Image source={props.item.image} style={styles.image} />
       </View> */}

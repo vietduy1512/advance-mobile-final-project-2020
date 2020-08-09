@@ -7,6 +7,7 @@ import Browse from "./Main/Browse";
 import Bookmark from "./Main/Bookmark";
 import Search from "./Main/Search";
 import CourseDetail from "./Courses/CourseDetail";
+import PathCourses from "./Paths/PathCourses";
 import Login from "./Authenticate/Login";
 import Register from "./Authenticate/Register";
 import ForgotPassword from "./Authenticate/ForgotPassword";
@@ -63,6 +64,11 @@ const MainLayout = () => {
         <RootStack.Screen
           name={Screens.COURSE_DETAIL}
           component={CourseDetail}
+          options={{ headerShown: false }}
+        />
+        <RootStack.Screen
+          name={Screens.PATH_COURSES}
+          component={PathCourses}
           options={{ headerShown: false }}
         />
       </RootStack.Navigator>

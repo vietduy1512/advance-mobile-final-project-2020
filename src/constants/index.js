@@ -4,6 +4,7 @@ export const Screens = Object.freeze({
   BROWSE: "Browse",
   SEARCH: "Search",
   COURSE_DETAIL: "CourseDetail",
+  PATH_COURSES: "PathCourses",
   SETTINGS: "Settings",
   LOGIN: "Login",
   REGISTER: "Register",
