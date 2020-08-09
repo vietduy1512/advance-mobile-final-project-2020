@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   StyleSheet,
   ScrollView,
@@ -6,13 +6,13 @@ import {
   TextInput,
   TouchableOpacity,
   Keyboard,
+  AsyncStorage,
 } from "react-native";
 import Constants from "expo-constants";
 import SearchListCourses from "components/Main/Search/SearchListCourses";
 import SearchListPaths from "components/Main/Search/SearchListPaths";
 import SearchListAuthors from "components/Main/Search/SearchListAuthors";
 import { Titles } from "constants";
-import { MockupDataContext } from "config/context";
 import { Tab, Tabs, TabHeading, View } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import { ThemeContext } from "config/context";
@@ -24,15 +24,30 @@ import { LoadingContext } from "config/context";
 const Search = () => {
   const { setLoading } = useContext(LoadingContext);
   const { theme } = useContext(ThemeContext);
-  const { recentSearches } = useContext(MockupDataContext);
+  const [recentSearches, setRecentSearches] = useState([]);
   const [searchCourses, setSearchCourses] = useState([]);
   const [searchPaths, setSearchPaths] = useState([]);
   const [searchAuthors, setSearchAuthors] = useState([]);
+  const [showResult, setShowResult] = useState(false);
+
+  useEffect(() => {
+    fetchRecentSearches();
+  }, []);
+
+  const fetchRecentSearches = async () => {
+    const result = await AsyncStorage.getItem("recent_searches");
+    if (!result) {
+      return;
+    }
+    const searches = JSON.parse(result);
+    setRecentSearches(searches);
+  };
 
   const searchData = (text) => {
     setLoading(true);
-    Promise.all([searchCourse(text), getAllCategories(), getAllAuthors()]).then(
-      ([coursesRes, categoriesRes, authorsRes]) => {
+    saveSearchHistory(text);
+    Promise.all([searchCourse(text), getAllCategories(), getAllAuthors()])
+      .then(([coursesRes, categoriesRes, authorsRes]) => {
         let courses = coursesRes.data.payload.rows;
         let newPaths = categoriesRes.data.payload.filter((path) =>
           path.name.toLowerCase().includes(text.toLowerCase())
@@ -44,10 +59,31 @@ const Search = () => {
         setSearchCourses(courses);
         setSearchPaths(newPaths);
         setSearchAuthors(newAuthors);
-      }
-    ).finally(() => {
-      setLoading(false);
-    });
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  const saveSearchHistory = async (text) => {
+    let searches = [];
+    const result = await AsyncStorage.getItem("recent_searches");
+    if (result) {
+      searches = JSON.parse(result);
+    }
+    if (searches && searches.length > 10) {
+      searches.pop();
+    }
+    searches.unshift(text);
+    setRecentSearches(searches);
+    await AsyncStorage.setItem("recent_searches", JSON.stringify(searches));
+  };
+
+  const deleteSearchHistory = async (index) => {
+    let searches = [...recentSearches];
+    searches.splice(index, 1);
+    setRecentSearches(searches);
+    await AsyncStorage.setItem("recent_searches", JSON.stringify(searches));
   };
 
   const AllSection = () => (
@@ -67,6 +103,7 @@ const Search = () => {
     const onSubmitEditing = () => {
       searchData(searchText);
       setSearchText("");
+      setShowResult(true);
     };
 
     return (
@@ -120,6 +157,7 @@ const Search = () => {
             setSearchPaths([]);
             setSearchAuthors([]);
             setSearchText("");
+            setShowResult(false);
           }}
         >
           <Text>Cancel</Text>
@@ -213,29 +251,43 @@ const Search = () => {
   );
 
   const RecentSearches = () => {
-    const Searches = ({ content }) => {
+    const Searches = ({ content, index }) => {
       const onSubmit = () => {
         searchData(content);
       };
+      const onDelete = () => {
+        deleteSearchHistory(index);
+      };
       return (
-        <TouchableOpacity
+        <View
           style={{
-            marginLeft: 15,
+            marginHorizontal: 20,
             height: 30,
-            borderRadius: 5,
             alignItems: "center",
+            justifyContent: "space-between",
             flexDirection: "row",
+            marginTop: 10,
           }}
-          onPress={onSubmit}
         >
-          <Ionicons
-            style={{ flex: 1 }}
-            name="md-search"
-            size={20}
-            color={theme.textColor}
-          />
-          <Text style={{ flex: 11, color: theme.textColor }}>{content}</Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              height: 30,
+              flexDirection: "row",
+              width: "90%"
+            }}
+            onPress={onSubmit}
+          >
+            <Ionicons name="md-search" size={24} color={theme.textColor} />
+            <Text
+              style={{ fontSize: 20, marginLeft: 20, color: theme.textColor }}
+            >
+              {content}
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={onDelete}>
+            <Ionicons name="ios-close-circle" size={24} color="red" />
+          </TouchableOpacity>
+        </View>
       );
     };
 
@@ -250,16 +302,11 @@ const Search = () => {
           </TouchableOpacity>
         </View>
         {recentSearches.map((content, index) => (
-          <Searches key={index} content={content} />
+          <Searches key={index} content={content} index={index} />
         ))}
       </View>
     );
   };
-
-  let isSearched =
-    searchCourses.length !== 0 ||
-    searchPaths.length !== 0 ||
-    searchAuthors.length !== 0;
 
   return (
     <View
@@ -269,7 +316,7 @@ const Search = () => {
       }}
     >
       <Header />
-      {isSearched ? <SearchContent /> : <RecentSearches />}
+      {showResult ? <SearchContent /> : <RecentSearches />}
     </View>
   );
 };
@@ -286,6 +333,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontWeight: "bold",
+    fontSize: 20,
   },
   header: {
     alignItems: "center",

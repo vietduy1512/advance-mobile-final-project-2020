@@ -37,7 +37,11 @@ export const logout = (dispatch) => async () => {
 };
 
 export const init = (dispatch) => async () => {
-  const userInfo = JSON.parse(await AsyncStorage.getItem("user_info"));
+  const result = await AsyncStorage.getItem("user_info");
+  if (!result) {
+    return;
+  }
+  const userInfo = JSON.parse(result);
   const accessToken = await AsyncStorage.getItem("access_token");
   if (userInfo && accessToken) {
     dispatch({
