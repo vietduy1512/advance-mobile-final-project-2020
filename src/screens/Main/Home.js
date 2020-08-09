@@ -98,19 +98,27 @@ const Home = () => {
       <SectionCourses
         title={Titles.CONTINUE_LEARNING}
         courses={processCourses}
+        fetchCourses={getProcessCourses}
       />
       <SectionCourses
         title={Titles.RECOMMEND_COURSES}
         courses={recommendCourses}
+        fetchCourses={(page) => getRecommendCourses(authContext.state.userInfo.id, page)}
       />
       <SectionCourses
         title={Titles.TOP_SELL_COURSES}
         courses={topSellCourses}
+        fetchCourses={getTopSellCourses}
       />
-      <SectionCourses title={Titles.TOP_NEW_COURSES} courses={topNewCourses} />
+      <SectionCourses
+        title={Titles.TOP_NEW_COURSES}
+        courses={topNewCourses}
+        fetchCourses={getTopNewCourses}
+      />
       <SectionCourses
         title={Titles.TOP_RATE_COURSES}
         courses={topRateCourses}
+        fetchCourses={getTopRateCourses}
       />
       <SectionPaths title={Titles.PATHS} paths={paths} />
       <Channels />

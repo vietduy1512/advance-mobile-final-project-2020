@@ -5,6 +5,7 @@ export const Screens = Object.freeze({
   SEARCH: "Search",
   COURSE_DETAIL: "CourseDetail",
   PATH_COURSES: "PathCourses",
+  MORE_COURSES: "MoreCourses",
   SETTINGS: "Settings",
   LOGIN: "Login",
   REGISTER: "Register",
