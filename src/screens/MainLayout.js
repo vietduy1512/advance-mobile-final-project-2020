@@ -4,7 +4,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import { Screens } from "constants";
 import Home from "./Main/Home";
 import Browse from "./Main/Browse";
-import Bookmark from "./Main/Bookmark";
+import Download from "./Main/Download";
 import Search from "./Main/Search";
 import CourseDetail from "./Courses/CourseDetail";
 import MoreCourses from "./Courses/MoreCourses";
@@ -29,7 +29,7 @@ const TabLayout = () => {
         }}
       >
         <Tab.Screen name={Screens.HOME} component={Home} />
-        <Tab.Screen name={Screens.BOOKMARK} component={Bookmark} />
+        <Tab.Screen name={Screens.DOWNLOAD} component={Download} />
         <Tab.Screen name={Screens.BROWSE} component={Browse} />
         <Tab.Screen name={Screens.SEARCH} component={Search} />
       </Tab.Navigator>
@@ -91,8 +91,8 @@ const screenOptions = ({ route }) => ({
       case Screens.HOME:
         iconName = "ios-home";
         break;
-      case Screens.BOOKMARK:
-        iconName = "ios-bookmark";
+      case Screens.DOWNLOAD:
+        iconName = "ios-download";
         break;
       case Screens.BROWSE:
         iconName = "ios-albums";

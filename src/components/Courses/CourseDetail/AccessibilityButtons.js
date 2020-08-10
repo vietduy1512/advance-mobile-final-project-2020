@@ -7,7 +7,9 @@ import {
 } from "core/services/coursesService";
 import { bookmark, unbookmark } from "core/actions/bookmarkAction";
 import { connect } from "react-redux";
-import { MaterialIcons } from "@expo/vector-icons";
+import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
+import * as FileSystem from "expo-file-system";
+import * as Progress from "react-native-progress";
 
 const BookmarkButton = (props) => {
   const bookmarkCourse = () => {
@@ -90,22 +92,103 @@ const ChannelAdd = (props) => {
 };
 
 const DownloadButton = (props) => {
+  const [downloadProgress, setDownloadProgress] = useState(null);
+  const [isDownloading, setIsDownloading] = useState(false);
+  const [isDownloaded, setIsDownloaded] = useState(false);
+
+  useEffect(() => {
+    FileSystem.getInfoAsync(
+      FileSystem.documentDirectory + props.currentLessonName
+    ).then((result) => {
+      if (result.exists) {
+        setIsDownloaded(true);
+      }
+    });
+  }, [props.currentLessonName]);
+
+  const download = async () => {
+    const callback = (downloadProgress) => {
+      const progress =
+        downloadProgress.totalBytesWritten /
+        downloadProgress.totalBytesExpectedToWrite;
+      setDownloadProgress(progress);
+      console.log(progress);
+    };
+
+    const downloadResumable = FileSystem.createDownloadResumable(
+      props.currentLessonUrl,
+      FileSystem.documentDirectory + props.currentLessonName,
+      {},
+      callback
+    );
+
+    try {
+      setIsDownloading(true);
+      await downloadResumable.downloadAsync();
+      setIsDownloaded(true);
+      setIsDownloading(false);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   return (
-    <TouchableOpacity style={styles.accessibilityButton} onPress={() => {}}>
-      <View style={styles.accessibilityImageContainer}>
-        <View style={styles.accessibilityImageSize}>
-          <Image
-            source={require("assets/images/download.png")}
-            style={styles.accessibilityImage}
-          />
+    <>
+      {isDownloaded ? (
+        <View style={styles.accessibilityButton}>
+          <View
+            style={{
+              ...styles.accessibilityImageContainer,
+              opacity: 0.4,
+              backgroundColor: "blue",
+            }}
+          >
+            <View style={styles.accessibilityImageSize}>
+              <MaterialCommunityIcons
+                name="folder-download"
+                size={30}
+                color="black"
+              />
+            </View>
+          </View>
+          <View style={{ margin: 10 }}>
+            <Text style={{ fontSize: 12, color: props.theme.textColor }}>
+              Downloaded
+            </Text>
+          </View>
         </View>
-      </View>
-      <View style={{ margin: 10 }}>
-        <Text style={{ fontSize: 12, color: props.theme.textColor }}>
-          Download
-        </Text>
-      </View>
-    </TouchableOpacity>
+      ) : isDownloading ? (
+        <View
+          style={{
+            marginHorizontal: 15,
+            alignItems: "center",
+          }}
+        >
+          <Progress.Bar progress={downloadProgress} width={70} />
+          <View style={{ margin: 10 }}>
+            <Text style={{ fontSize: 12, color: props.theme.textColor }}>
+              Downloading
+            </Text>
+          </View>
+        </View>
+      ) : (
+        <TouchableOpacity style={styles.accessibilityButton} onPress={download}>
+          <View style={styles.accessibilityImageContainer}>
+            <View style={styles.accessibilityImageSize}>
+              <Image
+                source={require("assets/images/download.png")}
+                style={styles.accessibilityImage}
+              />
+            </View>
+          </View>
+          <View style={{ margin: 10 }}>
+            <Text style={{ fontSize: 12, color: props.theme.textColor }}>
+              Download
+            </Text>
+          </View>
+        </TouchableOpacity>
+      )}
+    </>
   );
 };
 

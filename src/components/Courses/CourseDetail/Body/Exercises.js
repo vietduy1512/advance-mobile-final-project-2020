@@ -78,7 +78,6 @@ const ContentBodyItem = ({ lesson, theme }) => {
       exercisesIds.map((exerciseId) =>
         getExerciseQuestion(exerciseId).then((response) => {
           const resultExercises = response.data.payload.exercises;
-          console.log(resultExercises);
           setExercises([
             ...exercises,
             ...resultExercises.exercises_questions.map((x) => x.content),

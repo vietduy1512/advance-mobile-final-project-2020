@@ -72,6 +72,7 @@ const ContentBodyItem = ({
   currentId,
   setCurrentId,
   setCurrentLessonUrl,
+  setCurrentLessonName,
 }) => {
   const isSelected = currentId === lesson.id;
 
@@ -86,6 +87,7 @@ const ContentBodyItem = ({
       onPress={() => {
         setCurrentId(lesson.id);
         setCurrentLessonUrl(lesson.videoUrl);
+        setCurrentLessonName(lesson.videoName);
       }}
     >
       {isSelected ? (
@@ -118,10 +120,16 @@ const ContentBodyItem = ({
 const ContentBody = ({
   section,
   theme,
-  currentId,
-  setCurrentId,
+  currentSelectedId,
   setCurrentLessonUrl,
+  setCurrentLessonName,
 }) => {
+  const [currentId, setCurrentId] = useState("");
+
+  useEffect(() => {
+    setCurrentId(currentSelectedId);
+  }, [currentSelectedId]);
+
   return (
     <>
       {section.lesson.map((lesson, key) => (
@@ -133,6 +141,7 @@ const ContentBody = ({
           currentId={currentId}
           setCurrentId={setCurrentId}
           setCurrentLessonUrl={setCurrentLessonUrl}
+          setCurrentLessonName={setCurrentLessonName}
         />
       ))}
     </>
@@ -145,12 +154,6 @@ const Contents = ({
   currentSelectedId,
   setCurrentLessonUrl,
 }) => {
-  const [currentId, setCurrentId] = useState("");
-
-  useEffect(() => {
-    setCurrentId(currentSelectedId);
-  }, [currentSelectedId]);
-
   return (
     <View
       style={{
@@ -165,8 +168,7 @@ const Contents = ({
             <ContentBody
               section={section}
               theme={theme}
-              currentId={currentId}
-              setCurrentId={setCurrentId}
+              currentSelectedId={currentSelectedId}
               setCurrentLessonUrl={setCurrentLessonUrl}
             />
           </View>

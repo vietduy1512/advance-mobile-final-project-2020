@@ -1,6 +1,7 @@
 export const Screens = Object.freeze({
   HOME: "Home",
   BOOKMARK: "Bookmark",
+  DOWNLOAD: "Download",
   BROWSE: "Browse",
   SEARCH: "Search",
   COURSE_DETAIL: "CourseDetail",

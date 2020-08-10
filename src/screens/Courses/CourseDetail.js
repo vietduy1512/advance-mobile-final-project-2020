@@ -34,6 +34,7 @@ const CourseDetail = () => {
   const [courseProcess, setCourseProcess] = useState("");
   const [relevantCourses, setRelevantCourses] = useState([]);
   const [currentLessonUrl, setCurrentLessonUrl] = useState("");
+  const [currentLessonName, setCurrentLessonName] = useState("");
   const [currentSelectedId, setCurrentSelectedId] = useState("");
   const route = useContext(NavigationRouteContext);
   const { courseId } = route.params;
@@ -57,8 +58,13 @@ const CourseDetail = () => {
   const initData = (response) => {
     const course = response.data.payload;
     setCourse(course);
-    if (course.section[0] && course.section[0].lesson[0]) {
+    if (
+      course.section[0] &&
+      course.section[0].lesson[0] &&
+      course.section[0].lesson[0].videoUrl
+    ) {
       setCurrentLessonUrl(course.section[0].lesson[0].videoUrl);
+      setCurrentLessonName(course.section[0].lesson[0].videoName);
       setCurrentSelectedId(course.section[0].lesson[0].id);
     }
     getAuthorDetail(course.instructorId).then((response) => {
@@ -73,10 +79,8 @@ const CourseDetail = () => {
       );
     });
     getCourseProcess(courseId).then((response) => {
-      console.log(response.data);
       setCourseProcess(response.data.payload);
-    })
-    
+    });
   };
 
   return (
@@ -99,6 +103,8 @@ const CourseDetail = () => {
           courseId={courseId}
           isRegistered={isRegistered}
           theme={theme}
+          currentLessonName={currentLessonName}
+          currentLessonUrl={currentLessonUrl}
           updateRegister={() => setIsRegistered(true)}
         />
         <Summary course={course} />
@@ -108,6 +114,7 @@ const CourseDetail = () => {
           theme={theme}
           currentSelectedId={currentSelectedId}
           setCurrentLessonUrl={setCurrentLessonUrl}
+          setCurrentLessonName={setCurrentLessonName}
         />
         <View style={{ marginTop: 30, marginHorizontal: 15 }}>
           <SectionCourses
