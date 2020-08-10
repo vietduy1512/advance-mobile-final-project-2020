@@ -12,6 +12,7 @@ import mockupData from "./src/config/context/mockupData";
 import { Container } from "native-base";
 import { Provider } from "react-redux";
 import store from "./src/core/store";
+import { navigationRef } from "./src/config/rootNavigation";
 import "./src/config/interceptors";
 
 export default function App() {
@@ -25,7 +26,7 @@ export default function App() {
           <LoadingContext.Provider value={{ loading, setLoading }}>
             <MockupDataContext.Provider value={mockupData}>
               <AuthenticationProvider>
-                <NavigationContainer>
+                <NavigationContainer ref={navigationRef}>
                   <MainLayout />
                 </NavigationContainer>
               </AuthenticationProvider>

@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Image, TouchableOpacity, Text } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons, AntDesign } from "@expo/vector-icons";
 
 const ContentHeader = ({ section, index, theme }) => {
   return (
@@ -65,32 +65,38 @@ const ContentHeader = ({ section, index, theme }) => {
   );
 };
 
-const ContentBodyItem = ({ name, isWatched, theme }) => {
+const ContentBodyItem = ({
+  item,
+  isWatched,
+  theme,
+  currentId,
+  setCurrentId,
+  setCurrentLessonUrl,
+}) => {
+  const isSelected = currentId === item.id;
+
   return (
-    <View
+    <TouchableOpacity
       style={{
         marginTop: 15,
         borderBottomWidth: 0.5,
         borderBottomColor: "gray",
         flexDirection: "row",
       }}
+      onPress={() => {
+        setCurrentId(item.id);
+        setCurrentLessonUrl(item.videoUrl);
+      }}
     >
-      {isWatched ? (
-        <View
-          style={{
-            height: 15,
-            width: 15,
-            marginRight: 20,
-          }}
-        >
+      {isSelected ? (
+        <View style={styles.iconContainer}>
+          <AntDesign name="playcircleo" size={20} color="blue" />
+        </View>
+      ) : isWatched ? (
+        <View style={styles.iconContainer}>
           <Image
             source={require("assets/images/check.png")}
-            style={{
-              flex: 1,
-              borderRadius: 30,
-              height: undefined,
-              width: undefined,
-            }}
+            style={styles.icon}
           />
         </View>
       ) : (
@@ -102,27 +108,49 @@ const ContentBodyItem = ({ name, isWatched, theme }) => {
           }}
         />
       )}
-      <Text style={{ marginBottom: 15, color: theme.textColor }}>{name}</Text>
-    </View>
+      <Text style={{ marginBottom: 15, color: theme.textColor }}>
+        {item.name}
+      </Text>
+    </TouchableOpacity>
   );
 };
 
-const ContentBody = ({ section, theme }) => {
+const ContentBody = ({
+  section,
+  theme,
+  currentId,
+  setCurrentId,
+  setCurrentLessonUrl,
+}) => {
   return (
     <>
       {section.lesson.map((item, key) => (
         <ContentBodyItem
           key={key}
-          name={item.name}
+          item={item}
           isWatched={true}
           theme={theme}
+          currentId={currentId}
+          setCurrentId={setCurrentId}
+          setCurrentLessonUrl={setCurrentLessonUrl}
         />
       ))}
     </>
   );
 };
 
-const Contents = ({ course, theme }) => {
+const Contents = ({
+  course,
+  theme,
+  currentSelectedId,
+  setCurrentLessonUrl,
+}) => {
+  const [currentId, setCurrentId] = useState("");
+
+  useEffect(() => {
+    setCurrentId(currentSelectedId);
+  }, [currentSelectedId]);
+
   return (
     <View
       style={{
@@ -134,7 +162,13 @@ const Contents = ({ course, theme }) => {
         course.section.map((section, index) => (
           <View style={{ width: "100%" }} key={index}>
             <ContentHeader section={section} index={index + 1} theme={theme} />
-            <ContentBody section={section} theme={theme} />
+            <ContentBody
+              section={section}
+              theme={theme}
+              currentId={currentId}
+              setCurrentId={setCurrentId}
+              setCurrentLessonUrl={setCurrentLessonUrl}
+            />
           </View>
         ))}
     </View>
@@ -148,5 +182,16 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "flex-start",
     padding: 15,
+  },
+  iconContainer: {
+    height: 20,
+    width: 20,
+    marginRight: 20,
+  },
+  icon: {
+    flex: 1,
+    borderRadius: 30,
+    height: undefined,
+    width: undefined,
   },
 });
