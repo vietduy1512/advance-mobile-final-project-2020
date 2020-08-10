@@ -2,7 +2,7 @@ import React from "react";
 import { Text } from "react-native";
 import { Tab, Tabs, TabHeading } from "native-base";
 import Contents from "./Contents";
-import Transcript from "./Transcript";
+import Exercises from "./Exercises";
 
 const CourseBody = (props) => {
   return (
@@ -19,11 +19,11 @@ const CourseBody = (props) => {
       <Tab
         heading={
           <TabHeading style={{ backgroundColor: props.theme.backgroundColor }}>
-            <Text style={{ color: props.theme.textColor }}>Transcript</Text>
+            <Text style={{ color: props.theme.textColor }}>Exercises</Text>
           </TabHeading>
         }
       >
-        <Transcript {...props} />
+        <Exercises {...props} />
       </Tab>
     </Tabs>
   );

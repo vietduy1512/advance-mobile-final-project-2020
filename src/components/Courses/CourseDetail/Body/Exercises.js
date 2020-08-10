@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, Image, TouchableOpacity, Text } from "react-native";
+import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
 import { MaterialCommunityIcons, AntDesign } from "@expo/vector-icons";
+import {
+  getLessonExercise,
+  getExerciseQuestion,
+} from "core/services/coursesService";
 
 const ContentHeader = ({ section, index, theme }) => {
   return (
@@ -65,63 +69,52 @@ const ContentHeader = ({ section, index, theme }) => {
   );
 };
 
-const ContentBodyItem = ({
-  lesson,
-  isWatched,
-  theme,
-  currentId,
-  setCurrentId,
-  setCurrentLessonUrl,
-}) => {
-  const isSelected = currentId === lesson.id;
+const ContentBodyItem = ({ lesson, theme }) => {
+  const [exercises, setExercises] = useState([]);
+
+  useEffect(() => {
+    getLessonExercise(lesson.id).then((response) => {
+      const exercisesIds = response.data.payload.exercises.map((x) => x.id);
+      exercisesIds.map((exerciseId) =>
+        getExerciseQuestion(exerciseId).then((response) => {
+          const resultExercises = response.data.payload.exercises;
+          console.log(resultExercises);
+          setExercises([
+            ...exercises,
+            ...resultExercises.exercises_questions.map((x) => x.content),
+          ]);
+        })
+      );
+    });
+  }, []);
 
   return (
-    <TouchableOpacity
-      style={{
-        marginTop: 15,
-        borderBottomWidth: 0.5,
-        borderBottomColor: "gray",
-        flexDirection: "row",
-      }}
-      onPress={() => {
-        setCurrentId(lesson.id);
-        setCurrentLessonUrl(lesson.videoUrl);
-      }}
-    >
-      {isSelected ? (
-        <View style={styles.iconContainer}>
-          <AntDesign name="playcircleo" size={20} color="blue" />
-        </View>
-      ) : isWatched ? (
-        <View style={styles.iconContainer}>
-          <Image
-            source={require("assets/images/check.png")}
-            style={styles.icon}
-          />
-        </View>
-      ) : (
-        <View
+    <>
+      <Text style={{ marginTop: 15, fontSize: 16 }}>{lesson.name}</Text>
+      {exercises.map((content, index) => (
+        <TouchableOpacity
           style={{
-            height: 15,
-            width: 15,
-            marginRight: 20,
+            marginTop: 15,
+            borderBottomWidth: 0.5,
+            borderBottomColor: "gray",
+            flexDirection: "row",
           }}
-        />
-      )}
-      <Text style={{ marginBottom: 15, color: theme.textColor }}>
-        {lesson.name}
-      </Text>
-    </TouchableOpacity>
+          key={index}
+          onPress={() => {}}
+        >
+          <View style={styles.iconContainer}>
+            <AntDesign name="questioncircleo" size={20} color="red" />
+          </View>
+          <Text style={{ marginBottom: 15, color: theme.textColor }}>
+            {content}
+          </Text>
+        </TouchableOpacity>
+      ))}
+    </>
   );
 };
 
-const ContentBody = ({
-  section,
-  theme,
-  currentId,
-  setCurrentId,
-  setCurrentLessonUrl,
-}) => {
+const ContentBody = ({ section, theme }) => {
   return (
     <>
       {section.lesson.map((lesson, key) => (
@@ -130,27 +123,13 @@ const ContentBody = ({
           lesson={lesson}
           isWatched={true}
           theme={theme}
-          currentId={currentId}
-          setCurrentId={setCurrentId}
-          setCurrentLessonUrl={setCurrentLessonUrl}
         />
       ))}
     </>
   );
 };
 
-const Contents = ({
-  course,
-  theme,
-  currentSelectedId,
-  setCurrentLessonUrl,
-}) => {
-  const [currentId, setCurrentId] = useState("");
-
-  useEffect(() => {
-    setCurrentId(currentSelectedId);
-  }, [currentSelectedId]);
-
+const Contents = ({ course, theme }) => {
   return (
     <View
       style={{
@@ -162,13 +141,7 @@ const Contents = ({
         course.section.map((section, index) => (
           <View style={{ width: "100%" }} key={index}>
             <ContentHeader section={section} index={index + 1} theme={theme} />
-            <ContentBody
-              section={section}
-              theme={theme}
-              currentId={currentId}
-              setCurrentId={setCurrentId}
-              setCurrentLessonUrl={setCurrentLessonUrl}
-            />
+            <ContentBody section={section} theme={theme} />
           </View>
         ))}
     </View>
@@ -187,11 +160,5 @@ const styles = StyleSheet.create({
     height: 20,
     width: 20,
     marginRight: 20,
-  },
-  icon: {
-    flex: 1,
-    borderRadius: 30,
-    height: undefined,
-    width: undefined,
   },
 });

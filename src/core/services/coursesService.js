@@ -87,3 +87,15 @@ export const getCategoryCourses = async (categoryId, page = 1, limit = 5) => {
     },
   });
 };
+
+export const getLessonExercise = async (lessonId) => {
+  return await axios.post(`/exercise/student/list-exercise-lesson`, {
+    lessonId: lessonId
+  });
+};
+
+export const getExerciseQuestion = async (exerciseId) => {
+  return await axios.post(`/exercise/student/exercise-test`, {
+    exerciseId: exerciseId
+  });
+};

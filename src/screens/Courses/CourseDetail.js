@@ -31,7 +31,7 @@ const CourseDetail = () => {
   const [course, setCourse] = useState({});
   const [author, setAuthor] = useState({});
   const [isRegistered, setIsRegistered] = useState(true);
-  const [courseProcess, setCourseProcess] = useState(true);
+  const [courseProcess, setCourseProcess] = useState("");
   const [relevantCourses, setRelevantCourses] = useState([]);
   const [currentLessonUrl, setCurrentLessonUrl] = useState("");
   const [currentSelectedId, setCurrentSelectedId] = useState("");
