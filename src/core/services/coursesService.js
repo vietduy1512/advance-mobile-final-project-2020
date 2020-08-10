@@ -47,6 +47,10 @@ export const getCourseDetailSummary = async (courseId, userId) => {
   return await axios.get(`/course/get-course-detail/${courseId}/${userId}`);
 };
 
+export const getCourseInfo = async (courseId) => {
+  return await axios.get(`/course/get-course-info?id=${courseId}`);
+};
+
 export const getCourseLikeStatus = async (courseId) => {
   return await axios.get(`/user/get-course-like-status/${courseId}`);
 };

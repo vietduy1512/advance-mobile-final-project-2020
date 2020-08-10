@@ -31,11 +31,13 @@ const SectionCoursesContent = (props) => {
           onPress={() => {
             navigation.navigate(Screens.MORE_COURSES, {
               title: props.title,
-              fetchCourses: props.fetchCourses
+              fetchCourses: props.fetchCourses,
             });
           }}
         >
-          <Text style={styles.expandText}>{Content.SEE_ALL}</Text>
+          {props.isHideHeader ? null : (
+            <Text style={styles.expandText}>{Content.SEE_ALL}</Text>
+          )}
         </TouchableOpacity>
       </View>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>

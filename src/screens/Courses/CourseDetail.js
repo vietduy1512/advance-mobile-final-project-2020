@@ -1,12 +1,18 @@
 import React, { useState, useEffect, useContext } from "react";
-import { StyleSheet, ScrollView } from "react-native";
+import { View, StyleSheet, ScrollView } from "react-native";
 import Constants from "expo-constants";
 import { NavigationRouteContext } from "@react-navigation/core";
 import { ThemeContext } from "config/context";
 import { AuthenticationContext } from "config/context";
-import { getCourseDetailSummary } from "core/services/coursesService";
+import {
+  getCourseDetailSummary,
+  getCourseInfo,
+  getCategoryCourses,
+} from "core/services/coursesService";
 import { getAuthorDetail } from "core/services/authorsService";
 import { LoadingContext } from "config/context";
+import { Titles } from "constants";
+import SectionCourses from "components/Courses/SectionCourses/SectionCoursesContent";
 import AccessibilityButtons from "components/Courses/CourseDetail/AccessibilityButtons";
 import Summary from "components/Courses/CourseDetail/Summary";
 import Relevants from "components/Courses/CourseDetail/Relevants";
@@ -22,6 +28,7 @@ const CourseDetail = () => {
 
   const [course, setCourse] = useState({});
   const [author, setAuthor] = useState({});
+  const [relevantCourses, setRelevantCourses] = useState([]);
   const [currentLessonUrl, setCurrentLessonUrl] = useState("");
   const [currentSelectedId, setCurrentSelectedId] = useState("");
   const route = useContext(NavigationRouteContext);
@@ -48,16 +55,22 @@ const CourseDetail = () => {
   }, []);
 
   const initData = (response) => {
-    setCourse(response.data.payload);
-    if (
-      response.data.payload.section[0] &&
-      response.data.payload.section[0].lesson[0]
-    ) {
-      setCurrentLessonUrl(response.data.payload.section[0].lesson[0].videoUrl);
-      setCurrentSelectedId(response.data.payload.section[0].lesson[0].id);
+    const course = response.data.payload;
+    setCourse(course);
+    if (course.section[0] && course.section[0].lesson[0]) {
+      setCurrentLessonUrl(course.section[0].lesson[0].videoUrl);
+      setCurrentSelectedId(course.section[0].lesson[0].id);
     }
-    getAuthorDetail(response.data.payload.instructorId).then((response) => {
+    getAuthorDetail(course.instructorId).then((response) => {
       setAuthor(response.data.payload);
+    });
+    getCourseInfo(course.id).then((res) => {
+      getCategoryCourses(res.data.payload.categoryIds[0], 1).then(
+        (response) => {
+          const courses = response.data.payload.rows;
+          setRelevantCourses(courses);
+        }
+      );
     });
   };
 
@@ -86,6 +99,13 @@ const CourseDetail = () => {
           currentSelectedId={currentSelectedId}
           setCurrentLessonUrl={setCurrentLessonUrl}
         />
+        <View style={{ marginTop: 30, marginHorizontal: 15 }}>
+          <SectionCourses
+            title={Titles.RELEVANT_COURSES}
+            courses={relevantCourses}
+            isHideHeader={true}
+          />
+        </View>
       </ScrollView>
     </>
   );
