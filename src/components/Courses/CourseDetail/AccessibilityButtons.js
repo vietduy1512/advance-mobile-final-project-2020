@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { View, Image, TouchableOpacity, Text, StyleSheet } from "react-native";
-import { likeCourses, getCourseLikeStatus } from "core/services/coursesService";
+import {
+  likeCourses,
+  getCourseLikeStatus,
+  registerFreeCourse,
+} from "core/services/coursesService";
 import { bookmark, unbookmark } from "core/actions/bookmarkAction";
 import { connect } from "react-redux";
+import { MaterialIcons } from "@expo/vector-icons";
 
 const BookmarkButton = (props) => {
   const bookmarkCourse = () => {
@@ -37,7 +42,9 @@ const BookmarkButton = (props) => {
         </View>
       </View>
       <View style={{ margin: 10 }}>
-        <Text style={{ fontSize: 12, color: props.theme.textColor }}>Unbookmark</Text>
+        <Text style={{ fontSize: 12, color: props.theme.textColor }}>
+          Unbookmark
+        </Text>
       </View>
     </TouchableOpacity>
   ) : (
@@ -54,7 +61,9 @@ const BookmarkButton = (props) => {
         </View>
       </View>
       <View style={{ margin: 10 }}>
-        <Text style={{ fontSize: 12, color: props.theme.textColor }}>Bookmark</Text>
+        <Text style={{ fontSize: 12, color: props.theme.textColor }}>
+          Bookmark
+        </Text>
       </View>
     </TouchableOpacity>
   );
@@ -92,18 +101,67 @@ const DownloadButton = (props) => {
         </View>
       </View>
       <View style={{ margin: 10 }}>
-        <Text style={{ fontSize: 12, color: props.theme.textColor }}>Download</Text>
+        <Text style={{ fontSize: 12, color: props.theme.textColor }}>
+          Download
+        </Text>
       </View>
     </TouchableOpacity>
+  );
+};
+
+const RegisterCourseButton = (props) => {
+  const registerCourse = () => {
+    registerFreeCourse(props.courseId).then(() => {
+      props.updateRegister();
+    });
+  };
+
+  return (
+    <>
+      <View
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Text style={{ color: "red", fontSize: 18 }}>
+          This course is not bought or registered.
+        </Text>
+        <Text style={{ color: "red", fontSize: 18, marginBottom: 15 }}>
+          Please register the course!
+        </Text>
+        <TouchableOpacity
+          style={styles.accessibilityButton}
+          onPress={registerCourse}
+        >
+          <View style={styles.accessibilityImageContainer}>
+            <View style={styles.accessibilityImageSize}>
+              <MaterialIcons name="payment" size={30} color="black" />
+            </View>
+          </View>
+          <View style={{ margin: 10 }}>
+            <Text style={{ fontSize: 12, color: props.theme.textColor }}>
+              Register
+            </Text>
+          </View>
+        </TouchableOpacity>
+      </View>
+    </>
   );
 };
 
 const AccessibilityButtons = (props) => {
   return (
     <View style={styles.accessibilityContainer}>
-      <BookmarkButton {...props} />
-      <ChannelAdd {...props} />
-      <DownloadButton {...props} />
+      {props.isRegistered ? (
+        <>
+          <BookmarkButton {...props} />
+          <ChannelAdd {...props} />
+          <DownloadButton {...props} />
+        </>
+      ) : (
+        <RegisterCourseButton {...props} />
+      )}
     </View>
   );
 };

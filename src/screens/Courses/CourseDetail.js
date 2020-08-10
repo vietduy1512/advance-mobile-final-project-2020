@@ -5,8 +5,10 @@ import { NavigationRouteContext } from "@react-navigation/core";
 import { ThemeContext } from "config/context";
 import { AuthenticationContext } from "config/context";
 import {
+  getCourseDetail,
   getCourseDetailSummary,
   getCourseInfo,
+  getCourseProcess,
   getCategoryCourses,
 } from "core/services/coursesService";
 import { getAuthorDetail } from "core/services/authorsService";
@@ -28,6 +30,8 @@ const CourseDetail = () => {
 
   const [course, setCourse] = useState({});
   const [author, setAuthor] = useState({});
+  const [isRegistered, setIsRegistered] = useState(true);
+  const [courseProcess, setCourseProcess] = useState(true);
   const [relevantCourses, setRelevantCourses] = useState([]);
   const [currentLessonUrl, setCurrentLessonUrl] = useState("");
   const [currentSelectedId, setCurrentSelectedId] = useState("");
@@ -36,19 +40,15 @@ const CourseDetail = () => {
 
   useEffect(() => {
     setLoading(true);
-    // TODO:
-    // getCourseDetail(courseId)
-    //   .then(initData)
-    //   .catch((error) => {
-    //     alertError(error);
-    //     if (error.response.status == 400) {
-    //       getCourseDetailSummary(courseId, authContext.state.userInfo.id).then(
-    //         initData
-    //       );
-    //     }
-    //   });
     getCourseDetailSummary(courseId, authContext.state.userInfo.id)
-      .then(initData)
+      .then((response) => {
+        initData(response);
+        getCourseDetail(courseId)
+          .then(initData)
+          .catch(() => {
+            setIsRegistered(false);
+          });
+      })
       .finally(() => {
         setLoading(false);
       });
@@ -72,6 +72,11 @@ const CourseDetail = () => {
         }
       );
     });
+    getCourseProcess(courseId).then((response) => {
+      console.log(response.data);
+      setCourseProcess(response.data.payload);
+    })
+    
   };
 
   return (
@@ -89,8 +94,13 @@ const CourseDetail = () => {
           theme={theme}
         />
         <AuthorButton author={author} />
-        <CourseInfo course={course} />
-        <AccessibilityButtons courseId={courseId} theme={theme} />
+        <CourseInfo course={course} courseProcess={courseProcess} />
+        <AccessibilityButtons
+          courseId={courseId}
+          isRegistered={isRegistered}
+          theme={theme}
+          updateRegister={() => setIsRegistered(true)}
+        />
         <Summary course={course} />
         <Relevants />
         <CourseBody

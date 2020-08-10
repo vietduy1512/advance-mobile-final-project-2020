@@ -55,6 +55,16 @@ export const getCourseLikeStatus = async (courseId) => {
   return await axios.get(`/user/get-course-like-status/${courseId}`);
 };
 
+export const registerFreeCourse = async (courseId) => {
+  return await axios.post(`/payment/get-free-courses`, {
+    courseId: courseId
+  });
+};
+
+export const getCourseProcess = async (courseId) => {
+  return await axios.get(`/course/process-course/${courseId}`);
+};
+
 export const searchCourse = async (keyword, page = 1, limit = 5) => {
   return await axios.post("/course/search", {
     keyword: keyword,

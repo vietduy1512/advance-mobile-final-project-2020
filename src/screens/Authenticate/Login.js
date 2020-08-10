@@ -57,6 +57,7 @@ const Login = ({ navigation }) => {
     setLoading(true);
     authContext.login(form.email, form.password).finally(() => {
       console.log("Login succeed!");
+      navigation.navigate(Screens.LAYOUT);
       setLoading(false);
     });
   };

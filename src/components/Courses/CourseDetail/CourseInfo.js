@@ -26,7 +26,9 @@ const CourseInfo = (props) => {
     <View style={styles.infoContainer}>
       <Text style={styles.darkText}>{`${moment(props.course.updatedAt).format(
         "MM/DD/YYYY"
-      )} - ${props.course.totalHours} hours`}</Text>
+      )} - ${props.courseProcess ? `${props.courseProcess} / ` : ''}${
+        props.course.totalHours
+      } hours`}</Text>
       <View style={styles.ratingStarContainer}>
         {renderStars(props.course.contentPoint)}
       </View>
