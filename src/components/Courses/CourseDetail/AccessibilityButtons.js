@@ -102,6 +102,8 @@ const DownloadButton = (props) => {
     ).then((result) => {
       if (result.exists) {
         setIsDownloaded(true);
+      } else {
+        setIsDownloaded(false);
       }
     });
   }, [props.currentLessonName]);

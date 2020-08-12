@@ -22,6 +22,7 @@ export const Titles = Object.freeze({
   TOP_RATE_COURSES: "Top rate courses",
   RELEVANT_COURSES: "Relevant courses",
   BOOKMARKS: "Bookmarks",
+  DOWNLOAD: "Download List",
   COURSES: "Courses",
   PATHS: "Paths",
   SEARCH: "Search",
