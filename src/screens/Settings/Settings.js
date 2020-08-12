@@ -138,8 +138,11 @@ const data = [
     itemRight: defaultItem,
   },
   {
-    title: "Contact support",
+    title: "Your favorite courses",
     itemRight: defaultItem,
+    onPress: ({ navigation }) => {
+      navigation.navigate(Screens.BOOKMARK);
+    },
   },
   {
     title: "App Version",

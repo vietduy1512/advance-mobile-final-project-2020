@@ -46,6 +46,12 @@ const SectionCoursesItem = (props) => {
           {moment(props.item.updatedAt).format("MM/DD/YYYY")}
         </Text>
         <View style={styles.ratingStarContainer}>{renderStars()}</View>
+        {props.item.latestLearnTime ? (
+          <Text style={styles.darkText}>
+            Last learned:{" "}
+            {moment(props.item.latestLearnTime).format("MM/DD/YYYY")}
+          </Text>
+        ) : null}
       </View>
     </TouchableOpacity>
   );

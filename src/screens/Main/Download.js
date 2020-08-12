@@ -3,11 +3,9 @@ import {
   StyleSheet,
   View,
   Text,
-  TouchableOpacity,
   ScrollView,
 } from "react-native";
 import Constants from "expo-constants";
-import ListCoursesContent from "components/Courses/ListCourses/ListCoursesContent";
 import { Titles } from "constants";
 import { ThemeContext } from "config/context";
 import { LoadingContext } from "config/context";

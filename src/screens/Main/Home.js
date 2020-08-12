@@ -64,11 +64,20 @@ const Home = () => {
           favoriteRes,
         ]) => {
           setRecommendCourses(recommendRes.data.payload);
-          setProcessCourses(processRes.data.payload);
           setTopSellCourses(topSellRes.data.payload);
           setTopNewCourses(topNewRes.data.payload);
           setTopRateCourses(topRateRes.data.payload);
           setPaths(categoriesRes.data.payload);
+
+          let processModel = processRes.data.payload.map(course => ({
+            id: course.id,
+            title: course.courseTitle,
+            instructorId: course.instructorId,
+            instructorName: course.instructorName,
+            latestLearnTime: course.latestLearnTime,
+            imageUrl: course.courseImage,
+          }));
+          setProcessCourses(processModel);
 
           const data = favoriteRes.data.payload;
           const model = data.map((item) => ({
@@ -103,7 +112,9 @@ const Home = () => {
       <SectionCourses
         title={Titles.RECOMMEND_COURSES}
         courses={recommendCourses}
-        fetchCourses={(page) => getRecommendCourses(authContext.state.userInfo.id, page)}
+        fetchCourses={(page) =>
+          getRecommendCourses(authContext.state.userInfo.id, page)
+        }
       />
       <SectionCourses
         title={Titles.TOP_SELL_COURSES}

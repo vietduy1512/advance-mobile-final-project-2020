@@ -4,6 +4,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import { Screens } from "constants";
 import Home from "./Main/Home";
 import Browse from "./Main/Browse";
+import Bookmark from "./Main/Bookmark";
 import Download from "./Main/Download";
 import Search from "./Main/Search";
 import CourseDetail from "./Courses/CourseDetail";
@@ -75,6 +76,11 @@ const MainLayout = () => {
         <RootStack.Screen
           name={Screens.MORE_COURSES}
           component={MoreCourses}
+          options={{ headerShown: false }}
+        />
+        <RootStack.Screen
+          name={Screens.BOOKMARK}
+          component={Bookmark}
           options={{ headerShown: false }}
         />
       </RootStack.Navigator>
