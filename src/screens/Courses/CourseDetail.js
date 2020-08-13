@@ -23,6 +23,7 @@ import CourseInfo from "components/Courses/CourseDetail/CourseInfo";
 import AuthorButton from "components/Courses/CourseDetail/AuthorButton";
 import VideoViewer from "components/Courses/CourseDetail/VideoViewer";
 import Ratings from "components/Courses/CourseDetail/Ratings";
+import RateCourseInput from "components/Courses/CourseDetail/RateCourseInput";
 
 const CourseDetail = () => {
   const { theme } = useContext(ThemeContext);
@@ -130,6 +131,7 @@ const CourseDetail = () => {
           />
         </View>
         <Ratings ratings={course.ratings} theme={theme} />
+        <RateCourseInput course={course} theme={theme} />
       </ScrollView>
     </>
   );
