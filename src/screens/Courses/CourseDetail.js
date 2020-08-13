@@ -22,6 +22,7 @@ import CourseBody from "components/Courses/CourseDetail/Body/CourseBody";
 import CourseInfo from "components/Courses/CourseDetail/CourseInfo";
 import AuthorButton from "components/Courses/CourseDetail/AuthorButton";
 import VideoViewer from "components/Courses/CourseDetail/VideoViewer";
+import Ratings from "components/Courses/CourseDetail/Ratings";
 
 const CourseDetail = () => {
   const { theme } = useContext(ThemeContext);
@@ -42,10 +43,15 @@ const CourseDetail = () => {
   useEffect(() => {
     setLoading(true);
     getCourseDetailSummary(courseId, authContext.state.userInfo.id)
-      .then((response) => {
-        initData(response);
+      .then((summaryRes) => {
+        initData(summaryRes);
         getCourseDetail(courseId)
-          .then(initData)
+          .then((response) => {
+            setCourse({
+              ...summaryRes.data.payload,
+              section: response.data.payload.section,
+            });
+          })
           .catch(() => {
             setIsRegistered(false);
           });
@@ -123,6 +129,7 @@ const CourseDetail = () => {
             isHideHeader={true}
           />
         </View>
+        <Ratings ratings={course.ratings} theme={theme} />
       </ScrollView>
     </>
   );
