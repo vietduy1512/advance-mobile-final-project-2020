@@ -8,6 +8,7 @@ export const getTopSellCourses = async (page = 1, limit = 5) => {
 };
 
 export const getTopNewCourses = async (page = 1, limit = 5) => {
+  console.log(limit);
   return await axios.post("/course/top-new", {
     limit: limit,
     page: page,

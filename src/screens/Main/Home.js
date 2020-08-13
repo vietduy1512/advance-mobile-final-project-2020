@@ -14,7 +14,7 @@ import { connect } from "react-redux";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Screens } from "constants";
 import { AntDesign, FontAwesome } from "@expo/vector-icons";
-import Settings from "../Settings/Settings";
+import SettingsLayout from "../SettingsLayout";
 import { ThemeContext } from "config/context";
 import {
   getRecommendCourses,
@@ -184,7 +184,7 @@ const HomeScreen = ({ navigation }) => {
           ),
         }}
       />
-      <HomeStack.Screen name={Screens.SETTINGS} component={Settings} />
+      <HomeStack.Screen name={Screens.SETTINGS} component={SettingsLayout} />
     </HomeStack.Navigator>
   );
 };

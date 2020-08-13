@@ -10,9 +10,7 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { ThemeContext } from "config/context";
 import { NavigationContext } from "@react-navigation/core";
-import { createStackNavigator } from "@react-navigation/stack";
-import ThemeSettings from "./ThemeSettings";
-import { Screens } from "constants";
+import { Screens, SettingScreens } from "constants";
 
 const SettingItem = ({ item, index }) => {
   const { theme } = useContext(ThemeContext);
@@ -57,8 +55,6 @@ const appVersion = () => {
   return <Text style={{ color: theme.textColor }}>1.0.1</Text>;
 };
 
-const SettingsStack = createStackNavigator();
-
 const SettingsMain = ({ navigation }) => {
   const { theme } = useContext(ThemeContext);
   return (
@@ -76,23 +72,7 @@ const SettingsMain = ({ navigation }) => {
   );
 };
 
-const Settings = () => (
-  <SettingsStack.Navigator>
-    <SettingsStack.Screen
-      name="SettingsMain"
-      component={SettingsMain}
-      options={{ headerShown: false }}
-    />
-    <SettingsStack.Screen
-      mode="modal"
-      name={"ThemeSettings"}
-      component={ThemeSettings}
-      options={{ headerShown: false }}
-    />
-  </SettingsStack.Navigator>
-);
-
-export default Settings;
+export default SettingsMain;
 
 const styles = StyleSheet.create({
   container: {
@@ -109,36 +89,39 @@ const data = [
   {
     title: "Account",
     itemRight: defaultItem,
+    onPress: ({ navigation }) => {
+      navigation.navigate(SettingScreens.USER_INFO);
+    },
   },
-  {
-    title: "Subscription",
-    itemRight: defaultItem,
-  },
-  {
-    title: "Communication Preferences",
-    itemRight: defaultItem,
-  },
+  // {
+  //   title: "Subscription",
+  //   itemRight: defaultItem,
+  // },
+  // {
+  //   title: "Communication Preferences",
+  //   itemRight: defaultItem,
+  // },
   {
     title: "Theme",
     itemRight: themeItem,
     onPress: ({ navigation }) => {
-      navigation.navigate("ThemeSettings");
+      navigation.navigate(SettingScreens.THEME);
     },
   },
+  // {
+  //   title: "Require Wi-Fi for streaming",
+  //   itemRight: defaultItem,
+  // },
+  // {
+  //   title: "Require Wi-Fi for downloading",
+  //   itemRight: defaultItem,
+  // },
+  // {
+  //   title: "Send feedback",
+  //   itemRight: defaultItem,
+  // },
   {
-    title: "Require Wi-Fi for streaming",
-    itemRight: defaultItem,
-  },
-  {
-    title: "Require Wi-Fi for downloading",
-    itemRight: defaultItem,
-  },
-  {
-    title: "Send feedback",
-    itemRight: defaultItem,
-  },
-  {
-    title: "Your favorite courses",
+    title: "Favorite courses",
     itemRight: defaultItem,
     onPress: ({ navigation }) => {
       navigation.navigate(Screens.BOOKMARK);

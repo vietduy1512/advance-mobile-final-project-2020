@@ -36,17 +36,17 @@ const MoreCourses = () => {
   const previousPage = () => {
     if (page > 1) {
       setPage(page - 1);
-      fetchCourses(page - 1);
+      fetchData(page - 1);
     }
   };
 
   const nextPage = () => {
     setPage(page + 1);
-    fetchCourses(page + 1);
+    fetchData(page + 1);
   };
 
   const isLeftDisabled = page <= 1;
-  const isRightDisabled =  courses.length < 5;
+  const isRightDisabled = courses.length < 5;
 
   return (
     <View

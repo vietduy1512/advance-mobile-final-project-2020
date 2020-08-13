@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 import { NavigationContext } from "@react-navigation/core";
 import { Video } from "expo-av";
 
@@ -14,8 +14,8 @@ const VideoViewer = ({ course, videoUrl, theme }) => {
           style={{
             width: 40,
             height: 40,
-            top: 5,
-            left: 5,
+            top: 25,
+            left: 10,
             position: "absolute",
             zIndex: 1,
           }}
@@ -24,7 +24,7 @@ const VideoViewer = ({ course, videoUrl, theme }) => {
           }}
           onError={(error) => console.log(error)}
         >
-          <MaterialCommunityIcons name="close" size={26} color="black" />
+          <AntDesign name="closecircle" size={28} color="white" />
         </TouchableOpacity>
         <Video
           source={videoUrl ? { uri: videoUrl } : null}

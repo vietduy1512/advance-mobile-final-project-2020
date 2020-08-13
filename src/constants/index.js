@@ -14,6 +14,13 @@ export const Screens = Object.freeze({
   LAYOUT: "TabLayout",
 });
 
+export const SettingScreens = Object.freeze({
+  MAIN: "SettingsMain",
+  THEME: "ThemeSettings",
+  USER_INFO: "UserInfo",
+  UPDATE_USER_INFO: "UpdateUserInfo",
+});
+
 export const Titles = Object.freeze({
   CONTINUE_LEARNING: "Continue Learning",
   RECOMMEND_COURSES: "Recommend courses",
