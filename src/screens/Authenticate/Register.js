@@ -101,7 +101,7 @@ const Register = ({ navigation }) => {
       <SafeAreaView>
         <InputField
           title={t("authentication.username")}
-          error="Username is invalid"
+          error={t("validation.invalidUsername")}
           dirty={dirty.username}
           validation={isValidUsername}
           value={form.username}
@@ -133,8 +133,8 @@ const Register = ({ navigation }) => {
           secureTextEntry={true}
         />
         <InputField
-          title="Confirm password"
-          error="Confirm password is not matched"
+          title={t("authentication.confirmPassword")}
+          error={t("validation.invalidConfirmPassword")}
           dirty={dirty.confirmPassword}
           validation={isValidConfirmPassword}
           value={form.confirmPassword}

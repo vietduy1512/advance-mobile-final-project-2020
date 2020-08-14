@@ -21,7 +21,7 @@ const BookmarkListCourses = (props) => {
   return (
     <ListCoursesContent
       {...props}
-      title={Titles.BOOKMARKS}
+      title={t(Titles.BOOKMARKS)}
       renderHeader={renderBookmarkHeader}
     />
   );

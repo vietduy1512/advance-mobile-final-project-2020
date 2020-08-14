@@ -27,6 +27,7 @@ import { getAllCategories } from "core/services/categoriesService";
 import { getFavoriteCourses } from "core/services/coursesService";
 import { LoadingContext } from "config/context";
 import { AuthenticationContext } from "config/context";
+import { useTranslation } from "react-i18next";
 
 const HomeStack = createStackNavigator();
 
@@ -41,6 +42,7 @@ const Home = () => {
   const [topRateCourses, setTopRateCourses] = useState([]);
   const [paths, setPaths] = useState([]);
   const [bookmarks, setBookmarks] = useState([]);
+  const { t } = useTranslation();
 
   useEffect(() => {
     setLoading(true);
@@ -105,53 +107,54 @@ const Home = () => {
       showsVerticalScrollIndicator={false}
     >
       <SectionCourses
-        title={Titles.CONTINUE_LEARNING}
+        title={t(Titles.CONTINUE_LEARNING)}
         courses={processCourses}
         fetchCourses={getProcessCourses}
       />
       <SectionCourses
-        title={Titles.RECOMMEND_COURSES}
+        title={t(Titles.RECOMMEND_COURSES)}
         courses={recommendCourses}
         fetchCourses={(page) =>
           getRecommendCourses(authContext.state.userInfo.id, page)
         }
       />
       <SectionCourses
-        title={Titles.TOP_SELL_COURSES}
+        title={t(Titles.TOP_SELL_COURSES)}
         courses={topSellCourses}
         fetchCourses={getTopSellCourses}
       />
       <SectionCourses
-        title={Titles.TOP_NEW_COURSES}
+        title={t(Titles.TOP_NEW_COURSES)}
         courses={topNewCourses}
         fetchCourses={getTopNewCourses}
       />
       <SectionCourses
-        title={Titles.TOP_RATE_COURSES}
+        title={t(Titles.TOP_RATE_COURSES)}
         courses={topRateCourses}
         fetchCourses={getTopRateCourses}
       />
-      <SectionPaths title={Titles.PATHS} paths={paths} />
+      <SectionPaths title={t(Titles.PATHS)} paths={paths} />
       <Channels />
-      <SectionCourses title={Titles.BOOKMARKS} courses={bookmarks} />
+      <SectionCourses title={t(Titles.BOOKMARKS)} courses={bookmarks} />
     </ScrollView>
   );
 };
 
 const HomeScreen = ({ navigation }) => {
   const authContext = useContext(AuthenticationContext);
+  const { t } = useTranslation();
 
   const logout = () => {
     Alert.alert(
-      "Logout",
-      "Are you sure you want to logout ?",
+      t("authentication.logout"),
+      t("authentication.confirmLogout"),
       [
         {
-          text: "No",
+          text: t("common.no"),
           style: "cancel",
         },
         {
-          text: "Yes",
+          text: t("common.yes"),
           onPress: () => {
             authContext.logout();
             navigation.navigate(Screens.LOGIN);

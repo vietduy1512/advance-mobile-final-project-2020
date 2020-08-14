@@ -35,7 +35,7 @@ const SearchListCourses = (props) => {
   return (
     <ListCoursesContent
       {...props}
-      title={Titles.SEARCH}
+      title={t(Titles.SEARCH)}
       renderHeader={
         props.isRenderSection ? renderSearchSectionHeader : renderSearchHeader
       }

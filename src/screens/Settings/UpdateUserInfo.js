@@ -81,7 +81,7 @@ const UpdateUserInfo = ({ navigation }) => {
       <SafeAreaView>
         <InputField
           title={t("authentication.username")}
-          error="Username is invalid"
+          error={t("validation.invalidUsername")}
           dirty={dirty.username}
           validation={isValidUsername}
           value={form.username}

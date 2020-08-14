@@ -125,7 +125,7 @@ const CourseDetail = () => {
         />
         <View style={{ marginTop: 30, marginHorizontal: 15 }}>
           <SectionCourses
-            title={Titles.RELEVANT_COURSES}
+            title={t(Titles.RELEVANT_COURSES)}
             courses={relevantCourses}
             isHideHeader={true}
           />
