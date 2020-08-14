@@ -114,7 +114,6 @@ const DownloadButton = (props) => {
         downloadProgress.totalBytesWritten /
         downloadProgress.totalBytesExpectedToWrite;
       setDownloadProgress(progress);
-      console.log(progress);
     };
 
     const downloadResumable = FileSystem.createDownloadResumable(

@@ -4,6 +4,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { Screens } from "constants";
 import { AuthenticationContext } from "config/context";
 import { LoadingContext } from "config/context";
+import { useTranslation } from "react-i18next";
 import InputField from "components/Common/InputField";
 import validator from "validator";
 
@@ -18,6 +19,7 @@ const Login = ({ navigation }) => {
   });
   const [errorMessage, setErrorMessage] = useState("");
   const authContext = useContext(AuthenticationContext);
+  const { t } = useTranslation();
   const { setLoading } = useContext(LoadingContext);
 
   const handleChange = (name, value) => {
@@ -49,20 +51,18 @@ const Login = ({ navigation }) => {
 
   const login = () => {
     if (!form.email || !form.password) {
-      setErrorMessage("Please fill all input above!");
+      setErrorMessage(t("validation.pleaseFillInput"));
       return;
     }
     setErrorMessage("");
 
     setLoading(true);
     authContext.login(form.email, form.password).finally(() => {
-      console.log("Login succeed!");
       navigation.navigate(Screens.LAYOUT);
       setLoading(false);
     });
   };
 
-  
   const isValidEmail = () => {
     return validator.isEmail(form.email);
   };
@@ -80,16 +80,16 @@ const Login = ({ navigation }) => {
         />
       </View>
       <InputField
-        title="Email"
-        error="Email is invalid"
+        title={t("authentication.email")}
+        error={t("validation.invalidEmail")}
         dirty={dirty.email}
         validation={isValidEmail}
         value={form.email}
         onChangeText={(value) => handleChange("email", value)}
       />
       <InputField
-        title="Password"
-        error="Password at least 4 characters"
+        title={t("authentication.password")}
+        error={t("validation.invalidPassword")}
         dirty={dirty.password}
         validation={isValidPassword}
         value={form.password}
@@ -97,7 +97,7 @@ const Login = ({ navigation }) => {
         secureTextEntry={true}
       />
       <View style={styles.submit}>
-        <Button title="Login" onPress={login} />
+        <Button title={t("authentication.login")} onPress={login} />
       </View>
       <View style={styles.navigation}>
         <TouchableOpacity
@@ -105,9 +105,9 @@ const Login = ({ navigation }) => {
             navigation.navigate(Screens.REGISTER);
           }}
         >
-          <Text
-            style={{ color: "blue" }}
-          >{`Don't have account? Sign up here`}</Text>
+          <Text style={{ color: "blue" }}>
+            {t("authentication.goToRegister")}
+          </Text>
         </TouchableOpacity>
       </View>
       <View style={styles.navigation}>
@@ -116,9 +116,9 @@ const Login = ({ navigation }) => {
             navigation.navigate(Screens.FORGOT_PASSWORD);
           }}
         >
-          <Text
-            style={{ color: "blue" }}
-          >{`Forget your password?`}</Text>
+          <Text style={{ color: "blue" }}>
+            {t("authentication.forgotPassword")}
+          </Text>
         </TouchableOpacity>
       </View>
       <Text

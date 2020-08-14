@@ -19,7 +19,7 @@ const Login = ({ course }) => {
 
   const submit = () => {
     if (!comment) {
-      setErrorMessage("Please fill all input above!");
+      setErrorMessage(t("validation.pleaseFillInput"));
       return;
     }
     setErrorMessage("");

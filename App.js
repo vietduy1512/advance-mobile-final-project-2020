@@ -14,6 +14,7 @@ import { Provider } from "react-redux";
 import store from "./src/core/store";
 import { navigationRef } from "./src/config/rootNavigation";
 import "./src/config/interceptors";
+import "./src/config/i18n";
 
 export default function App() {
   const [theme, setTheme] = useState(themes.light);

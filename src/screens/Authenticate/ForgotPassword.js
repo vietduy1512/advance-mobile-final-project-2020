@@ -7,12 +7,14 @@ import InputField from "components/Common/InputField";
 import validator from "validator";
 import { forgotPassword } from "core/services/usersService";
 import { alertSuccess } from "core/helpers/alertHelper";
+import { useTranslation } from "react-i18next";
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [dirty, setDirty] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const { setLoading } = useContext(LoadingContext);
+  const { t } = useTranslation();
 
   const handleChange = (value) => {
     setEmail(value);
@@ -21,7 +23,7 @@ const Login = ({ navigation }) => {
 
   const submit = () => {
     if (!email) {
-      setErrorMessage("Please fill all input above!");
+      setErrorMessage(t("validation.pleaseFillInput"));
       return;
     }
     setErrorMessage("");
@@ -30,7 +32,7 @@ const Login = ({ navigation }) => {
     forgotPassword(email)
       .then(() => {
         navigation.navigate(Screens.LOGIN);
-        alertSuccess("Send forgot password email successfully");
+        alertSuccess(t("authentication.resetPasswordSuccess"));
       })
       .catch((error) => {
         setErrorMessage(error.response.data.message);
@@ -63,15 +65,15 @@ const Login = ({ navigation }) => {
         Input email to reset your password
       </Text>
       <InputField
-        title="Email"
-        error="Email is invalid"
+        title={t("authentication.email")}
+        error={t("validation.invalidEmail")}
         dirty={dirty}
         validation={isValidEmail}
         value={email}
         onChangeText={(value) => handleChange(value)}
       />
       <View style={styles.submit}>
-        <Button title="Submit" onPress={submit} />
+        <Button title={t("authentication.submit")} onPress={submit} />
       </View>
       <View style={styles.navigation}>
         <TouchableOpacity
@@ -79,7 +81,7 @@ const Login = ({ navigation }) => {
             navigation.navigate(Screens.LOGIN);
           }}
         >
-          <Text style={{ color: "blue" }}>{`Back to Login`}</Text>
+          <Text style={{ color: "blue" }}>{t("authentication.backToLogin")}</Text>
         </TouchableOpacity>
       </View>
       <Text

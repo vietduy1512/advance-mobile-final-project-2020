@@ -60,9 +60,9 @@ const UserInfo = ({ navigation }) => {
       <View style={styles.imageContainer}>
         <Image source={{ uri: userInfo.avatar }} style={styles.image} />
       </View>
-      <Item title="Email" content={userInfo.email} />
+      <Item title={t("authentication.email")} content={userInfo.email} />
       <Item title="Name" content={userInfo.name} />
-      <Item title="Phone" content={userInfo.phone} />
+      <Item title={t("authentication.phone")} content={userInfo.phone} />
       <Item title="Usertype" content={userInfo.type} />
       <Button title="Update" onPress={navigateUpdate} />
     </View>

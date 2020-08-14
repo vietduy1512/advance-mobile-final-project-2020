@@ -43,7 +43,7 @@ const UpdateUserInfo = ({ navigation }) => {
 
   const updateInfo = () => {
     if (!form.username || !form.phone) {
-      setErrorMessage("Please fill all input above!");
+      setErrorMessage(t("validation.pleaseFillInput"));
       return;
     }
 
@@ -80,7 +80,7 @@ const UpdateUserInfo = ({ navigation }) => {
       </View>
       <SafeAreaView>
         <InputField
-          title="Username"
+          title={t("authentication.username")}
           error="Username is invalid"
           dirty={dirty.username}
           validation={isValidUsername}
@@ -88,8 +88,8 @@ const UpdateUserInfo = ({ navigation }) => {
           onChangeText={(value) => handleChange("username", value)}
         />
         <InputField
-          title="Phone"
-          error="Only number is required"
+          title={t("authentication.phone")}
+          error={t("validation.invalidPhone")}
           dirty={dirty.phone}
           validation={isValidPhone}
           value={form.phone}
