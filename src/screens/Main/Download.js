@@ -66,12 +66,6 @@ const Download = () => {
           </View>
         ))}
       </ScrollView>
-      {/* <ListCoursesContent
-        {...props}
-        title={t(Titles.DOWNLOAD)}
-        courses={bookmarks}
-        renderHeader={renderBookmarkHeader}
-      /> */}
     </View>
   );
 };

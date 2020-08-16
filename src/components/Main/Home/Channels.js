@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import { Text, View, Image, StyleSheet } from "react-native";
 import { ThemeContext } from "config/context";
+import { useTranslation } from "react-i18next";
 
 const Channels = () => {
   const { theme } = useContext(ThemeContext);
+  const { t } = useTranslation();
 
   const text =
     "Use channels to save, organize, and share content to accomplish your learning objectives";
@@ -12,7 +14,7 @@ const Channels = () => {
     <View>
       <View style={styles.header}>
         <Text style={{ ...styles.title, color: theme.textColor }}>
-          Channels
+          {t("titles.channels")}
         </Text>
       </View>
       <View style={styles.container}>

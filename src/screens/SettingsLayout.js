@@ -1,5 +1,6 @@
 import React from "react";
 import ThemeSettings from "./Settings/ThemeSettings";
+import LanguageSettings from "./Settings/LanguageSettings";
 import UserInfo from "./Settings/UserInfo";
 import UpdateUserInfo from "./Settings/UpdateUserInfo";
 import SettingsMain from "./Settings/Settings";
@@ -19,6 +20,12 @@ const SettingsLayout = () => (
       mode="modal"
       name={SettingScreens.THEME}
       component={ThemeSettings}
+      options={{ headerShown: false }}
+    />
+    <SettingsStack.Screen
+      mode="modal"
+      name={SettingScreens.LANGUAGE}
+      component={LanguageSettings}
       options={{ headerShown: false }}
     />
     <SettingsStack.Screen

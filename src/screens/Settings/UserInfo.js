@@ -5,6 +5,7 @@ import { getUserInfo } from "core/services/usersService";
 import { LoadingContext } from "config/context";
 import { SettingScreens } from "constants";
 import { useFocusEffect } from "@react-navigation/native";
+import { useTranslation } from "react-i18next";
 
 const Item = ({ title, content }) => {
   const { theme } = useContext(ThemeContext);
@@ -30,6 +31,7 @@ const Item = ({ title, content }) => {
 const UserInfo = ({ navigation }) => {
   const { theme } = useContext(ThemeContext);
   const { setLoading } = useContext(LoadingContext);
+  const { t } = useTranslation();
   const [userInfo, setUserInfo] = useState({});
 
   useFocusEffect(
@@ -61,10 +63,10 @@ const UserInfo = ({ navigation }) => {
         <Image source={{ uri: userInfo.avatar }} style={styles.image} />
       </View>
       <Item title={t("authentication.email")} content={userInfo.email} />
-      <Item title="Name" content={userInfo.name} />
+      <Item title={t("authentication.username")} content={userInfo.name} />
       <Item title={t("authentication.phone")} content={userInfo.phone} />
-      <Item title="Usertype" content={userInfo.type} />
-      <Button title="Update" onPress={navigateUpdate} />
+      <Item title={t("authentication.usertype")} content={userInfo.type} />
+      <Button title={t("authentication.update")} onPress={navigateUpdate} />
     </View>
   );
 };

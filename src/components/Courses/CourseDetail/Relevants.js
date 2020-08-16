@@ -1,14 +1,17 @@
 import React from "react";
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 import { Entypo, MaterialCommunityIcons } from "@expo/vector-icons";
+import { useTranslation } from "react-i18next";
 
 const Relevants = () => {
+  const { t } = useTranslation();
+
   return (
     <View style={styles.relevantsContainer}>
       <TouchableOpacity style={styles.relevantsButton} onPress={() => {}}>
         <Entypo name="archive" size={20} />
         <Text style={{ fontSize: 12, marginLeft: 5 }}>
-          Related paths & courses
+          {t("courseDetail.related")}
         </Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.relevantsButton} onPress={() => {}}>
@@ -17,7 +20,7 @@ const Relevants = () => {
           size={20}
         />
         <Text style={{ fontSize: 12, marginLeft: 5 }}>
-          Take a learning check
+          {t("courseDetail.learningCheck")}
         </Text>
       </TouchableOpacity>
     </View>

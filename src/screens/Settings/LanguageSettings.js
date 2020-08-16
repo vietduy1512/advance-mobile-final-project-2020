@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { TouchableOpacity, StyleSheet, Text, View } from "react-native";
 import { ThemeContext } from "config/context";
-import { themes } from "constants/context";
 import { useTranslation } from "react-i18next";
 
 const Item = ({ title, onPress }) => {
@@ -24,23 +23,23 @@ const Item = ({ title, onPress }) => {
 };
 
 const ThemeSettings = ({ navigation }) => {
-  const { theme, setTheme } = useContext(ThemeContext);
-  const { t } = useTranslation();
+  const { theme } = useContext(ThemeContext);
+  const { i18n } = useTranslation();
   return (
     <View
       style={{ ...styles.container, backgroundColor: theme.backgroundColor }}
     >
       <Item
-        title={t("settings.light")}
+        title="English"
         onPress={() => {
-          setTheme(themes.light);
+          i18n.changeLanguage('en');
           navigation.goBack();
         }}
       />
       <Item
-        title={t("settings.dark")}
+        title="Tiếng Việt"
         onPress={() => {
-          setTheme(themes.dark);
+          i18n.changeLanguage('vi');
           navigation.goBack();
         }}
       />

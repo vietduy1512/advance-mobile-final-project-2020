@@ -4,6 +4,7 @@ import { LoadingContext } from "config/context";
 import InputField from "components/Common/InputField";
 import validator from "validator";
 import { ratingCourse } from "core/services/coursesService";
+import { useTranslation } from "react-i18next";
 
 const Login = ({ course }) => {
   const [comment, setComment] = useState("");
@@ -11,6 +12,7 @@ const Login = ({ course }) => {
   const [dirty, setDirty] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const { setLoading } = useContext(LoadingContext);
+  const { t } = useTranslation();
 
   const handleChange = (value) => {
     setComment(value);
@@ -45,8 +47,8 @@ const Login = ({ course }) => {
   return (
     <View style={styles.container}>
       <InputField
-        title="Comment"
-        error="Comment is invalid"
+        title={t("courseDetail.comment")}
+        error={t("validation.invalidComment")}
         dirty={dirty}
         validation={isValidComment}
         value={comment}
@@ -64,7 +66,7 @@ const Login = ({ course }) => {
         <Picker.Item label="5 stars" value={5} />
       </Picker>
       <View style={styles.submit}>
-        <Button title="Submit" onPress={submit} />
+        <Button title={t("authentication.submit")} onPress={submit} />
       </View>
       <Text
         style={{

@@ -17,6 +17,7 @@ export const Screens = Object.freeze({
 export const SettingScreens = Object.freeze({
   MAIN: "SettingsMain",
   THEME: "ThemeSettings",
+  LANGUAGE: "LanguageSettings",
   USER_INFO: "UserInfo",
   UPDATE_USER_INFO: "UpdateUserInfo",
 });
@@ -41,5 +42,5 @@ export const Titles = Object.freeze({
 });
 
 export const Content = Object.freeze({
-  SEE_ALL: "See all >",
+  SEE_ALL: "titles.seeAll",
 });

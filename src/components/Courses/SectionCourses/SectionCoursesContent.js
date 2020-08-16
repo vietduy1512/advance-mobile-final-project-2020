@@ -12,9 +12,11 @@ import SectionCoursesItem from "./SectionCoursesItem";
 import EmptyText from "components/Common/EmptyText";
 import { NavigationContext } from "@react-navigation/core";
 import { Screens } from "constants";
+import { useTranslation } from "react-i18next";
 
 const SectionCoursesContent = (props) => {
   const { theme } = useContext(ThemeContext);
+  const { t } = useTranslation();
   const navigation = useContext(NavigationContext);
 
   const Courses = ({ courses }) =>
@@ -36,7 +38,7 @@ const SectionCoursesContent = (props) => {
           }}
         >
           {props.isHideHeader ? null : (
-            <Text style={styles.expandText}>{Content.SEE_ALL}</Text>
+            <Text style={styles.expandText}>{t(Content.SEE_ALL)}</Text>
           )}
         </TouchableOpacity>
       </View>
@@ -44,7 +46,7 @@ const SectionCoursesContent = (props) => {
         <EmptyText
           items={props.courses}
           body={<Courses courses={props.courses} />}
-          message="There are no courses yet!"
+          message={t("data.noCourses")}
         />
       </ScrollView>
     </View>

@@ -24,6 +24,7 @@ import AuthorButton from "components/Courses/CourseDetail/AuthorButton";
 import VideoViewer from "components/Courses/CourseDetail/VideoViewer";
 import Ratings from "components/Courses/CourseDetail/Ratings";
 import RateCourseInput from "components/Courses/CourseDetail/RateCourseInput";
+import { useTranslation } from "react-i18next";
 
 const CourseDetail = () => {
   const { theme } = useContext(ThemeContext);
@@ -38,6 +39,7 @@ const CourseDetail = () => {
   const [currentLessonUrl, setCurrentLessonUrl] = useState("");
   const [currentLessonName, setCurrentLessonName] = useState("");
   const [currentSelectedId, setCurrentSelectedId] = useState("");
+  const { t } = useTranslation();
   const route = useContext(NavigationRouteContext);
   const { courseId } = route.params;
 

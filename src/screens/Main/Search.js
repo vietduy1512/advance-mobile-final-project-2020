@@ -20,6 +20,7 @@ import { getAllCategories } from "core/services/categoriesService";
 import { getAllAuthors } from "core/services/authorsService";
 import { searchCourse } from "core/services/coursesService";
 import { LoadingContext } from "config/context";
+import { useTranslation } from "react-i18next";
 
 const Search = () => {
   const { setLoading } = useContext(LoadingContext);
@@ -105,8 +106,8 @@ const Search = () => {
 
     const onSubmitEditing = () => {
       searchData(searchText);
-      setSearchText("");
       setShowResult(true);
+      setSearchText("");
     };
 
     return (
@@ -257,9 +258,15 @@ const Search = () => {
   };
 
   const RecentSearches = () => {
+    const { t } = useTranslation();
+    
     const Searches = ({ content, index }) => {
       const onSubmit = () => {
+        setSearchCourses([]);
+        setSearchPaths([]);
+        setSearchAuthors([]);
         searchData(content);
+        setShowResult(true);
       };
       const onDelete = () => {
         deleteSearchHistory(index);
@@ -301,7 +308,7 @@ const Search = () => {
       <View>
         <View style={styles.header}>
           <Text style={{ ...styles.title, color: theme.textColor }}>
-            Recent searches
+            {t("searches.recentSearches")}
           </Text>
           <TouchableOpacity style={styles.clearBtnContainer}>
             <Text style={styles.clearBtn}>Remove all</Text>

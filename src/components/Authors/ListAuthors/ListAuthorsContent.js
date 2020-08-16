@@ -3,9 +3,11 @@ import { View, ScrollView } from "react-native";
 import ListAuthorsItem from "./ListAuthorsItem";
 import { ThemeContext } from "config/context";
 import EmptyText from "components/Common/EmptyText";
+import { useTranslation } from "react-i18next";
 
 const ListAuthorsContent = (props) => {
   const { theme } = useContext(ThemeContext);
+  const { t } = useTranslation();
 
   const Authors = ({ authors }) =>
     authors.map((item) => <ListAuthorsItem key={item.id} item={item} />);
@@ -17,7 +19,7 @@ const ListAuthorsContent = (props) => {
         <EmptyText
           items={props.authors}
           body={<Authors authors={props.authors} />}
-          message="There are no authors yet!"
+          message={t("data.noAuthors")}
         />
       </ScrollView>
     </View>

@@ -97,7 +97,7 @@ const UpdateUserInfo = ({ navigation }) => {
         />
       </SafeAreaView>
       <View style={styles.submit}>
-        <Button title="Submit" onPress={updateInfo} />
+        <Button title={t("authentication.submit")} onPress={updateInfo} />
       </View>
       <View style={styles.navigation}>
         <TouchableOpacity

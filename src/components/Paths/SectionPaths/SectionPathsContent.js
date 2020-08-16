@@ -10,9 +10,11 @@ import { Content } from "constants";
 import { ThemeContext } from "config/context";
 import SectionPathsItem from "./SectionPathsItem";
 import EmptyText from "components/Common/EmptyText";
+import { useTranslation } from "react-i18next";
 
 const SectionPathsContent = (props) => {
   const { theme } = useContext(ThemeContext);
+  const { t } = useTranslation();
 
   const Paths = ({ paths }) =>
     paths.map((item) => <SectionPathsItem key={item.id} item={item} />);
@@ -24,14 +26,14 @@ const SectionPathsContent = (props) => {
           {props.title}
         </Text>
         <TouchableOpacity style={styles.expandContainer}>
-          <Text style={styles.expandText}>{Content.SEE_ALL}</Text>
+          <Text style={styles.expandText}>{t(Content.SEE_ALL)}</Text>
         </TouchableOpacity>
       </View>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
         <EmptyText
           items={props.paths}
           body={<Paths paths={props.paths} />}
-          message="There are no paths yet!"
+          message={t("data.noPaths")}
         />
       </ScrollView>
     </View>
