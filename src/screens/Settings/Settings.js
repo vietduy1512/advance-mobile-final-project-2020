@@ -5,13 +5,13 @@ import {
   StyleSheet,
   Text,
   View,
-  Button,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { ThemeContext } from "config/context";
 import { NavigationContext } from "@react-navigation/core";
 import { Screens, SettingScreens } from "constants";
 import { useTranslation } from "react-i18next";
+import CommonButton from "components/Common/CommonButton";
 
 const SettingItem = ({ item, index }) => {
   const { theme } = useContext(ThemeContext);
@@ -56,7 +56,9 @@ const languageItem = () => {
   const { i18n } = useTranslation();
   return (
     <View style={{ flexDirection: "row" }}>
-      <Text style={{ color: "grey", marginRight: 5 }}>{i18n.language === "en" ? "English" : "Tiếng Việt"}</Text>
+      <Text style={{ color: "grey", marginRight: 5 }}>
+        {i18n.language === "en" ? "English" : "Tiếng Việt"}
+      </Text>
       <Ionicons name="ios-arrow-forward" size={20} color="grey" />
     </View>
   );
@@ -76,10 +78,12 @@ const SettingsMain = ({ navigation }) => {
     >
       <ScrollView>
         {data.map((item, index) => SettingItem({ item, index }))}
-        <Button
-          title={t("authentication.logout")}
-          onPress={() => navigation.navigate(Screens.LOGIN)}
-        />
+        <View style={{ alignItems: "center", marginTop: 20 }}>
+          <CommonButton
+            title={t("authentication.logout")}
+            onPress={() => navigation.navigate(Screens.LOGIN)}
+          />
+        </View>
       </ScrollView>
     </View>
   );

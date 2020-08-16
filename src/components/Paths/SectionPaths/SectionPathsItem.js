@@ -15,10 +15,6 @@ const SectionPathsItem = (props) => {
 
   return (
     <TouchableOpacity style={styles.item} onPress={openPath}>
-      {/* TODO */}
-      {/* <View style={styles.imageContainer}>
-        <Image source={{ uri:props.item.image }} style={styles.image} />
-      </View> */}
       <View style={{ margin: 10 }}>
         <Text>{props.item.name}</Text>
       </View>
@@ -34,7 +30,6 @@ const styles = StyleSheet.create({
     marginRight: 15,
     width: 100,
     height: 70,
-    //height: 140,
     backgroundColor: "#dcdeef",
     shadowColor: "#000",
     shadowOffset: {
@@ -45,14 +40,4 @@ const styles = StyleSheet.create({
     shadowRadius: 6.27,
     elevation: 10,
   },
-  // imageContainer: {
-  //   height: 80,
-  //   width: 100,
-  //   backgroundColor: 'white'
-  // },
-  // image: {
-  //   flex: 1,
-  //   height: undefined,
-  //   width: undefined
-  // },
 });

@@ -31,6 +31,7 @@ const CourseDetail = () => {
   const authContext = useContext(AuthenticationContext);
   const { setLoading } = useContext(LoadingContext);
 
+  const [isLoading, setIsLoading] = useState(true);
   const [course, setCourse] = useState({});
   const [author, setAuthor] = useState({});
   const [isRegistered, setIsRegistered] = useState(true);
@@ -61,6 +62,7 @@ const CourseDetail = () => {
       })
       .finally(() => {
         setLoading(false);
+        setIsLoading(false);
       });
   }, []);
 
@@ -92,50 +94,44 @@ const CourseDetail = () => {
     });
   };
 
-  return (
-    <>
-      <ScrollView
-        style={{
-          ...styles.container,
-          backgroundColor: theme.backgroundColor,
-        }}
-        showsVerticalScrollIndicator={false}
-      >
-        <VideoViewer
-          course={course}
-          videoUrl={currentLessonUrl}
-          theme={theme}
+  return isLoading ? null : (
+    <ScrollView
+      style={{
+        ...styles.container,
+        backgroundColor: theme.backgroundColor,
+      }}
+      showsVerticalScrollIndicator={false}
+    >
+      <VideoViewer course={course} videoUrl={currentLessonUrl} theme={theme} />
+      <AuthorButton author={author} />
+      <CourseInfo course={course} courseProcess={courseProcess} />
+      <AccessibilityButtons
+        courseId={courseId}
+        isRegistered={isRegistered}
+        theme={theme}
+        currentLessonName={currentLessonName}
+        currentLessonUrl={currentLessonUrl}
+        updateRegister={() => setIsRegistered(true)}
+      />
+      <Summary course={course} />
+      <Relevants />
+      <CourseBody
+        course={course}
+        theme={theme}
+        currentSelectedId={currentSelectedId}
+        setCurrentLessonUrl={setCurrentLessonUrl}
+        setCurrentLessonName={setCurrentLessonName}
+      />
+      <View style={{ marginTop: 30, marginHorizontal: 15 }}>
+        <SectionCourses
+          title={t(Titles.RELEVANT_COURSES)}
+          courses={relevantCourses}
+          isHideHeader={true}
         />
-        <AuthorButton author={author} />
-        <CourseInfo course={course} courseProcess={courseProcess} />
-        <AccessibilityButtons
-          courseId={courseId}
-          isRegistered={isRegistered}
-          theme={theme}
-          currentLessonName={currentLessonName}
-          currentLessonUrl={currentLessonUrl}
-          updateRegister={() => setIsRegistered(true)}
-        />
-        <Summary course={course} />
-        <Relevants />
-        <CourseBody
-          course={course}
-          theme={theme}
-          currentSelectedId={currentSelectedId}
-          setCurrentLessonUrl={setCurrentLessonUrl}
-          setCurrentLessonName={setCurrentLessonName}
-        />
-        <View style={{ marginTop: 30, marginHorizontal: 15 }}>
-          <SectionCourses
-            title={t(Titles.RELEVANT_COURSES)}
-            courses={relevantCourses}
-            isHideHeader={true}
-          />
-        </View>
-        <Ratings ratings={course.ratings} theme={theme} />
-        <RateCourseInput course={course} theme={theme} />
-      </ScrollView>
-    </>
+      </View>
+      <Ratings ratings={course.ratings} theme={theme} />
+      <RateCourseInput course={course} theme={theme} />
+    </ScrollView>
   );
 };
 

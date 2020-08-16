@@ -1,10 +1,11 @@
 import React, { useState, useContext } from "react";
-import { Text, Button, View, StyleSheet, Picker } from "react-native";
+import { Text, View, StyleSheet, Picker } from "react-native";
 import { LoadingContext } from "config/context";
 import InputField from "components/Common/InputField";
 import validator from "validator";
 import { ratingCourse } from "core/services/coursesService";
 import { useTranslation } from "react-i18next";
+import CommonButton from "components/Common/CommonButton";
 
 const Login = ({ course }) => {
   const [comment, setComment] = useState("");
@@ -66,7 +67,7 @@ const Login = ({ course }) => {
         <Picker.Item label="5 stars" value={5} />
       </Picker>
       <View style={styles.submit}>
-        <Button title={t("authentication.submit")} onPress={submit} />
+        <CommonButton title={t("authentication.submit")} onPress={submit} />
       </View>
       <Text
         style={{

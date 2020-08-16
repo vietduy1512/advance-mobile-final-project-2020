@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import {
   Text,
-  Button,
   View,
   Image,
   StyleSheet,
@@ -15,9 +14,12 @@ import validator from "validator";
 import InputField from "components/Common/InputField";
 import { alertSuccess } from "core/helpers/alertHelper";
 import { NavigationRouteContext } from "@react-navigation/core";
+import CommonButton from "components/Common/CommonButton";
+import { useTranslation } from "react-i18next";
 
 const UpdateUserInfo = ({ navigation }) => {
   const route = useContext(NavigationRouteContext);
+  const { t } = useTranslation();
   const { name, avatar, phone } = route.params;
   const [form, setForm] = useState({
     username: name || "",
@@ -97,7 +99,7 @@ const UpdateUserInfo = ({ navigation }) => {
         />
       </SafeAreaView>
       <View style={styles.submit}>
-        <Button title={t("authentication.submit")} onPress={updateInfo} />
+        <CommonButton title={t("authentication.submit")} onPress={updateInfo} />
       </View>
       <View style={styles.navigation}>
         <TouchableOpacity

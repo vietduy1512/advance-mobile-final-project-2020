@@ -110,6 +110,7 @@ const Home = () => {
         title={t(Titles.CONTINUE_LEARNING)}
         courses={processCourses}
         fetchCourses={getProcessCourses}
+        isHideHeader
       />
       <SectionCourses
         title={t(Titles.RECOMMEND_COURSES)}

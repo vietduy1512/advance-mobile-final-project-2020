@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import {
   Text,
-  Button,
   View,
   Image,
   StyleSheet,
@@ -15,6 +14,7 @@ import validator from "validator";
 import InputField from "components/Common/InputField";
 import { alertSuccess } from "core/helpers/alertHelper";
 import { useTranslation } from "react-i18next";
+import CommonButton from "components/Common/CommonButton";
 
 const Register = ({ navigation }) => {
   const [form, setForm] = useState({
@@ -143,7 +143,7 @@ const Register = ({ navigation }) => {
         />
       </SafeAreaView>
       <View style={styles.submit}>
-        <Button title="Register" onPress={register} />
+        <CommonButton title="Register" onPress={register} />
       </View>
       <View style={styles.navigation}>
         <TouchableOpacity

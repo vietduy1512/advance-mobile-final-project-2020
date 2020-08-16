@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Text, Button, View, Image, StyleSheet } from "react-native";
+import { Text, View, Image, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Screens } from "constants";
 import { AuthenticationContext } from "config/context";
 import { LoadingContext } from "config/context";
 import { useTranslation } from "react-i18next";
 import InputField from "components/Common/InputField";
+import CommonButton from "components/Common/CommonButton";
 import validator from "validator";
 
 const Login = ({ navigation }) => {
@@ -97,7 +98,7 @@ const Login = ({ navigation }) => {
         secureTextEntry={true}
       />
       <View style={styles.submit}>
-        <Button title={t("authentication.login")} onPress={login} />
+        <CommonButton title={t("authentication.login")} onPress={login} />
       </View>
       <View style={styles.navigation}>
         <TouchableOpacity

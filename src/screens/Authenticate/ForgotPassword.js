@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Text, Button, View, Image, StyleSheet } from "react-native";
+import { Text, View, Image, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Screens } from "constants";
 import { LoadingContext } from "config/context";
@@ -8,6 +8,7 @@ import validator from "validator";
 import { forgotPassword } from "core/services/usersService";
 import { alertSuccess } from "core/helpers/alertHelper";
 import { useTranslation } from "react-i18next";
+import CommonButton from "components/Common/CommonButton";
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -73,7 +74,7 @@ const Login = ({ navigation }) => {
         onChangeText={(value) => handleChange(value)}
       />
       <View style={styles.submit}>
-        <Button title={t("authentication.submit")} onPress={submit} />
+        <CommonButton title={t("authentication.submit")} onPress={submit} />
       </View>
       <View style={styles.navigation}>
         <TouchableOpacity
