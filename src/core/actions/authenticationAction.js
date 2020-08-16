@@ -20,6 +20,7 @@ export const login = (dispatch) => async (email, password) => {
     } else {
       dispatch({ type: LOGIN_FAILED, errorMessage: "Something went wrong!" });
     }
+    throw error;
   }
 };
 

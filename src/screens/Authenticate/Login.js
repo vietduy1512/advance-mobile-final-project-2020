@@ -11,8 +11,8 @@ import validator from "validator";
 
 const Login = ({ navigation }) => {
   const [form, setForm] = useState({
-    email: "vietduy1512+001@gmail.com",
-    password: "P@ssw0rd",
+    email: "",
+    password: "",
   });
   const [dirty, setDirty] = useState({
     email: false,
@@ -58,10 +58,14 @@ const Login = ({ navigation }) => {
     setErrorMessage("");
 
     setLoading(true);
-    authContext.login(form.email, form.password).finally(() => {
-      navigation.navigate(Screens.LAYOUT);
-      setLoading(false);
-    });
+    authContext
+      .login(form.email, form.password)
+      .then(() => {
+        navigation.navigate(Screens.LAYOUT);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   const isValidEmail = () => {
