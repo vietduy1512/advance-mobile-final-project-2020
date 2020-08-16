@@ -3,9 +3,11 @@ import { View, ScrollView } from "react-native";
 import { ThemeContext } from "config/context";
 import ListPathsItem from "./ListPathsItem";
 import EmptyText from "components/Common/EmptyText";
+import { useTranslation } from "react-i18next";
 
 const ListPathsContent = (props) => {
   const { theme } = useContext(ThemeContext);
+  const { t } = useTranslation();
 
   const Paths = ({ paths }) =>
     paths.map((item) => <ListPathsItem key={item.id} item={item} />);
@@ -17,7 +19,7 @@ const ListPathsContent = (props) => {
         <EmptyText
           items={props.paths}
           body={<Paths paths={props.paths} />}
-          message="There are no paths yet!"
+          message={t("data.noPaths")}
         />
       </ScrollView>
     </View>

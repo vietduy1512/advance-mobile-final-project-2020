@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
-import { Titles } from "constants";
 import { ThemeContext } from "config/context";
 import ListCoursesContent from "components/Courses/ListCourses/ListCoursesContent";
 
@@ -21,7 +20,6 @@ const BookmarkListCourses = (props) => {
   return (
     <ListCoursesContent
       {...props}
-      title={Titles.BOOKMARKS}
       renderHeader={renderBookmarkHeader}
     />
   );

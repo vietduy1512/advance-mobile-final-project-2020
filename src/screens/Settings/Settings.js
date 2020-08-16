@@ -5,15 +5,17 @@ import {
   StyleSheet,
   Text,
   View,
-  Button,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { ThemeContext } from "config/context";
 import { NavigationContext } from "@react-navigation/core";
 import { Screens, SettingScreens } from "constants";
+import { useTranslation } from "react-i18next";
+import CommonButton from "components/Common/CommonButton";
 
 const SettingItem = ({ item, index }) => {
   const { theme } = useContext(ThemeContext);
+  const { t } = useTranslation();
   const navigation = useContext(NavigationContext);
   return (
     <TouchableOpacity
@@ -29,7 +31,7 @@ const SettingItem = ({ item, index }) => {
       onPress={() => (item.onPress ? item.onPress({ navigation }) : null)}
     >
       <Text style={{ ...styles.text, color: theme.textColor }}>
-        {item.title}
+        {t(item.title)}
       </Text>
       {item.itemRight ? item.itemRight() : null}
     </TouchableOpacity>
@@ -50,6 +52,18 @@ const themeItem = () => {
   );
 };
 
+const languageItem = () => {
+  const { i18n } = useTranslation();
+  return (
+    <View style={{ flexDirection: "row" }}>
+      <Text style={{ color: "grey", marginRight: 5 }}>
+        {i18n.language === "en" ? "English" : "Tiếng Việt"}
+      </Text>
+      <Ionicons name="ios-arrow-forward" size={20} color="grey" />
+    </View>
+  );
+};
+
 const appVersion = () => {
   const { theme } = useContext(ThemeContext);
   return <Text style={{ color: theme.textColor }}>1.0.1</Text>;
@@ -57,16 +71,19 @@ const appVersion = () => {
 
 const SettingsMain = ({ navigation }) => {
   const { theme } = useContext(ThemeContext);
+  const { t } = useTranslation();
   return (
     <View
       style={{ ...styles.container, backgroundColor: theme.backgroundColor }}
     >
       <ScrollView>
         {data.map((item, index) => SettingItem({ item, index }))}
-        <Button
-          title="Sign out"
-          onPress={() => navigation.navigate(Screens.LOGIN)}
-        />
+        <View style={{ alignItems: "center", marginTop: 20 }}>
+          <CommonButton
+            title={t("authentication.logout")}
+            onPress={() => navigation.navigate(Screens.LOGIN)}
+          />
+        </View>
       </ScrollView>
     </View>
   );
@@ -87,48 +104,35 @@ const styles = StyleSheet.create({
 
 const data = [
   {
-    title: "Account",
+    title: "settings.account",
     itemRight: defaultItem,
     onPress: ({ navigation }) => {
       navigation.navigate(SettingScreens.USER_INFO);
     },
   },
-  // {
-  //   title: "Subscription",
-  //   itemRight: defaultItem,
-  // },
-  // {
-  //   title: "Communication Preferences",
-  //   itemRight: defaultItem,
-  // },
   {
-    title: "Theme",
+    title: "settings.theme",
     itemRight: themeItem,
     onPress: ({ navigation }) => {
       navigation.navigate(SettingScreens.THEME);
     },
   },
-  // {
-  //   title: "Require Wi-Fi for streaming",
-  //   itemRight: defaultItem,
-  // },
-  // {
-  //   title: "Require Wi-Fi for downloading",
-  //   itemRight: defaultItem,
-  // },
-  // {
-  //   title: "Send feedback",
-  //   itemRight: defaultItem,
-  // },
   {
-    title: "Favorite courses",
+    title: "settings.language",
+    itemRight: languageItem,
+    onPress: ({ navigation }) => {
+      navigation.navigate(SettingScreens.LANGUAGE);
+    },
+  },
+  {
+    title: "settings.favorites",
     itemRight: defaultItem,
     onPress: ({ navigation }) => {
       navigation.navigate(Screens.BOOKMARK);
     },
   },
   {
-    title: "App Version",
+    title: "settings.appVersion",
     itemRight: appVersion,
   },
 ];

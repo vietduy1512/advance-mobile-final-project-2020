@@ -8,7 +8,6 @@ export const getTopSellCourses = async (page = 1, limit = 5) => {
 };
 
 export const getTopNewCourses = async (page = 1, limit = 5) => {
-  console.log(limit);
   return await axios.post("/course/top-new", {
     limit: limit,
     page: page,
@@ -58,7 +57,7 @@ export const getCourseLikeStatus = async (courseId) => {
 
 export const registerFreeCourse = async (courseId) => {
   return await axios.post(`/payment/get-free-courses`, {
-    courseId: courseId
+    courseId: courseId,
   });
 };
 
@@ -91,12 +90,22 @@ export const getCategoryCourses = async (categoryId, page = 1, limit = 5) => {
 
 export const getLessonExercise = async (lessonId) => {
   return await axios.post(`/exercise/student/list-exercise-lesson`, {
-    lessonId: lessonId
+    lessonId: lessonId,
   });
 };
 
 export const getExerciseQuestion = async (exerciseId) => {
   return await axios.post(`/exercise/student/exercise-test`, {
-    exerciseId: exerciseId
+    exerciseId: exerciseId,
+  });
+};
+
+export const ratingCourse = async (courseId, content, point) => {
+  return await axios.post(`/course/rating-course`, {
+    courseId: courseId,
+    formalityPoint: point,
+    contentPoint: point,
+    presentationPoint: point,
+    content: content,
   });
 };

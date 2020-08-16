@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "advance-mobile-final-project-2020",
-    "slug": "advance-mobile-final-project-2020",
+    "name": "E_Learning",
+    "slug": "E_Learning",
     "platforms": [
       "ios",
       "android",
@@ -23,6 +23,10 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
+      "package": "com.hcmus1512068.elearning",
+      "versionCode": 1
     }
   }
 }

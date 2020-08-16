@@ -11,11 +11,13 @@ import { ThemeContext } from "config/context";
 import { LoadingContext } from "config/context";
 import * as FileSystem from "expo-file-system";
 import { Video } from "expo-av";
+import { useTranslation } from "react-i18next";
 
 const Download = () => {
   const { setLoading } = useContext(LoadingContext);
   const { theme } = useContext(ThemeContext);
   const [courses, setCourses] = useState([]);
+  const { t } = useTranslation();
 
   useEffect(() => {
     setLoading(true);
@@ -42,7 +44,7 @@ const Download = () => {
     >
       <View style={styles.header}>
         <Text style={{ ...styles.title, color: theme.textColor }}>
-          {Titles.DOWNLOAD}
+          {t(Titles.DOWNLOAD)}
         </Text>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -64,12 +66,6 @@ const Download = () => {
           </View>
         ))}
       </ScrollView>
-      {/* <ListCoursesContent
-        {...props}
-        title={Titles.DOWNLOAD}
-        courses={bookmarks}
-        renderHeader={renderBookmarkHeader}
-      /> */}
     </View>
   );
 };

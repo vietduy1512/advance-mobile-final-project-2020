@@ -8,10 +8,13 @@ import {
 import { bookmark, unbookmark } from "core/actions/bookmarkAction";
 import { connect } from "react-redux";
 import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { useTranslation } from "react-i18next";
 import * as FileSystem from "expo-file-system";
 import * as Progress from "react-native-progress";
 
 const BookmarkButton = (props) => {
+  const { t } = useTranslation();
+
   const bookmarkCourse = () => {
     likeCourses(props.courseId).then((res) => {
       setIsBookmarked(res.data.likeStatus);
@@ -45,7 +48,7 @@ const BookmarkButton = (props) => {
       </View>
       <View style={{ margin: 10 }}>
         <Text style={{ fontSize: 12, color: props.theme.textColor }}>
-          Unbookmark
+          {t("courseDetail.unbookmark")}
         </Text>
       </View>
     </TouchableOpacity>
@@ -64,7 +67,7 @@ const BookmarkButton = (props) => {
       </View>
       <View style={{ margin: 10 }}>
         <Text style={{ fontSize: 12, color: props.theme.textColor }}>
-          Bookmark
+          {t("courseDetail.bookmark")}
         </Text>
       </View>
     </TouchableOpacity>
@@ -72,6 +75,8 @@ const BookmarkButton = (props) => {
 };
 
 const ChannelAdd = (props) => {
+  const { t } = useTranslation();
+
   return (
     <TouchableOpacity style={styles.accessibilityButton} onPress={() => {}}>
       <View style={styles.accessibilityImageContainer}>
@@ -84,7 +89,7 @@ const ChannelAdd = (props) => {
       </View>
       <View style={{ margin: 10, width: 100, alignItems: "center" }}>
         <Text style={{ fontSize: 12, color: props.theme.textColor }}>
-          Add to channel
+          {t("courseDetail.addChannel")}
         </Text>
       </View>
     </TouchableOpacity>
@@ -92,6 +97,7 @@ const ChannelAdd = (props) => {
 };
 
 const DownloadButton = (props) => {
+  const { t } = useTranslation();
   const [downloadProgress, setDownloadProgress] = useState(null);
   const [isDownloading, setIsDownloading] = useState(false);
   const [isDownloaded, setIsDownloaded] = useState(false);
@@ -114,7 +120,6 @@ const DownloadButton = (props) => {
         downloadProgress.totalBytesWritten /
         downloadProgress.totalBytesExpectedToWrite;
       setDownloadProgress(progress);
-      console.log(progress);
     };
 
     const downloadResumable = FileSystem.createDownloadResumable(
@@ -155,7 +160,7 @@ const DownloadButton = (props) => {
           </View>
           <View style={{ margin: 10 }}>
             <Text style={{ fontSize: 12, color: props.theme.textColor }}>
-              Downloaded
+              {t("courseDetail.downloaded")}
             </Text>
           </View>
         </View>
@@ -169,7 +174,7 @@ const DownloadButton = (props) => {
           <Progress.Bar progress={downloadProgress} width={70} />
           <View style={{ margin: 10 }}>
             <Text style={{ fontSize: 12, color: props.theme.textColor }}>
-              Downloading
+              {t("courseDetail.downloading")}
             </Text>
           </View>
         </View>
@@ -185,7 +190,7 @@ const DownloadButton = (props) => {
           </View>
           <View style={{ margin: 10 }}>
             <Text style={{ fontSize: 12, color: props.theme.textColor }}>
-              Download
+              {t("courseDetail.download")}
             </Text>
           </View>
         </TouchableOpacity>
@@ -195,6 +200,8 @@ const DownloadButton = (props) => {
 };
 
 const RegisterCourseButton = (props) => {
+  const { t } = useTranslation();
+
   const registerCourse = () => {
     registerFreeCourse(props.courseId).then(() => {
       props.updateRegister();
@@ -210,10 +217,10 @@ const RegisterCourseButton = (props) => {
         }}
       >
         <Text style={{ color: "red", fontSize: 18 }}>
-          This course is not bought or registered.
+          {t("courseDetail.notBought")}
         </Text>
         <Text style={{ color: "red", fontSize: 18, marginBottom: 15 }}>
-          Please register the course!
+          {t("courseDetail.pleaseRegister")}
         </Text>
         <TouchableOpacity
           style={styles.accessibilityButton}

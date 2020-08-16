@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import {
   Text,
-  Button,
   View,
   Image,
   StyleSheet,
@@ -14,6 +13,8 @@ import { LoadingContext } from "config/context";
 import validator from "validator";
 import InputField from "components/Common/InputField";
 import { alertSuccess } from "core/helpers/alertHelper";
+import { useTranslation } from "react-i18next";
+import CommonButton from "components/Common/CommonButton";
 
 const Register = ({ navigation }) => {
   const [form, setForm] = useState({
@@ -32,6 +33,7 @@ const Register = ({ navigation }) => {
   });
   const [errorMessage, setErrorMessage] = useState("");
   const { setLoading } = useContext(LoadingContext);
+  const { t } = useTranslation();
 
   const handleChange = (name, value) => {
     setForm({
@@ -46,7 +48,7 @@ const Register = ({ navigation }) => {
 
   const register = () => {
     if (!form.username || !form.email || !form.phone || !form.password) {
-      setErrorMessage("Please fill all input above!");
+      setErrorMessage(t("validation.pleaseFillInput"));
       return;
     }
 
@@ -98,32 +100,32 @@ const Register = ({ navigation }) => {
       </View>
       <SafeAreaView>
         <InputField
-          title="Username"
-          error="Username is invalid"
+          title={t("authentication.username")}
+          error={t("validation.invalidUsername")}
           dirty={dirty.username}
           validation={isValidUsername}
           value={form.username}
           onChangeText={(value) => handleChange("username", value)}
         />
         <InputField
-          title="Email"
-          error="Email is invalid"
+          title={t("authentication.email")}
+          error={t("validation.invalidEmail")}
           dirty={dirty.email}
           validation={isValidEmail}
           value={form.email}
           onChangeText={(value) => handleChange("email", value)}
         />
         <InputField
-          title="Phone"
-          error="Only number is required"
+          title={t("authentication.phone")}
+          error={t("validation.invalidPhone")}
           dirty={dirty.phone}
           validation={isValidPhone}
           value={form.phone}
           onChangeText={(value) => handleChange("phone", value)}
         />
         <InputField
-          title="Password"
-          error="Password at least 4 characters"
+          title={t("authentication.password")}
+          error={t("validation.invalidPassword")}
           dirty={dirty.password}
           validation={isValidPassword}
           value={form.password}
@@ -131,8 +133,8 @@ const Register = ({ navigation }) => {
           secureTextEntry={true}
         />
         <InputField
-          title="Confirm password"
-          error="Confirm password is not matched"
+          title={t("authentication.confirmPassword")}
+          error={t("validation.invalidConfirmPassword")}
           dirty={dirty.confirmPassword}
           validation={isValidConfirmPassword}
           value={form.confirmPassword}
@@ -141,7 +143,7 @@ const Register = ({ navigation }) => {
         />
       </SafeAreaView>
       <View style={styles.submit}>
-        <Button title="Register" onPress={register} />
+        <CommonButton title="Register" onPress={register} />
       </View>
       <View style={styles.navigation}>
         <TouchableOpacity
@@ -149,7 +151,9 @@ const Register = ({ navigation }) => {
             navigation.navigate(Screens.LOGIN);
           }}
         >
-          <Text style={{ color: "blue" }}>{`Back to Login`}</Text>
+          <Text style={{ color: "blue" }}>
+            {t("authentication.backToLogin")}
+          </Text>
         </TouchableOpacity>
       </View>
       <Text

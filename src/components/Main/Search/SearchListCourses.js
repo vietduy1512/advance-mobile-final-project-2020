@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import ListCoursesContent from "components/Courses/ListCourses/ListCoursesContent";
-import { Titles } from "constants";
 import { ThemeContext } from "config/context";
 
 const SearchListCourses = (props) => {
@@ -35,7 +34,6 @@ const SearchListCourses = (props) => {
   return (
     <ListCoursesContent
       {...props}
-      title={Titles.SEARCH}
       renderHeader={
         props.isRenderSection ? renderSearchSectionHeader : renderSearchHeader
       }

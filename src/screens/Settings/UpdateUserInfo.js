@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import {
   Text,
-  Button,
   View,
   Image,
   StyleSheet,
@@ -15,9 +14,12 @@ import validator from "validator";
 import InputField from "components/Common/InputField";
 import { alertSuccess } from "core/helpers/alertHelper";
 import { NavigationRouteContext } from "@react-navigation/core";
+import CommonButton from "components/Common/CommonButton";
+import { useTranslation } from "react-i18next";
 
 const UpdateUserInfo = ({ navigation }) => {
   const route = useContext(NavigationRouteContext);
+  const { t } = useTranslation();
   const { name, avatar, phone } = route.params;
   const [form, setForm] = useState({
     username: name || "",
@@ -43,7 +45,7 @@ const UpdateUserInfo = ({ navigation }) => {
 
   const updateInfo = () => {
     if (!form.username || !form.phone) {
-      setErrorMessage("Please fill all input above!");
+      setErrorMessage(t("validation.pleaseFillInput"));
       return;
     }
 
@@ -80,16 +82,16 @@ const UpdateUserInfo = ({ navigation }) => {
       </View>
       <SafeAreaView>
         <InputField
-          title="Username"
-          error="Username is invalid"
+          title={t("authentication.username")}
+          error={t("validation.invalidUsername")}
           dirty={dirty.username}
           validation={isValidUsername}
           value={form.username}
           onChangeText={(value) => handleChange("username", value)}
         />
         <InputField
-          title="Phone"
-          error="Only number is required"
+          title={t("authentication.phone")}
+          error={t("validation.invalidPhone")}
           dirty={dirty.phone}
           validation={isValidPhone}
           value={form.phone}
@@ -97,7 +99,7 @@ const UpdateUserInfo = ({ navigation }) => {
         />
       </SafeAreaView>
       <View style={styles.submit}>
-        <Button title="Submit" onPress={updateInfo} />
+        <CommonButton title={t("authentication.submit")} onPress={updateInfo} />
       </View>
       <View style={styles.navigation}>
         <TouchableOpacity

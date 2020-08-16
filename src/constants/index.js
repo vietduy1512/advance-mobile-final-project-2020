@@ -17,29 +17,30 @@ export const Screens = Object.freeze({
 export const SettingScreens = Object.freeze({
   MAIN: "SettingsMain",
   THEME: "ThemeSettings",
+  LANGUAGE: "LanguageSettings",
   USER_INFO: "UserInfo",
   UPDATE_USER_INFO: "UpdateUserInfo",
 });
 
 export const Titles = Object.freeze({
-  CONTINUE_LEARNING: "Continue Learning",
-  RECOMMEND_COURSES: "Recommend courses",
-  TOP_SELL_COURSES: "Top sell courses",
-  TOP_NEW_COURSES: "Top new courses",
-  TOP_RATE_COURSES: "Top rate courses",
-  RELEVANT_COURSES: "Relevant courses",
-  BOOKMARKS: "Bookmarks",
-  DOWNLOAD: "Download List",
-  COURSES: "Courses",
-  PATHS: "Paths",
-  SEARCH: "Search",
-  AUTHORS: "Authors",
-  TOP_AUTHORS: "Top Authors",
-  NEW_RELEASES: "New Releases",
-  RECOMMENDED: "Recommended",
-  POPULAR_SKILLS: "Popular Skills",
+  CONTINUE_LEARNING: "titles.continueLearning",
+  RECOMMEND_COURSES: "titles.recommendCourses",
+  TOP_SELL_COURSES: "titles.topSellCourses",
+  TOP_NEW_COURSES: "titles.topNewCourses",
+  TOP_RATE_COURSES: "titles.topRateCourses",
+  RELEVANT_COURSES: "titles.relevantCourses",
+  BOOKMARKS: "titles.bookmarks",
+  DOWNLOAD: "titles.download",
+  COURSES: "titles.courses",
+  PATHS: "titles.paths",
+  SEARCH: "titles.search",
+  AUTHORS: "titles.authors",
+  TOP_AUTHORS: "titles.topAuthors",
+  NEW_RELEASES: "titles.newReleases",
+  RECOMMENDED: "titles.recommended",
+  POPULAR_SKILLS: "titles.popularSkills",
 });
 
 export const Content = Object.freeze({
-  SEE_ALL: "See all >",
+  SEE_ALL: "titles.seeAll",
 });

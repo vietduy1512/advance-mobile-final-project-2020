@@ -8,11 +8,13 @@ import { ThemeContext } from "config/context";
 import { connect } from "react-redux";
 import { getFavoriteCourses } from "core/services/coursesService";
 import { LoadingContext } from "config/context";
+import { useTranslation } from "react-i18next";
 
 const Bookmark = () => {
   const { setLoading } = useContext(LoadingContext);
   const { theme } = useContext(ThemeContext);
   const [bookmarks, setBookmarks] = useState([]);
+  const { t } = useTranslation();
 
   // TODO: Use Redux instead
   useFocusEffect(
@@ -41,7 +43,7 @@ const Bookmark = () => {
         backgroundColor: theme.backgroundColor,
       }}
     >
-      <BookmarkListCourses title={Titles.BOOKMARKS} courses={bookmarks} />
+      <BookmarkListCourses title={t(Titles.BOOKMARKS)} courses={bookmarks} />
     </View>
   );
 };

@@ -20,6 +20,7 @@ import { getAllCategories } from "core/services/categoriesService";
 import { getAllAuthors } from "core/services/authorsService";
 import { searchCourse } from "core/services/coursesService";
 import { LoadingContext } from "config/context";
+import { useTranslation } from "react-i18next";
 
 const Search = () => {
   const { setLoading } = useContext(LoadingContext);
@@ -86,24 +87,27 @@ const Search = () => {
     await AsyncStorage.setItem("recent_searches", JSON.stringify(searches));
   };
 
-  const AllSection = () => (
-    <ScrollView
-      showsVerticalScrollIndicator={false}
-      style={styles.sectioncontainer}
-    >
-      <SearchListCourses title={Titles.COURSES} courses={searchCourses} />
-      <SearchListPaths title={Titles.PATHS} paths={searchPaths} />
-      <SearchListAuthors title={Titles.AUTHORS} authors={searchAuthors} />
-    </ScrollView>
-  );
+  const AllSection = () => {
+    const { t } = useTranslation();
+    return (
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={styles.sectioncontainer}
+      >
+        <SearchListCourses title={t(Titles.COURSES)} courses={searchCourses} />
+        <SearchListPaths title={t(Titles.PATHS)} paths={searchPaths} />
+        <SearchListAuthors title={t(Titles.AUTHORS)} authors={searchAuthors} />
+      </ScrollView>
+    );
+  };
 
   const Header = () => {
     const [searchText, setSearchText] = useState("");
 
     const onSubmitEditing = () => {
       searchData(searchText);
-      setSearchText("");
       setShowResult(true);
+      setSearchText("");
     };
 
     return (
@@ -166,94 +170,103 @@ const Search = () => {
     );
   };
 
-  const SearchContent = () => (
-    <Tabs tabBarUnderlineStyle={{ backgroundColor: "blue" }}>
-      <Tab
-        style={{
-          ...styles.sectioncontainer,
-          backgroundColor: theme.backgroundColor,
-        }}
-        heading={
-          <TabHeading style={{ backgroundColor: theme.backgroundColor }}>
-            <Text style={{ color: theme.textColor }}>All</Text>
-          </TabHeading>
-        }
-      >
-        <AllSection />
-      </Tab>
-      <Tab
-        style={{
-          ...styles.sectioncontainer,
-          backgroundColor: theme.backgroundColor,
-        }}
-        heading={
-          <TabHeading style={{ backgroundColor: theme.backgroundColor }}>
-            <Text style={{ color: theme.textColor }}>Courses</Text>
-          </TabHeading>
-        }
-      >
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          style={styles.sectioncontainer}
+  const SearchContent = () => {
+    const { t } = useTranslation();
+    return (
+      <Tabs tabBarUnderlineStyle={{ backgroundColor: "blue" }}>
+        <Tab
+          style={{
+            ...styles.sectioncontainer,
+            backgroundColor: theme.backgroundColor,
+          }}
+          heading={
+            <TabHeading style={{ backgroundColor: theme.backgroundColor }}>
+              <Text style={{ color: theme.textColor }}>All</Text>
+            </TabHeading>
+          }
         >
-          <SearchListCourses
-            title={Titles.COURSES}
-            courses={searchCourses}
-            isRenderSection={true}
-          />
-        </ScrollView>
-      </Tab>
-      <Tab
-        style={{
-          ...styles.sectioncontainer,
-          backgroundColor: theme.backgroundColor,
-        }}
-        heading={
-          <TabHeading style={{ backgroundColor: theme.backgroundColor }}>
-            <Text style={{ color: theme.textColor }}>Paths</Text>
-          </TabHeading>
-        }
-      >
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          style={styles.sectioncontainer}
+          <AllSection />
+        </Tab>
+        <Tab
+          style={{
+            ...styles.sectioncontainer,
+            backgroundColor: theme.backgroundColor,
+          }}
+          heading={
+            <TabHeading style={{ backgroundColor: theme.backgroundColor }}>
+              <Text style={{ color: theme.textColor }}>Courses</Text>
+            </TabHeading>
+          }
         >
-          <SearchListPaths
-            title={Titles.PATHS}
-            paths={searchPaths}
-            isRenderSection={true}
-          />
-        </ScrollView>
-      </Tab>
-      <Tab
-        style={{
-          ...styles.sectioncontainer,
-          backgroundColor: theme.backgroundColor,
-        }}
-        heading={
-          <TabHeading style={{ backgroundColor: theme.backgroundColor }}>
-            <Text style={{ color: theme.textColor }}>Authors</Text>
-          </TabHeading>
-        }
-      >
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          style={styles.sectioncontainer}
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            style={styles.sectioncontainer}
+          >
+            <SearchListCourses
+              title={t(Titles.COURSES)}
+              courses={searchCourses}
+              isRenderSection={true}
+            />
+          </ScrollView>
+        </Tab>
+        <Tab
+          style={{
+            ...styles.sectioncontainer,
+            backgroundColor: theme.backgroundColor,
+          }}
+          heading={
+            <TabHeading style={{ backgroundColor: theme.backgroundColor }}>
+              <Text style={{ color: theme.textColor }}>Paths</Text>
+            </TabHeading>
+          }
         >
-          <SearchListAuthors
-            title={Titles.AUTHORS}
-            authors={searchAuthors}
-            isRenderSection={true}
-          />
-        </ScrollView>
-      </Tab>
-    </Tabs>
-  );
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            style={styles.sectioncontainer}
+          >
+            <SearchListPaths
+              title={t(Titles.PATHS)}
+              paths={searchPaths}
+              isRenderSection={true}
+            />
+          </ScrollView>
+        </Tab>
+        <Tab
+          style={{
+            ...styles.sectioncontainer,
+            backgroundColor: theme.backgroundColor,
+          }}
+          heading={
+            <TabHeading style={{ backgroundColor: theme.backgroundColor }}>
+              <Text style={{ color: theme.textColor }}>Authors</Text>
+            </TabHeading>
+          }
+        >
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            style={styles.sectioncontainer}
+          >
+            <SearchListAuthors
+              title={t(Titles.AUTHORS)}
+              authors={searchAuthors}
+              isRenderSection={true}
+            />
+          </ScrollView>
+        </Tab>
+      </Tabs>
+    );
+  };
 
   const RecentSearches = () => {
+    const { t } = useTranslation();
+    
     const Searches = ({ content, index }) => {
       const onSubmit = () => {
+        setSearchCourses([]);
+        setSearchPaths([]);
+        setSearchAuthors([]);
         searchData(content);
+        setShowResult(true);
       };
       const onDelete = () => {
         deleteSearchHistory(index);
@@ -273,7 +286,7 @@ const Search = () => {
             style={{
               height: 30,
               flexDirection: "row",
-              width: "90%"
+              width: "90%",
             }}
             onPress={onSubmit}
           >
@@ -295,7 +308,7 @@ const Search = () => {
       <View>
         <View style={styles.header}>
           <Text style={{ ...styles.title, color: theme.textColor }}>
-            Recent searches
+            {t("searches.recentSearches")}
           </Text>
           <TouchableOpacity style={styles.clearBtnContainer}>
             <Text style={styles.clearBtn}>Remove all</Text>

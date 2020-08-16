@@ -17,9 +17,6 @@ const ListPathsItem = (props) => {
 
   return (
     <TouchableOpacity style={styles.item} onPress={openPath}>
-      {/* <View style={styles.imageContainer}>
-        <Image source={props.item.image} style={styles.image} />
-      </View> */}
       <View style={{ margin: 10 }}>
         <Text style={{ color: theme.textColor }}>{props.item.name}</Text>
       </View>
@@ -40,13 +37,4 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 30,
     paddingBottom: 5,
   },
-  // imageContainer: {
-  //   height: 60,
-  //   width: 100
-  // },
-  // image: {
-  //   flex: 1,
-  //   height: undefined,
-  //   width: undefined
-  // },
 });
