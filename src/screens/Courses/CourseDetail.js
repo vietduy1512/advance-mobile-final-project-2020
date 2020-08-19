@@ -50,12 +50,6 @@ const CourseDetail = () => {
       .then((summaryRes) => {
         initData(summaryRes);
         getCourseDetail(courseId)
-          .then((response) => {
-            setCourse({
-              ...summaryRes.data.payload,
-              section: response.data.payload.section,
-            });
-          })
           .catch(() => {
             setIsRegistered(false);
           });

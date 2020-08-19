@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, Image, TouchableOpacity, Text } from "react-native";
+import { StyleSheet, View, Image, TouchableOpacity, Text, Alert } from "react-native";
 import { MaterialCommunityIcons, AntDesign } from "@expo/vector-icons";
 
 const ContentHeader = ({ section, index, theme }) => {
@@ -86,6 +86,9 @@ const ContentBodyItem = ({
       }}
       onPress={() => {
         setCurrentId(lesson.id);
+        if (!lesson.videoUrl) {
+          Alert.alert("No video found!");
+        }
         setCurrentLessonUrl(lesson.videoUrl);
         setCurrentLessonName(lesson.videoName);
       }}
@@ -123,8 +126,9 @@ const ContentBody = ({
   currentSelectedId,
   setCurrentLessonUrl,
   setCurrentLessonName,
+  currentId,
+  setCurrentId,
 }) => {
-  const [currentId, setCurrentId] = useState("");
 
   useEffect(() => {
     setCurrentId(currentSelectedId);
@@ -155,6 +159,8 @@ const Contents = ({
   setCurrentLessonUrl,
   setCurrentLessonName={setCurrentLessonName}
 }) => {
+  const [currentId, setCurrentId] = useState("");
+
   return (
     <View
       style={{
@@ -172,6 +178,8 @@ const Contents = ({
               currentSelectedId={currentSelectedId}
               setCurrentLessonUrl={setCurrentLessonUrl}
               setCurrentLessonName={setCurrentLessonName}
+              currentId={currentId}
+              setCurrentId={setCurrentId}
             />
           </View>
         ))}
