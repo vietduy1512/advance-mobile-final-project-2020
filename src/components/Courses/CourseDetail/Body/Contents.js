@@ -153,6 +153,7 @@ const Contents = ({
   theme,
   currentSelectedId,
   setCurrentLessonUrl,
+  setCurrentLessonName={setCurrentLessonName}
 }) => {
   return (
     <View
@@ -170,6 +171,7 @@ const Contents = ({
               theme={theme}
               currentSelectedId={currentSelectedId}
               setCurrentLessonUrl={setCurrentLessonUrl}
+              setCurrentLessonName={setCurrentLessonName}
             />
           </View>
         ))}
